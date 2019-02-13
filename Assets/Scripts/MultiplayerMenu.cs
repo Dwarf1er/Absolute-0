@@ -7,6 +7,7 @@ using UnityEngine.UI;
 //https://docs.unity3d.com/ScriptReference/MonoBehaviour.OnMouseOver.html
 public class MultiplayerMenu : MonoBehaviour
 {
+    Button HostButton { get; set; }
     Button JoinButton { get; set; }
     Button JoinGame { get; set; }
     GameObject HostDescription { get; set; }
@@ -33,6 +34,7 @@ public class MultiplayerMenu : MonoBehaviour
 
     private void InitializeReferences()
     {
+        HostButton = GameObject.Find("BtnHébergerLAN").GetComponent<Button>();
         JoinButton = GameObject.Find("BtnJoindreLAN").GetComponent<Button>();
         JoinGame = GameObject.Find("BtnJoindrePartie").GetComponent<Button>();
         InputIP = GameObject.Find("InputIP").GetComponent<InputField>();
@@ -45,3 +47,4 @@ public class MultiplayerMenu : MonoBehaviour
         CheckComponenets();
     }
 }
+

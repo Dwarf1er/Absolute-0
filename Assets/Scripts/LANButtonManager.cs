@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 //Site pour le OnMouseOver:
 //https://docs.unity3d.com/ScriptReference/UI.Selectable.OnPointerEnter.html
-public class LANButtonManager : MonoBehaviour, IPointerEnterHandler
+public class LANButtonManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField]
     GameObject Text;
@@ -15,10 +15,16 @@ public class LANButtonManager : MonoBehaviour, IPointerEnterHandler
         EstDessus = true;
     }
 
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        EstDessus = false;
+    }
+
+
+
     // Start is called before the first frame update
     void Start()
     {
-      
         
         
     }
