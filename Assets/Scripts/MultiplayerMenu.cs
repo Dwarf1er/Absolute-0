@@ -1,50 +1,60 @@
-﻿using System;
+﻿//https://www.youtube.com/watch?v=9w2kwGDZ6wM
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-//Site pour le OnMouseOver:
-//https://docs.unity3d.com/ScriptReference/MonoBehaviour.OnMouseOver.html
-public class MultiplayerMenu : MonoBehaviour
+using UnityEngine.Networking;
+public class MultiplayerMenu : NetworkManager
 {
-    Button HostButton { get; set; }
-    Button JoinButton { get; set; }
-    Button JoinGame { get; set; }
-    GameObject HostDescription { get; set; }
-    GameObject JoinDescription { get; set; }
-    InputField InputIP { get; set; }
-    Text TxtInputIP { get; set; }
-    bool EstCliqué { get; set; }
-       
-
-    // Start is called before the first frame update
-    void Start()
+    public void StartUpHost()
     {
-        InitializeReferences();
-        EstCliqué = false;
-        JoinButton.onClick.AddListener(() => EstCliqué = !EstCliqué);
+        AssociatePort();
+        NetworkManager.singleton.StartHost();
     }
 
-    private void CheckComponenets()
+    public void StartUpClient()
     {
-        InputIP.gameObject.SetActive(EstCliqué);
-        TxtInputIP.gameObject.SetActive(EstCliqué);
-        JoinGame.gameObject.SetActive(EstCliqué);
+        AssociatePort();
+        AssociateIPAddress();
+        NetworkManager.singleton.StartClient();
     }
 
-    private void InitializeReferences()
+    private void AssociateIPAddress()
     {
-        HostButton = GameObject.Find("BtnHébergerLAN").GetComponent<Button>();
-        JoinButton = GameObject.Find("BtnJoindreLAN").GetComponent<Button>();
-        JoinGame = GameObject.Find("BtnJoindrePartie").GetComponent<Button>();
-        InputIP = GameObject.Find("InputIP").GetComponent<InputField>();
-        TxtInputIP = GameObject.Find("TxtInputIP").GetComponent<Text>();
+        string IpAdress = GameObject.Find("InputIP").GetComponent<InputField>().transform.FindChild("Text").GetComponent<Text>().text;
+        NetworkManager.singleton.networkAddress = IpAdress;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void AssociatePort()
     {
-        CheckComponenets();
+        NetworkManager.singleton.networkPort = 5005;
+    }
+
+    private void OnLevelWasLoaded(int level)
+    {
+        if (level == 0)
+        {
+            SetMenuButtons();
+        }
+        else
+        {
+            SetOtherButtons();
+        }
+    }
+
+    private void SetOtherButtons()
+    {
+        
+    }
+
+    private void SetMenuButtons()
+    {
+        GameObject.Find("BtnHébergerLAN").GetComponent<Button>().onClick.RemoveAllListeners();
+        GameObject.Find("BtnHébergerLAN").GetComponent<Button>().onClick.AddListener(StartUpHost);
+
+        GameObject.Find("BtnJoindrePartie").GetComponent<Button>().onClick.RemoveAllListeners();
+        GameObject.Find("BtnJoindrePartie").GetComponent<Button>().onClick.AddListener(StartUpClient);
     }
 }
 
