@@ -5,6 +5,12 @@ using UnityEngine.Networking;
 
 public class Player : NetworkBehaviour
 {
+    public override void OnStartLocalPlayer()
+    {
+        base.OnStartLocalPlayer();
+        Camera.main.GetComponent­<PlayerCamera>().setTarget(gameObject.transform);   //set the target for the camera as the player on instanciation
+    }
+
     void Update()
     {
         if (isLocalPlayer)  //Checks for local player ownership
