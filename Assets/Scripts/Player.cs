@@ -8,7 +8,7 @@ public class Player : NetworkBehaviour
     public override void OnStartLocalPlayer()
     {
         base.OnStartLocalPlayer();
-        Camera.main.GetComponent­<PlayerCamera>().setTarget(gameObject.transform);   //set the target for the camera as the player on instanciation
+        Camera.main.GetComponent­<PlayerCamera>().setTarget(gameObject);   //set the target for the camera as the player on instanciation
     }
 
     void Update()
