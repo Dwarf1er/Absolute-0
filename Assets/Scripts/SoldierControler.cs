@@ -5,9 +5,15 @@ using UnityEngine.AI;
 
 public class SoldierControler : MonoBehaviour
 {
-
     public Camera playerCam;
-    public NavMeshAgent playerAgent;
+    public NavMeshAgent soldierAgent;
+
+    Animator animator;
+
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -19,8 +25,10 @@ public class SoldierControler : MonoBehaviour
 
             if (Physics.Raycast(mouseRay, out mouseTarget))
             {
-                playerAgent.SetDestination(mouseTarget.point);
+                soldierAgent.SetDestination(mouseTarget.point);
             }
         }
+
+        animator.SetFloat("Velocity", soldierAgent.velocity.magnitude);
     }
 }
