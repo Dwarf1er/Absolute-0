@@ -36,12 +36,12 @@ public class PlayerCamera : MonoBehaviour
         float desiredAngleY = cameraTarget.transform.eulerAngles.y;  //The desired angle on the Y axis is the same as the player's transform
         float desiredAngleX = transform.eulerAngles.x;  //The desired angle on the X axis is the same as the camera's transform
 
-        if (transform.localEulerAngles.x > 80 && transform.localEulerAngles.x < 280)  //To keep the player from looking upwards at more than 80 degrees
+        if (transform.localEulerAngles.x > 80 && transform.localEulerAngles.x < 180)  //To keep the player from looking upwards at more than 80 degrees
         {
             desiredAngleX = 80f;
         }
 
-        if (transform.localEulerAngles.x < 280 && transform.localEulerAngles.x > 80)  //To keep the player from looking downwards at more than 80 degrees
+        if (transform.localEulerAngles.x < 280 && transform.localEulerAngles.x > 180)  //To keep the player from looking downwards at more than 80 degrees
         {
             desiredAngleX = 280f;
         }

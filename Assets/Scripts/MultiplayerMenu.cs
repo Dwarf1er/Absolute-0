@@ -22,7 +22,7 @@ public class MultiplayerMenu : NetworkManager
 
     private void AssociateIPAddress()
     {
-        string IpAdress = GameObject.Find("InputIP").GetComponent<InputField>().transform.FindChild("Text").GetComponent<Text>().text;
+        string IpAdress = GameObject.Find("InputIP").transform.Find("Text").GetComponent<Text>().text;
         NetworkManager.singleton.networkAddress = IpAdress;
     }
 
@@ -31,7 +31,7 @@ public class MultiplayerMenu : NetworkManager
         NetworkManager.singleton.networkPort = 5005;
     }
 
-    private void OnLevelWasLoaded(int level)
+    void OnLevelWasLoaded(int level)
     {
         if (level == 0)
         {
@@ -43,18 +43,16 @@ public class MultiplayerMenu : NetworkManager
         }
     }
 
+
     private void SetOtherButtons()
     {
-        
+        GameObject.Find("Button").GetComponent<Button>().onClick.AddListener(NetworkManager.singleton.StopHost);
     }
 
     private void SetMenuButtons()
     {
-        GameObject.Find("BtnHébergerLAN").GetComponent<Button>().onClick.RemoveAllListeners();
-        GameObject.Find("BtnHébergerLAN").GetComponent<Button>().onClick.AddListener(StartUpHost);
-
-        GameObject.Find("BtnJoindrePartie").GetComponent<Button>().onClick.RemoveAllListeners();
-        GameObject.Find("BtnJoindrePartie").GetComponent<Button>().onClick.AddListener(StartUpClient);
+        GameObject.Find("BtnHébergerLAN").GetComponent<Button>().onClick.AddListener(()=>StartUpHost());
+        GameObject.Find("BtnJoindrePartie").GetComponent<Button>().onClick.AddListener(()=>StartUpClient());
     }
 }
 
