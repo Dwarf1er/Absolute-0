@@ -22,7 +22,7 @@ public class MultiplayerMenu : NetworkManager
 
     private void AssociateIPAddress()
     {
-        string IpAdress = GameObject.Find("InputIP").transform.FindChild("Text").GetComponent<Text>().text;
+        string IpAdress = GameObject.Find("InputIP").transform.Find("Text").GetComponent<Text>().text;
         NetworkManager.singleton.networkAddress = IpAdress;
     }
 
@@ -51,8 +51,8 @@ public class MultiplayerMenu : NetworkManager
 
     private void SetMenuButtons()
     {
-        GameObject.Find("BtnHébergerLAN").GetComponent<Button>().onClick.AddListener(StartUpHost);
-        GameObject.Find("BtnJoindrePartie").GetComponent<Button>().onClick.AddListener(StartUpClient);
+        GameObject.Find("BtnHébergerLAN").GetComponent<Button>().onClick.AddListener(()=>StartUpHost());
+        GameObject.Find("BtnJoindrePartie").GetComponent<Button>().onClick.AddListener(()=>StartUpClient());
     }
 }
 
