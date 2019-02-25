@@ -15,15 +15,14 @@ public class MultiplayerMenu : NetworkManager
 
     public void StartUpClient()
     {
-        AssociatePort();
         AssociateIPAddress();
+        AssociatePort();
         NetworkManager.singleton.StartClient();
     }
 
     private void AssociateIPAddress()
     {
-        string IpAdress = GameObject.Find("InputIP").transform.Find("Text").GetComponent<Text>().text;
-        NetworkManager.singleton.networkAddress = IpAdress;
+        NetworkManager.singleton.networkAddress =  GameObject.Find("InputIP").transform.FindChild("Text").GetComponent<Text>().text;
     }
 
     private void AssociatePort()
@@ -35,7 +34,7 @@ public class MultiplayerMenu : NetworkManager
     {
         if (level == 0)
         {
-            SetMenuButtons();
+            StartCoroutine(SetMenuButtons());
         }
         else
         {
@@ -49,9 +48,10 @@ public class MultiplayerMenu : NetworkManager
         GameObject.Find("Button").GetComponent<Button>().onClick.AddListener(NetworkManager.singleton.StopHost);
     }
 
-    private void SetMenuButtons()
+    IEnumerator SetMenuButtons()
     {
-        GameObject.Find("BtnHébergerLAN").GetComponent<Button>().onClick.AddListener(()=>StartUpHost());
+        yield return new WaitForSeconds(0.3f);
+        GameObject.Find("BtnHébergerLAN").GetComponent<Button>().onClick.AddListener(() => StartUpHost());
         GameObject.Find("BtnJoindrePartie").GetComponent<Button>().onClick.AddListener(()=>StartUpClient());
     }
 }
