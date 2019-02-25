@@ -11,10 +11,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MenuJouer.unity
     guid: 6fc46fbebc373a94480a03cd4148a906
-  - enabled: 1
-    path: Assets/Scenes/Main Scene.unity
-    guid: 2a6dd7ff852971f49b8ead7d0ac8fb41
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/NetworkTest.unity
     guid: 0044dc9af0fba02418900f64055e26c2
+  - enabled: 1
+    path: Assets/Scenes/MainLevel.unity
+    guid: 43d8012d1cefd584081d810725a93e27
   m_configObjects: {}
