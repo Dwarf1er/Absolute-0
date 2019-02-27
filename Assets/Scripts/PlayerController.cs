@@ -44,9 +44,14 @@ public class PlayerController : MonoBehaviour
 
         //Rotating the camera, rotation is on the X axis
         float rotationX = Input.GetAxisRaw("Mouse Y");
-        Vector3 finalCameraRotation = new Vector3(-rotationX, 0f, 0f) * mouseSensitivity; //The -rotationX is to prevent the movment from being inverted to the mouse's
+        float finalCameraRotation = rotationX * mouseSensitivity;
 
-        //Doing the previous rotation on the camera
+        //Executing the previous rotation on the camera
         utilities.SetCameraRotation(finalCameraRotation);
+
+        //Positioning the camera
+        Vector3 cameraPosition
+
+        //Executing the previous positioning on the camera
     }
 }
