@@ -8,22 +8,32 @@ using UnityEngine.Networking;
 public class PlayerUtilities : NetworkBehaviour
 {
     //Constants
-    Vector3 notMoving { get; set; } //used to verify if player is not moving and is the default state
+    Vector3 notMoving { get; set; } //Used to verify if player is not moving and is the default state
+    const float defaultRotation = 0f; //Used to set default camera rotation to 0
 
     //References
     Vector3 playerVelocity { get; set; }
     Vector3 playerRotation { get; set; }
-    Vector3 cameraRotation { get; set; }
+    Vector3 cameraPosition { get; set; }
+    float cameraRotation { get; set; } //Camera rotation on the X axis
+    float liveCameraRotation { get; set; } //Current camera rotation on the X axis
+    Rigidbody rigibody { get; set; }
+
     [SerializeField]
     Camera playerCamera;
-    Rigidbody rigibody { get; set; }
+    [SerializeField]
+    float playerCameraRotationCap = 80f;
+
 
     void Start()
     {
+        //Instantiation of player references
         notMoving = Vector3.zero;
         playerVelocity = notMoving;
         playerRotation = notMoving;
-        cameraRotation = notMoving;
+        cameraRotation = defaultRotation;
+        cameraPosition = notMoving;
+        liveCameraRotation = defaultRotation;
         rigibody = GetComponent<Rigidbody>();
     }
 
@@ -49,6 +59,7 @@ public class PlayerUtilities : NetworkBehaviour
         ExecutePlayerMovement();
         ExecutePlayerRotation();
         ExecuteCameraRotation();
+        ExecuteCameraPositioning();
     }
 
     //Receives finalMovement from PlayerController and outputs it as the playerVelocity
@@ -64,9 +75,15 @@ public class PlayerUtilities : NetworkBehaviour
     }
 
     //Receives finalCameraRotation from PlayerController and outputs it as the cameraRotation
-    public void SetCameraRotation(Vector3 cameraRotationReceived)
+    public void SetCameraRotation(float cameraRotationReceived)
     {
         cameraRotation = cameraRotationReceived;
+    }
+
+    //Receives finalCameraPosition from PlayerController and outputs it as the cameraPosition
+    public void SetCameraPosition(float cameraPositionReceived)
+    {
+        cameraPosition = cameraPositionReceived;
     }
 
     //Moves the player
@@ -86,6 +103,16 @@ public class PlayerUtilities : NetworkBehaviour
     void ExecuteCameraRotation()
     {
         if(playerCamera != null)
-            playerCamera.transform.Rotate(cameraRotation);
+        {
+            liveCameraRotation -= cameraRotation; //Using a -= because a += would make the rotation inverted
+            liveCameraRotation = Mathf.Clamp(liveCameraRotation, -playerCameraRotationCap, playerCameraRotationCap); //Keeps the camera rotation between two angles
+            playerCamera.transform.localEulerAngles = new Vector3(liveCameraRotation, 0f, 0f); //Applying the rotation to the camera's transform
+        }        
+    }
+
+    //Positions the camera
+    void ExecuteCameraPositioning()
+    {
+
     }
 }
