@@ -7,6 +7,25 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 public class MultiplayerMenu : NetworkManager
 {
+    Button BtnHost { get; set; }
+    Button BtnJoin { get; set; }
+    InputField IPAdress { get; set; }
+    Text TxtError { get; set; }
+    
+    private void Start()
+    {
+        InitializeReferences();
+       
+    }
+
+    private void InitializeReferences()
+    {
+        BtnHost = GameObject.Find("BtnHébergerLAN").GetComponent<Button>();
+        BtnJoin = GameObject.Find("BtnJoindrePartie").GetComponent<Button>();
+        IPAdress = GameObject.Find("InputIP").GetComponent<InputField>();
+        TxtError = GameObject.Find("TxtError").GetComponent<Text>();
+    }
+
     public void StartUpHost()
     {
         AssociatePort();
@@ -15,14 +34,26 @@ public class MultiplayerMenu : NetworkManager
 
     public void StartUpClient()
     {
-        AssociateIPAddress();
-        AssociatePort();
-        NetworkManager.singleton.StartClient();
+        try
+        {
+            AssociateIPAddress();
+            AssociatePort();
+            NetworkManager.singleton.StartClient();
+        }
+        catch(UnityException)
+        {
+            TxtError.text = "Erreur surveneue";
+        }
+    
     }
 
     private void AssociateIPAddress()
     {
-        NetworkManager.singleton.networkAddress =  GameObject.Find("InputIP").transform.FindChild("Text").GetComponent<Text>().text;
+        string IPTest = IPAdress.text;
+        
+            NetworkManager.singleton.networkAddress = IPTest;
+        
+    
     }
 
     private void AssociatePort()
@@ -45,14 +76,21 @@ public class MultiplayerMenu : NetworkManager
 
     private void SetOtherButtons()
     {
-        GameObject.Find("Button").GetComponent<Button>().onClick.AddListener(NetworkManager.singleton.StopHost);
+        GameObject.Find("Button").GetComponent<Button>().onClick.AddListener(() => StopGame());
     }
 
     IEnumerator SetMenuButtons()
     {
         yield return new WaitForSeconds(0.3f);
-        GameObject.Find("BtnHébergerLAN").GetComponent<Button>().onClick.AddListener(() => StartUpHost());
-        GameObject.Find("BtnJoindrePartie").GetComponent<Button>().onClick.AddListener(()=>StartUpClient());
+        BtnHost.onClick.AddListener(() => StartUpHost());
+        BtnJoin.onClick.AddListener(()=>StartUpClient());
     }
+
+    private void StopGame()
+    {
+        NetworkManager.singleton.StopHost();
+    }
+
+  
 }
 
