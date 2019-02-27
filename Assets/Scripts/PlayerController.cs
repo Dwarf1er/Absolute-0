@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     float playerSpeed = 10f;
     [SerializeField]
     float mouseSensitivity = 5f;
+    [SerializeField]
+    Vector3 cameraOffSet = new Vector3(0, 0.5f, 2);
 
     //Reference to PlayerUtilities to be set in Start
     PlayerUtilities utilities { get; set; }
@@ -37,7 +39,7 @@ public class PlayerController : MonoBehaviour
 
         //Rotating the player, rotation is on the Y axis
         float rotationY = Input.GetAxisRaw("Mouse X");
-        Vector3 finalRotation = new Vector3(0f, rotationY, 0f) * mouseSensitivity;
+        Vector3 finalRotation = new Vector3(0, rotationY, 0) * mouseSensitivity;
 
         //Doing the previous rotation on the player
         utilities.SetPlayerRotation(finalRotation);
@@ -50,8 +52,9 @@ public class PlayerController : MonoBehaviour
         utilities.SetCameraRotation(finalCameraRotation);
 
         //Positioning the camera
-        Vector3 cameraPosition
+        Vector3 finalCameraOffSet = cameraOffSet;
 
         //Executing the previous positioning on the camera
+        utilities.SetCameraOffSet(finalCameraOffSet);
     }
 }

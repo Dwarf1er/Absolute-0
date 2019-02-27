@@ -15,6 +15,7 @@ public class PlayerUtilities : NetworkBehaviour
     Vector3 playerVelocity { get; set; }
     Vector3 playerRotation { get; set; }
     Vector3 cameraPosition { get; set; }
+    Vector3 cameraOffSet { get; set; }
     float cameraRotation { get; set; } //Camera rotation on the X axis
     float liveCameraRotation { get; set; } //Current camera rotation on the X axis
     Rigidbody rigibody { get; set; }
@@ -24,7 +25,6 @@ public class PlayerUtilities : NetworkBehaviour
     [SerializeField]
     float playerCameraRotationCap = 80f;
 
-
     void Start()
     {
         //Instantiation of player references
@@ -32,7 +32,8 @@ public class PlayerUtilities : NetworkBehaviour
         playerVelocity = notMoving;
         playerRotation = notMoving;
         cameraRotation = defaultRotation;
-        cameraPosition = notMoving;
+        cameraPosition = playerCamera.transform.localPosition;
+        cameraOffSet = notMoving;
         liveCameraRotation = defaultRotation;
         rigibody = GetComponent<Rigidbody>();
     }
@@ -81,9 +82,9 @@ public class PlayerUtilities : NetworkBehaviour
     }
 
     //Receives finalCameraPosition from PlayerController and outputs it as the cameraPosition
-    public void SetCameraPosition(float cameraPositionReceived)
+    public void SetCameraOffSet(Vector3 cameraOffSetReceived)
     {
-        cameraPosition = cameraPositionReceived;
+        cameraOffSet = cameraOffSetReceived;
     }
 
     //Moves the player
@@ -113,6 +114,10 @@ public class PlayerUtilities : NetworkBehaviour
     //Positions the camera
     void ExecuteCameraPositioning()
     {
-
+        if(playerCamera != null)
+        {
+            cameraPosition = Vector3.zero;
+            playerCamera.transform.Translate(cameraOffSet);
+        }
     }
 }
