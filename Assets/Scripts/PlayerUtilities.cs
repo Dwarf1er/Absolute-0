@@ -31,7 +31,6 @@ public class PlayerUtilities : NetworkBehaviour
         playerVelocity = notMoving;
         playerRotation = notMoving;
         cameraRotation = defaultRotation;
-        cameraOffSet = notMoving;
         liveCameraRotation = defaultRotation;
         rigibody = GetComponent<Rigidbody>();
     }
@@ -103,7 +102,7 @@ public class PlayerUtilities : NetworkBehaviour
     {
         if(playerCamera != null)
         {
-            liveCameraRotation += cameraRotation; //Using a -= because a += would make the rotation inverted
+            liveCameraRotation -= cameraRotation; //Using a -= because a += would make the rotation inverted
             liveCameraRotation = Mathf.Clamp(liveCameraRotation, -playerCameraRotationCap, playerCameraRotationCap); //Keeps the camera rotation between two angles
             playerCamera.transform.localEulerAngles = new Vector3(liveCameraRotation, 0f, 0f); //Applying the rotation to the camera's transform
         }        
@@ -116,7 +115,6 @@ public class PlayerUtilities : NetworkBehaviour
         {
             playerCamera.transform.localPosition = Vector3.zero;
             playerCamera.transform.Translate(cameraOffSet);
-            playerCamera.transform.Rotate(0,180,0); //Puts the camera's focus on the player instead of in front of him
         }
     }
 }

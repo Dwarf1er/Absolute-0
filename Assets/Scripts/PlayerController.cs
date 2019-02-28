@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     float mouseSensitivity = 5f;
     [SerializeField]
-    Vector3 cameraOffSet = new Vector3(0, 0.5f, 5);
+    Vector3 cameraOffSet = new Vector3(0, 0.5f, -5);
 
     //Reference to PlayerUtilities to be set in Start
     PlayerUtilities utilities { get; set; }
