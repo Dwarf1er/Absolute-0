@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5040918652889890020}
   - component: {fileID: 5040918652889890022}
   - component: {fileID: 5040918652889890021}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +91,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5040918653352053448}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 5040918653411329197}
   - component: {fileID: 5040918653411329199}
   - component: {fileID: 5040918653411329198}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -207,9 +207,10 @@ GameObject:
   - component: {fileID: 5040918653419404802}
   - component: {fileID: 7610716049400440230}
   - component: {fileID: 9016652594333500250}
-  m_Layer: 0
+  - component: {fileID: 759655805487914794}
+  m_Layer: 9
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -363,9 +364,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offlineComponents:
   - {fileID: 5040918653419404802}
-  - {fileID: 0}
+  - {fileID: 9016652594333500250}
   - {fileID: 5040918652889890022}
   - {fileID: 5040918652889890021}
+  - {fileID: 759655805487914794}
+  onlineLayerName: Ennemies
 --- !u!114 &9016652594333500250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -381,6 +384,26 @@ MonoBehaviour:
   playerSpeed: 10
   mouseSensitivity: 5
   cameraOffSet: {x: 0, y: 0.5, z: -5}
+--- !u!114 &759655805487914794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5040918653419404800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56dba496ad09fe9459f9ed4d120dea31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerWeapon:
+    weaponName: M16
+    weaponDamage: 15
+    weaponRange: 200
+  playerCamera: {fileID: 5040918652889890022}
+  raycastMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &5040918653911090999
 GameObject:
   m_ObjectHideFlags: 0
@@ -390,7 +413,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5040918653911091000}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Graphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -421,7 +444,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5040918654598419471}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Weapon Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
