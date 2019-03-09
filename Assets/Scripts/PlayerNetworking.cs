@@ -9,7 +9,9 @@ public class PlayerNetworking : NetworkBehaviour
     [SerializeField]
     List<Behaviour> offlineComponents = new List<Behaviour>();
     [SerializeField]
-    string onlineLayerName = "Ennemy";
+    string onlineEnnemyLayerName = "Ennemy";
+    [SerializeField]
+    string onlineAllyLayerName = "Ally";
     Camera lobbyCamera;
 
     void Start()
@@ -44,8 +46,13 @@ public class PlayerNetworking : NetworkBehaviour
 
     void AssignOnlineLayers()
     {
-        //Assign the layer Ennemies to online entitites (ennemies)
-        gameObject.layer = LayerMask.NameToLayer(onlineLayerName);
+        //Assigns the layer Ally to all non-LocalPlayer gameobjects tagged as Player(s)
+        if (gameObject.tag == "Player")
+            gameObject.layer = LayerMask.NameToLayer(onlineAllyLayerName);
+
+        //Assigns the layer Ennemy to all non-localPlayer gameobjects that are not tagged tagged as Player(s)
+        else
+            gameObject.layer = LayerMask.NameToLayer(onlineEnnemyLayerName);
     }
 
     void EnlistPlayer()

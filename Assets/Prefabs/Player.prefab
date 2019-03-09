@@ -368,7 +368,7 @@ MonoBehaviour:
   - {fileID: 5040918652889890022}
   - {fileID: 5040918652889890021}
   - {fileID: 759655805487914794}
-  onlineLayerName: Ennemies
+  onlineLayerName: Ennemy
 --- !u!114 &9016652594333500250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -403,7 +403,7 @@ MonoBehaviour:
   playerCamera: {fileID: 5040918652889890022}
   raycastMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 2048
 --- !u!1 &5040918653911090999
 GameObject:
   m_ObjectHideFlags: 0
