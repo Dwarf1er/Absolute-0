@@ -51,8 +51,22 @@ public class PlayerController : MonoBehaviour
         //Executing the previous rotation on the camera
         utilities.SetCameraRotation(finalCameraRotation);
 
-        //Positioning the camera
-        Vector3 finalCameraOffSet = cameraOffSet;
+        //Calculating the camera offset
+        Vector3 finalCameraOffSet;
+        RaycastHit raycastHit;
+        Vector3 raycastOrigin = gameObject.transform.position;
+        Vector3 raycastDirection = utilities.playerCamera.transform.forward;
+        float cameraOffSetMaxDistance = new Vector3(0, 0.5f, -5).magnitude;
+
+        if (Physics.Raycast(raycastOrigin, raycastDirection, out raycastHit, cameraOffSetMaxDistance))
+        {
+            Debug.DrawLine(raycastOrigin, raycastHit.point);
+            float finalCameraOffSetZ = cameraOffSetMaxDistance - raycastHit.distance;
+            finalCameraOffSet = new Vector3(cameraOffSet.x, cameraOffSet.y, finalCameraOffSetZ);
+        }
+
+        else
+            finalCameraOffSet = cameraOffSet;
 
         //Executing the previous positioning on the camera
         utilities.SetCameraOffSet(finalCameraOffSet);

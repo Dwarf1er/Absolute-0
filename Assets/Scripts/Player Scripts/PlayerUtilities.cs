@@ -20,7 +20,7 @@ public class PlayerUtilities : NetworkBehaviour
     Rigidbody rigibody { get; set; }
 
     [SerializeField]
-    Camera playerCamera;
+    public Camera playerCamera;
     [SerializeField]
     float playerCameraRotationCap = 80f;
 
