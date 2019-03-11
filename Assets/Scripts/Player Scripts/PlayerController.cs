@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     //Player attributes
     [SerializeField]
-    float playerSpeed = 10f;
+    float playerSpeed = 15f;
     [SerializeField]
     float mouseSensitivity = 5f;
     [SerializeField]

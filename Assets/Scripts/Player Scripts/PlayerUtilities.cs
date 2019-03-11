@@ -12,7 +12,7 @@ public class PlayerUtilities : NetworkBehaviour
     const float defaultRotation = 0f; //Used to set default camera rotation to 0
 
     //References
-    Vector3 playerVelocity { get; set; }
+    public Vector3 playerVelocity { get; private set; } //Accessible pour l'animator
     Vector3 playerRotation { get; set; }
     Vector3 cameraOffSet { get; set; }
     float cameraRotation { get; set; } //Camera rotation on the X axis
@@ -33,22 +33,6 @@ public class PlayerUtilities : NetworkBehaviour
         cameraRotation = defaultRotation;
         liveCameraRotation = defaultRotation;
         rigibody = GetComponent<Rigidbody>();
-    }
-
-    void Update()
-    {
-        if (Input.GetKey(KeyCode.W))
-                transform.Translate(Vector3.forward);
-
-        if (Input.GetKey(KeyCode.A))
-                transform.Translate(Vector3.left);
-
-        if (Input.GetKey(KeyCode.S))
-                transform.Translate(Vector3.back);
-
-
-        if (Input.GetKey(KeyCode.D))
-                transform.Translate(Vector3.right);  
     }
 
     //As recommended by Unity for physics calculations, using FixedUpdate instead of Update

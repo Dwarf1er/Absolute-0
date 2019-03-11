@@ -10,13 +10,13 @@ public class PlayerAnimation : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
         utilities = GetComponent<PlayerUtilities>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //animator.SetFloat("Velocity", utilities.playerVelocity);
+        animator.SetFloat("Velocity", utilities.playerVelocity.magnitude);
     }
 }
