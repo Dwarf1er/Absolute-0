@@ -54,17 +54,27 @@ public class PlayerController : MonoBehaviour
         //Calculating the camera offset
         Vector3 finalCameraOffSet = cameraOffSet;
         RaycastHit raycastHit;
-        Vector3 raycastOrigin = utilities.playerCamera.transform.position;
+        Vector3 raycastOrigin = gameObject.transform.position + cameraOffSet;
         Vector3 raycastDirection = utilities.playerCamera.transform.TransformDirection(Vector3.forward);
-        int layerMask = 1 << 31;
-        layerMask = ~layerMask;
         float distancePlayerCamera = cameraOffSet.magnitude;
+        int raycastMask = LayerMask.GetMask("LocalPlayer", "Environment");
 
-        if (Physics.Raycast(raycastOrigin, raycastDirection, out raycastHit, Mathf.Infinity, layerMask))
+        if (Physics.Raycast(raycastOrigin, raycastDirection, out raycastHit, Mathf.Infinity, raycastMask))
         {
-                Debug.DrawRay(utilities.playerCamera.transform.position, utilities.playerCamera.transform.TransformDirection(Vector3.forward) * raycastHit.distance, Color.red);
+            if (raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Environment"))
+            {
+                Debug.DrawRay(raycastOrigin, raycastDirection * raycastHit.distance, Color.red);
+                Debug.Log("Hit l'environnement");
                 float translateFactor = (raycastHit.point - utilities.playerCamera.transform.position).magnitude / cameraOffSet.magnitude;
                 finalCameraOffSet = cameraOffSet * translateFactor;
+            }
+
+            if (raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("LocalPlayer"))
+            {
+                Debug.DrawRay(raycastOrigin, raycastDirection * raycastHit.distance, Color.blue);
+                Debug.Log("Hit le joueur");
+                finalCameraOffSet = cameraOffSet;
+            }
         }
 
         //Executing the previous positioning on the camera
