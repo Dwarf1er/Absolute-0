@@ -6,12 +6,13 @@ using UnityEngine.AI;
 public abstract class Ennemy : MonoBehaviour
 {
     //Components
-    Animator Animator { get; set; }
-    NavMeshAgent NavMeshAgent { get; set; }
+    protected virtual Animator Animator { get; set; }
+    protected virtual NavMeshAgent NavMeshAgent { get; set; }
 
     //Stats
     int Tier { get; set; }
-    int MaxHP
+    int MaxHP { get; set; }
+    int HP
     {
         get { return hp; }
         set
@@ -28,7 +29,6 @@ public abstract class Ennemy : MonoBehaviour
                 hp = MaxHP;
         }
     }
-    int HP { get; set; }
     int Armor { get; set; }
     float Speed { get; set; }
     int Damage { get; set; }
@@ -36,6 +36,12 @@ public abstract class Ennemy : MonoBehaviour
 
     //Backing Store
     int hp;
+
+    protected virtual void Awake()
+    {
+        Animator = GetComponent<Animator>();
+        NavMeshAgent = GetComponent<NavMeshAgent>();
+    }
 
     //Functions
     public abstract void TriggerDeath();
