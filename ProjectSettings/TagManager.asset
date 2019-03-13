@@ -14,9 +14,9 @@ TagManager:
   - 
   - 
   - PostProcessing
-  - LocalPlayer
   - Ally
   - Ennemy
+  - Environment
   - 
   - 
   - 
@@ -36,7 +36,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - LocalPlayer
   m_SortingLayers:
   - name: Default
     uniqueID: 0

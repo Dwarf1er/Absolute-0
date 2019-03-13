@@ -52,21 +52,20 @@ public class PlayerController : MonoBehaviour
         utilities.SetCameraRotation(finalCameraRotation);
 
         //Calculating the camera offset
-        Vector3 finalCameraOffSet;
+        Vector3 finalCameraOffSet = cameraOffSet;
         RaycastHit raycastHit;
-        Vector3 raycastOrigin = gameObject.transform.position;
-        Vector3 raycastDirection = utilities.playerCamera.transform.forward;
-        float cameraOffSetMaxDistance = new Vector3(0, 0.5f, -5).magnitude;
+        Vector3 raycastOrigin = utilities.playerCamera.transform.position;
+        Vector3 raycastDirection = utilities.playerCamera.transform.TransformDirection(Vector3.forward);
+        int layerMask = 1 << 31;
+        layerMask = ~layerMask;
+        float distancePlayerCamera = cameraOffSet.magnitude;
 
-        if (Physics.Raycast(raycastOrigin, raycastDirection, out raycastHit, cameraOffSetMaxDistance))
+        if (Physics.Raycast(raycastOrigin, raycastDirection, out raycastHit, Mathf.Infinity, layerMask))
         {
-            Debug.DrawLine(raycastOrigin, raycastHit.point);
-            float finalCameraOffSetZ = cameraOffSetMaxDistance - raycastHit.distance;
-            finalCameraOffSet = new Vector3(cameraOffSet.x, cameraOffSet.y, finalCameraOffSetZ);
+                Debug.DrawRay(utilities.playerCamera.transform.position, utilities.playerCamera.transform.TransformDirection(Vector3.forward) * raycastHit.distance, Color.red);
+                float translateFactor = (raycastHit.point - utilities.playerCamera.transform.position).magnitude / cameraOffSet.magnitude;
+                finalCameraOffSet = cameraOffSet * translateFactor;
         }
-
-        else
-            finalCameraOffSet = cameraOffSet;
 
         //Executing the previous positioning on the camera
         utilities.SetCameraOffSet(finalCameraOffSet);
