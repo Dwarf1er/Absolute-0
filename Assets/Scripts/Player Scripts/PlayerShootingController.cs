@@ -7,11 +7,7 @@ public class PlayerShootingController : NetworkBehaviour
 {
     //References
     public PlayerWeapons playerWeapon;
-    const string EnnemyTag = "Ennemy";
-    [SerializeField]
     Camera playerCamera;
-    [SerializeField]
-    LayerMask raycastMask;
 
     private void Start()
     {
@@ -31,14 +27,16 @@ public class PlayerShootingController : NetworkBehaviour
     [Client]
     void Fire()
     {
+        RaycastHit raycastHit;
+        playerCamera = GetComponentInChildren<Camera>();
         Vector3 raycastOrigin = playerCamera.transform.position;
         Vector3 raycastDirection = playerCamera.transform.forward;
-        RaycastHit raycastHit;
+        int raycastMask = LayerMask.GetMask("Ennemy");
 
         if (Physics.Raycast(raycastOrigin, raycastDirection, out raycastHit, playerWeapon.weaponRange, raycastMask))
         {
             //Checks if an ennemy has been hit
-            if (raycastHit.collider.tag == EnnemyTag)
+            if (raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Ennemy"))
                 CmdEnnemyShot(raycastHit.collider.name);
 
         }

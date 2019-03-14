@@ -20,6 +20,25 @@ public class MultiplayerMenu : NetworkManager
         TxtError.text = string.Empty;
     }
 
+    public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
+    {
+        GameObject player;
+        Transform startPos = GetStartPosition();
+
+        if(startPos != null)
+        {
+            if(playerPrefab.name == "Player1")
+            {
+                SkinnedMeshRenderer skin = playerPrefab.transform.Find("Soldier_mesh").GetComponent<SkinnedMeshRenderer>(); //Referencing the skinned mesh renderer to change the material used to have a different type of soldier
+            }
+
+            if(playerPrefab.name == "Player2")
+            {
+
+            }
+        }
+    }
+
     private void InitializeReferences()
     {
         BtnHost = GameObject.Find("BtnHébergerLAN").GetComponent<Button>();

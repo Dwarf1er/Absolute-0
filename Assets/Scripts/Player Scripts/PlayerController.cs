@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     float playerSpeed = 15f;
     [SerializeField]
     float mouseSensitivity = 5f;
-    Vector3 CameraOffSet = new Vector3(0, 0, -5f);
+    Vector3 CameraOffSet = new Vector3(0, 0, -5f); //The camera offset should only be a distance on the z axis
 
     //Reference to PlayerUtilities to be set in Start
     PlayerUtilities utilities { get; set; }
@@ -59,18 +59,20 @@ public class PlayerController : MonoBehaviour
 
         if (Physics.Raycast(raycastOrigin, raycastDirection, out raycastHit, Mathf.Infinity, raycastMask))
         {
+            //Checks if the camera is behind a part of the environment (e.g a wall, the floor, etc...)
             if (raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Environment"))
             {
-                Debug.DrawRay(raycastOrigin, raycastDirection * raycastHit.distance, Color.red);
-                Debug.Log("Hit l'environnement");
-                float translateFactor = (raycastHit.point - raycastOrigin).magnitude / CameraOffSet.magnitude;
+                Debug.DrawRay(raycastOrigin, raycastDirection * raycastHit.distance, Color.red); //Debug info
+                Debug.Log("Hit l'environnement"); //Debug info
+                float translateFactor = (raycastHit.point - raycastOrigin).magnitude / CameraOffSet.magnitude; //Translate factor is determined by the distance from obstacle to camera and from player to camera
                 finalCameraOffSet *= (0.9f - translateFactor); // (1 - translateFactor) collerait la caméra à la surface du plancher/mur
             }
 
+            //Checks if the camera is not behind a part of the environment (e.g a wall, the floor, etc...)
             if (raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("LocalPlayer"))
             {
-                Debug.DrawRay(raycastOrigin, raycastDirection * raycastHit.distance, Color.blue);
-                Debug.Log("Hit le joueur");
+                Debug.DrawRay(raycastOrigin, raycastDirection * raycastHit.distance, Color.blue); //Debug info
+                Debug.Log("Hit le joueur"); //Debug info
             }
         }
 
