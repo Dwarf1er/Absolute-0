@@ -369,33 +369,26 @@ PrefabInstance:
     - target: {fileID: 9500000, guid: 54c59f8780aaa2f4ebdae0e8027edf29, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 4232f5e1e006db5439e9991e273b111a, type: 2}
+      objectReference: {fileID: 9100000, guid: 71f47cd8fcdb2cf41b3d9b3e9d432dba, type: 2}
     - target: {fileID: 9500000, guid: 54c59f8780aaa2f4ebdae0e8027edf29, type: 3}
       propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some generic clip(s) animate transforms that are
-        already bound by a Humanoid avatar. These transforms can only be changed by
-        Humanoid clips.\n\tTransform 'Bip001 L Hand'\n\tTransform 'Bip001 R Foot'\n\tTransform
-        'Bip001 R Finger0'\n\tTransform 'Bip001 R Toe0'\n\tTransform 'Bip001 Head'\n\tTransform
-        'Bip001 Spine1'\n\tTransform 'Bip001 R UpperArm'\n\tTransform 'Bip001 R Calf'\n\tTransform
-        'Bip001 L UpperArm'\n\tTransform 'Bip001 L Forearm'\n\tand more ...\n\tFrom
-        animation clip 'demo_combat_idle'\n\tFrom animation clip 'demo_combat_run'\n\tFrom
-        animation clip 'demo_combat_shoot'"
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 400016, guid: 54c59f8780aaa2f4ebdae0e8027edf29, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.00020005534
+      value: -0.00020005535
       objectReference: {fileID: 0}
     - target: {fileID: 400016, guid: 54c59f8780aaa2f4ebdae0e8027edf29, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.043689054
+      value: -0.043689057
       objectReference: {fileID: 0}
     - target: {fileID: 400042, guid: 54c59f8780aaa2f4ebdae0e8027edf29, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.0002000515
+      value: 0.00020005151
       objectReference: {fileID: 0}
     - target: {fileID: 400042, guid: 54c59f8780aaa2f4ebdae0e8027edf29, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.043689054
+      value: -0.043689057
       objectReference: {fileID: 0}
     - target: {fileID: 100078, guid: 54c59f8780aaa2f4ebdae0e8027edf29, type: 3}
       propertyPath: m_IsActive
