@@ -10,7 +10,7 @@ public class PlayerUtilities : NetworkBehaviour
     //Constants
     Vector3 notMoving { get; set; } //Used to verify if player is not moving and is the default state
     const float defaultRotation = 0f; //Used to set default camera rotation to 0
-    public const float PlayerHeight = 2.65f;
+    public const float PlayerHeight = 2.60f;
 
     //References
     public Vector3 playerVelocity { get; private set; } //Accessible pour l'animator
