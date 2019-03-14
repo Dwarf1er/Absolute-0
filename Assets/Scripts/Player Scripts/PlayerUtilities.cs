@@ -10,6 +10,7 @@ public class PlayerUtilities : NetworkBehaviour
     //Constants
     Vector3 notMoving { get; set; } //Used to verify if player is not moving and is the default state
     const float defaultRotation = 0f; //Used to set default camera rotation to 0
+    public const float PlayerHeight = 2.65f;
 
     //References
     public Vector3 playerVelocity { get; private set; } //Accessible pour l'animator
@@ -22,7 +23,7 @@ public class PlayerUtilities : NetworkBehaviour
     [SerializeField]
     public Camera playerCamera;
     [SerializeField]
-    float playerCameraRotationCap = 80f;
+    float playerCameraRotationCap = 70f;
 
     void Start()
     {
@@ -86,7 +87,7 @@ public class PlayerUtilities : NetworkBehaviour
     {
         if(playerCamera != null)
         {
-            liveCameraRotation += cameraRotation; //Using a -= because a += would make the rotation inverted
+            liveCameraRotation -= cameraRotation; //Using a -= because a += would make the rotation inverted
             liveCameraRotation = Mathf.Clamp(liveCameraRotation, -playerCameraRotationCap, playerCameraRotationCap); //Keeps the camera rotation between two angles
             playerCamera.transform.localEulerAngles = new Vector3(liveCameraRotation, 0f, 0f); //Applying the rotation to the camera's transform
         }        
@@ -97,7 +98,7 @@ public class PlayerUtilities : NetworkBehaviour
     {
         if(playerCamera != null)
         {
-            playerCamera.transform.localPosition = Vector3.zero;
+            playerCamera.transform.localPosition = Vector3.up * PlayerHeight;
             playerCamera.transform.Translate(cameraOffSet);
         }
     }

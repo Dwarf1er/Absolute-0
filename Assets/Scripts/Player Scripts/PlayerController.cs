@@ -10,8 +10,7 @@ public class PlayerController : MonoBehaviour
     float playerSpeed = 15f;
     [SerializeField]
     float mouseSensitivity = 5f;
-    [SerializeField]
-    Vector3 cameraOffSet = new Vector3(0, 0.5f, -5);
+    Vector3 CameraOffSet = new Vector3(0, 0, -5f);
 
     //Reference to PlayerUtilities to be set in Start
     PlayerUtilities utilities { get; set; }
@@ -52,11 +51,10 @@ public class PlayerController : MonoBehaviour
         utilities.SetCameraRotation(finalCameraRotation);
 
         //Calculating the camera offset
-        Vector3 finalCameraOffSet = cameraOffSet;
+        Vector3 finalCameraOffSet = CameraOffSet;
         RaycastHit raycastHit;
-        Vector3 raycastOrigin = gameObject.transform.position + cameraOffSet;
+        Vector3 raycastOrigin = gameObject.transform.position + (Vector3.up * PlayerUtilities.PlayerHeight) + CameraOffSet.z * utilities.playerCamera.transform.TransformDirection(Vector3.forward); //Tête du player + 5 vers l'arrière
         Vector3 raycastDirection = utilities.playerCamera.transform.TransformDirection(Vector3.forward);
-        float distancePlayerCamera = cameraOffSet.magnitude;
         int raycastMask = LayerMask.GetMask("LocalPlayer", "Environment");
 
         if (Physics.Raycast(raycastOrigin, raycastDirection, out raycastHit, Mathf.Infinity, raycastMask))
@@ -65,15 +63,14 @@ public class PlayerController : MonoBehaviour
             {
                 Debug.DrawRay(raycastOrigin, raycastDirection * raycastHit.distance, Color.red);
                 Debug.Log("Hit l'environnement");
-                float translateFactor = (raycastHit.point - utilities.playerCamera.transform.position).magnitude / cameraOffSet.magnitude;
-                finalCameraOffSet = cameraOffSet * translateFactor;
+                float translateFactor = (raycastHit.point - raycastOrigin).magnitude / CameraOffSet.magnitude;
+                finalCameraOffSet *= (0.9f - translateFactor); // (1 - translateFactor) collerait la caméra à la surface du plancher/mur
             }
 
             if (raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("LocalPlayer"))
             {
                 Debug.DrawRay(raycastOrigin, raycastDirection * raycastHit.distance, Color.blue);
                 Debug.Log("Hit le joueur");
-                finalCameraOffSet = cameraOffSet;
             }
         }
 
