@@ -1239,8 +1239,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "Une erreur lors de la connexion est survenue. \nVeillez vous assurez que
-    vous avez bien entr\xE9 l'adresse IP"
+  m_Text: "Une erreur lors de la connexion est survenue. \nVeuillez vous assurez d'avoir
+    bien entr\xE9 l'adresse IP"
 --- !u!222 &779173843
 CanvasRenderer:
   m_ObjectHideFlags: 0
