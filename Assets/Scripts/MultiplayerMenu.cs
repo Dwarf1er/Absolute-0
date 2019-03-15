@@ -7,17 +7,20 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 public class MultiplayerMenu : NetworkManager
 {
+    const string BasicIP = "localhost";
+
     Button BtnHost { get; set; }
     Button BtnJoin { get; set; }
     InputField IPAdress { get; set; }
-    Text TxtError { get; set; }
     bool IsClicked { get; set; } //Permet de savoir si le bouton 'BtnJoin' a été cliqué
+    GameObject PnlError { get; set; }
+    Button BtnOK { get; set; }
     
     private void Start()
     {
         InitializeReferences();
+        PnlError.SetActive(false);
         IsClicked = false;
-        TxtError.text = string.Empty;
     }
 
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
@@ -41,10 +44,17 @@ public class MultiplayerMenu : NetworkManager
 
     private void InitializeReferences()
     {
-        BtnHost = GameObject.Find("BtnHébergerLAN").GetComponent<Button>();
-        BtnJoin = GameObject.Find("BtnJoindrePartie").GetComponent<Button>();
         IPAdress = GameObject.Find("InputIP").GetComponent<InputField>();
-        TxtError = GameObject.Find("TxtError").GetComponent<Text>();
+        PnlError = GameObject.Find("PnlError");
+        BtnOK = PnlError.transform.Find("BtnOk").GetComponent<Button>();
+        BtnOK.onClick.AddListener(() => HidePanel());
+        
+    }
+
+    private void HidePanel()
+    {
+        IsClicked = false;
+        PnlError.SetActive(false);
     }
 
     public void StartUpHost()
@@ -55,7 +65,7 @@ public class MultiplayerMenu : NetworkManager
 
     public void StartUpClient()
     {
-        IsClicked = !IsClicked;
+        IsClicked = true;
         AssociateIPAddress();
         AssociatePort();
         NetworkManager.singleton.StartClient();
@@ -77,7 +87,7 @@ public class MultiplayerMenu : NetworkManager
     {
         if (level == 0)
         {
-            StartCoroutine(SetMenuButtons());
+            SetMenuButtons();
         }
         else
         {
@@ -91,10 +101,11 @@ public class MultiplayerMenu : NetworkManager
         GameObject.Find("Button").GetComponent<Button>().onClick.AddListener(() => StopGame());
     }
 
-    IEnumerator SetMenuButtons()
+    void SetMenuButtons()
     {
-        yield return new WaitForSeconds(0.3f);
+        BtnHost = GameObject.Find("BtnHébergerLAN").GetComponent<Button>();
         BtnHost.onClick.AddListener(() => StartUpHost());
+        BtnJoin = GameObject.Find("BtnJoindrePartie").GetComponent<Button>();
         BtnJoin.onClick.AddListener(()=> StartUpClient());
     }
 
@@ -111,13 +122,22 @@ public class MultiplayerMenu : NetworkManager
     //de cliqué sur le bouton permettant de joindre une partie. S'il n'y en a pas, un message d'erreur est envoyé. 
     void CheckNetworkAdress()
     {
-       
-        if (IsClicked = true && string.IsNullOrEmpty(NetworkManager.singleton.networkAddress))
-            TxtError.text = "L'adresse IP est inexistante";
+
+        if (IsClicked = true && IsBadAddress())
+            PnlError.SetActive(true);
         else
-            TxtError.text = string.Empty;
+            PnlError.SetActive(false);
+    }
+    bool IsBadAddress()
+    {
+        bool badAdress;
+        if (string.IsNullOrEmpty(NetworkManager.singleton.networkAddress))
+            badAdress = true;
+        else
+            badAdress = false;
+        return badAdress;
     }
 
-
+   
 }
 
