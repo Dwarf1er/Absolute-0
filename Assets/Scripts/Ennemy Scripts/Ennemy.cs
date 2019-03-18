@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public abstract class Ennemy : MonoBehaviour
 {
     //Components
-    protected virtual Animator Animator { get; set; }
+    protected virtual Animator Animator { get; set; } //Must have the following parameters: (float) Speed, (trigger) TakeDamage, (trigger) Death
     protected virtual NavMeshAgent NavMeshAgent { get; set; }
 
     //Stats
@@ -43,6 +43,40 @@ public abstract class Ennemy : MonoBehaviour
         NavMeshAgent = GetComponent<NavMeshAgent>();
     }
 
+    public void SetStats(int maxHp, int armor, float speed, int damage)
+    {
+        MaxHP = maxHp;
+        HP = MaxHP;
+        Armor = armor;
+        Speed = speed;
+        Damage = damage;
+    }
+
+    private void Update()
+    {
+        Animator.SetFloat("Speed", NavMeshAgent.velocity.magnitude);
+    }
+
     //Functions
-    public abstract void TriggerDeath();
+    public void TriggerDeath()
+    {
+        Animator.SetTrigger("Death");
+    }
+
+    public void TakeDamage(int rawDamage)
+    {
+        int damage = rawDamage - Armor;
+
+        if (damage >= 0)
+            Animator.SetTrigger("TakeDamage"); //Animation is only triggered if the ennemy takes damage
+        else
+            damage = 0; //Damage must not be negative
+
+        HP -= damage;
+    }
+
+    public void SetDestination(Vector3 destination)
+    {
+        NavMeshAgent.SetDestination(destination);
+    }
 }

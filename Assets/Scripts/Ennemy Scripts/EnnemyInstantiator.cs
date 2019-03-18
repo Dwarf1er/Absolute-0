@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class EnnemyInstantiator : MonoBehaviour
 {
+
+    GameObject Worker = Resources.Load<GameObject>("Ennemy Worker");
+
     // Start is called before the first frame update
     void Start()
     {
@@ -16,22 +19,23 @@ public class EnnemyInstantiator : MonoBehaviour
         
     }
 
-    void SpawnWorker(Vector3 position, int tier)
+    public void SpawnWorker(Vector3 position, int tier)
+    {
+        GameObject newEnnemy = Instantiate(Worker, position, Quaternion.identity);
+        newEnnemy.GetComponent<Ennemy>().SetStats(30, 0, 2, 10);
+    }
+
+    public void SpawnMelee(Vector3 position, int tier)
     {
 
     }
 
-    void SpawnMelee(Vector3 position, int tier)
+    public void SpawnAssault(Vector3 position, int tier)
     {
 
     }
 
-    void SpawnAssault(Vector3 position, int tier)
-    {
-
-    }
-
-    void SpawnHeavy(Vector3 position, int tier)
+    public void SpawnHeavy(Vector3 position, int tier)
     {
 
     }
