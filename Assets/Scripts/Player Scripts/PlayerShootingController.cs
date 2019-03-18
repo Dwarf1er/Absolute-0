@@ -36,16 +36,18 @@ public class PlayerShootingController : NetworkBehaviour
         if (Physics.Raycast(raycastOrigin, raycastDirection, out raycastHit, playerWeapon.weaponRange, raycastMask))
         {
             //Checks if an ennemy has been hit
-            if (raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Ennemy"))
-                CmdEnnemyShot(raycastHit.collider.name);
+            //if (raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Ennemy"))
+                //CmdEnnemyShot(raycastHit);
 
         }
     }
 
     //Server only method, therefore marked as "Command"
+    /*
     [Command]
-    void CmdEnnemyShot(string ennemyID)
+    void CmdEnnemyShot(RaycastHit hit)
     {
-        Debug.Log(ennemyID + " has been shot");
+        //hit.rigidbody.GetComponent<Ennemy>().TakeDamage;
     }
+    */
 }

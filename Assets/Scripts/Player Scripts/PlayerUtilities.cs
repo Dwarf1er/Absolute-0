@@ -13,12 +13,15 @@ public class PlayerUtilities : NetworkBehaviour
     public const float PlayerHeight = 2.60f;
 
     //References
-    public Vector3 playerVelocity { get; private set; } //Accessible pour l'animator
+    public Vector3 playerVelocity { get; private set; }
     Vector3 playerRotation { get; set; }
     Vector3 cameraOffSet { get; set; }
     float cameraRotation { get; set; } //Camera rotation on the X axis
     float liveCameraRotation { get; set; } //Current camera rotation on the X axis
     Rigidbody rigibody { get; set; }
+    Animator animator; // Used to trigger animations
+    bool inAir { get; set; } //Checks if the player jumped
+    bool inSprint { get; set; } //Checks if the player is sprinting
 
     [SerializeField]
     public Camera playerCamera;
@@ -34,6 +37,25 @@ public class PlayerUtilities : NetworkBehaviour
         cameraRotation = defaultRotation;
         liveCameraRotation = defaultRotation;
         rigibody = GetComponent<Rigidbody>();
+        animator = GetComponentInChildren<Animator>();
+    }
+
+    //Checks if the player is in contact with the ground
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Environment"))
+            animator.SetTrigger("Land");
+    }
+
+    void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Environment") && inAir)
+            inAir = false;
+    }
+
+    void OnCollisionExit(Collision collision)
+    {
+        inAir = true;
     }
 
     //As recommended by Unity for physics calculations, using FixedUpdate instead of Update
@@ -49,6 +71,7 @@ public class PlayerUtilities : NetworkBehaviour
     public void SetPlayerVelocity (Vector3 playerVelocityReceived)
     {
         playerVelocity = playerVelocityReceived;
+        animator.SetFloat("Velocity", playerVelocity.magnitude);
     }
 
     //Receives finalRotation from PlayerController and outputs it as the playerRotation
@@ -73,7 +96,26 @@ public class PlayerUtilities : NetworkBehaviour
     void ExecutePlayerMovement()
     {
         if (playerVelocity != notMoving)
-            rigibody.MovePosition(rigibody.position + playerVelocity * Time.fixedDeltaTime); //Delta time will keep the velocity yo be affected by the FPS rate
+        {
+            //Delta time will keep the velocity yo be affected by the FPS rate
+            if (Input.GetKey(KeyCode.LeftShift))
+            {
+                rigibody.MovePosition(rigibody.position + (playerVelocity * 1.5f) * Time.fixedDeltaTime); //Times 2 playerVelocity to go faster
+                animator.SetBool("Sprint", true);
+            }
+
+            else
+            {
+                rigibody.MovePosition(rigibody.position + playerVelocity * Time.fixedDeltaTime);
+                animator.SetBool("Sprint", false);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) && !inAir)
+        {
+            rigibody.AddForce(Vector3.up * 5, ForceMode.Impulse);
+            animator.SetTrigger("Jump");            
+        }
     }
 
     //Rotates the player

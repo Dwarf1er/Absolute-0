@@ -94,7 +94,6 @@ GameObject:
   - component: {fileID: 5721141342790451577}
   - component: {fileID: 8262574878429701712}
   - component: {fileID: 3703460745229906834}
-  - component: {fileID: 8870453008239637659}
   - component: {fileID: 3794970337315769144}
   - component: {fileID: 6562558983226266092}
   - component: {fileID: 4616794041079126181}
@@ -185,18 +184,6 @@ MonoBehaviour:
     i15: 0
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
---- !u!114 &8870453008239637659
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5168639402256876684}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c78eca062b9d394db3955d88b93a631, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3794970337315769144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -256,10 +243,6 @@ MonoBehaviour:
     weaponName: M16
     weaponDamage: 15
     weaponRange: 200
-  playerCamera: {fileID: 8678688239460354427}
-  raycastMask:
-    serializedVersion: 2
-    m_Bits: 1024
 --- !u!1 &7329652069342889124
 GameObject:
   m_ObjectHideFlags: 0
