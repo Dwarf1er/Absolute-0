@@ -7,19 +7,18 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 public class MultiplayerMenu : NetworkManager
 {
-    const string BasicIP = "localhost";
+    const string ErrorMessage = "**Une erreur lors de la connexion est survenue. Veuillez vous assurez d'avoir bien entré l'adresse IP**";
 
     Button BtnHost { get; set; }
     Button BtnJoin { get; set; }
     InputField IPAdress { get; set; }
-    GameObject PnlError { get; set; }
-    Button BtnOK { get; set; }
+    Text TxtError { get; set; }
     private void Start()
     {
         InitializeReferences();
-        PnlError.SetActive(false);
     }
 
+    /*
     public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
     {
         GameObject player;
@@ -38,20 +37,15 @@ public class MultiplayerMenu : NetworkManager
             }
         }
     }
+    */
 
     private void InitializeReferences()
     {
         IPAdress = GameObject.Find("InputIP").GetComponent<InputField>();
-        PnlError = GameObject.Find("PnlError");
-        BtnOK = PnlError.transform.Find("BtnOK").GetComponent<Button>();
-        BtnOK.onClick.AddListener(() => HidePanel());
-
+        TxtError = GameObject.Find("TxtError").GetComponent<Text>();
     }
 
-    private void HidePanel()
-    {
-        PnlError.SetActive(false);
-    }
+   
 
     public void StartUpHost()
     {
@@ -64,9 +58,10 @@ public class MultiplayerMenu : NetworkManager
         AssociateIPAddress();
 
         if (string.IsNullOrEmpty(NetworkManager.singleton.networkAddress))
-            PnlError.SetActive(true);
+            TxtError.text = ErrorMessage;
         else
         {
+            TxtError.text = string.Empty;
             AssociatePort();
             NetworkManager.singleton.StartClient();
         }
