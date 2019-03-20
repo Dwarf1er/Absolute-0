@@ -7,7 +7,7 @@ public class PlayerShootingController : NetworkBehaviour
 {
     //References
     public PlayerWeapons playerWeapon;
-    Camera playerCamera;
+    [SerializeField] Camera playerCamera;
 
     private void Start()
     {
@@ -28,7 +28,6 @@ public class PlayerShootingController : NetworkBehaviour
     void Fire()
     {
         RaycastHit raycastHit;
-        playerCamera = GetComponentInChildren<Camera>();
         Vector3 raycastOrigin = playerCamera.transform.position;
         Vector3 raycastDirection = playerCamera.transform.forward;
         int raycastMask = LayerMask.GetMask("Ennemy");
@@ -36,18 +35,19 @@ public class PlayerShootingController : NetworkBehaviour
         if (Physics.Raycast(raycastOrigin, raycastDirection, out raycastHit, playerWeapon.weaponRange, raycastMask))
         {
             //Checks if an ennemy has been hit
-            //if (raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Ennemy"))
-                //CmdEnnemyShot(raycastHit);
+            if (raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Ennemy"))
+                CmdEnnemyShot(raycastHit);
 
         }
     }
 
     //Server only method, therefore marked as "Command"
-    /*
+    
     [Command]
     void CmdEnnemyShot(RaycastHit hit)
     {
+        Debug.Log(hit.collider.name + " was hit");
         //hit.rigidbody.GetComponent<Ennemy>().TakeDamage;
     }
-    */
+    
 }

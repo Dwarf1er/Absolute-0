@@ -243,6 +243,7 @@ MonoBehaviour:
     weaponName: M16
     weaponDamage: 15
     weaponRange: 200
+  playerCamera: {fileID: 8678688239460354427}
 --- !u!1 &7329652069342889124
 GameObject:
   m_ObjectHideFlags: 0
@@ -305,6 +306,42 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 100078, guid: 54c59f8780aaa2f4ebdae0e8027edf29, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100082, guid: 54c59f8780aaa2f4ebdae0e8027edf29, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100084, guid: 54c59f8780aaa2f4ebdae0e8027edf29, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100088, guid: 54c59f8780aaa2f4ebdae0e8027edf29, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100096, guid: 54c59f8780aaa2f4ebdae0e8027edf29, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400016, guid: 54c59f8780aaa2f4ebdae0e8027edf29, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.00020005535
+      objectReference: {fileID: 0}
+    - target: {fileID: 400016, guid: 54c59f8780aaa2f4ebdae0e8027edf29, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.043689057
+      objectReference: {fileID: 0}
+    - target: {fileID: 400042, guid: 54c59f8780aaa2f4ebdae0e8027edf29, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.00020005151
+      objectReference: {fileID: 0}
+    - target: {fileID: 400042, guid: 54c59f8780aaa2f4ebdae0e8027edf29, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.043689057
+      objectReference: {fileID: 0}
     - target: {fileID: 400066, guid: 54c59f8780aaa2f4ebdae0e8027edf29, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -356,42 +393,6 @@ PrefabInstance:
     - target: {fileID: 9500000, guid: 54c59f8780aaa2f4ebdae0e8027edf29, type: 3}
       propertyPath: m_WarningMessage
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 400016, guid: 54c59f8780aaa2f4ebdae0e8027edf29, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.00020005535
-      objectReference: {fileID: 0}
-    - target: {fileID: 400016, guid: 54c59f8780aaa2f4ebdae0e8027edf29, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.043689057
-      objectReference: {fileID: 0}
-    - target: {fileID: 400042, guid: 54c59f8780aaa2f4ebdae0e8027edf29, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.00020005151
-      objectReference: {fileID: 0}
-    - target: {fileID: 400042, guid: 54c59f8780aaa2f4ebdae0e8027edf29, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.043689057
-      objectReference: {fileID: 0}
-    - target: {fileID: 100078, guid: 54c59f8780aaa2f4ebdae0e8027edf29, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 100082, guid: 54c59f8780aaa2f4ebdae0e8027edf29, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 100084, guid: 54c59f8780aaa2f4ebdae0e8027edf29, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 100088, guid: 54c59f8780aaa2f4ebdae0e8027edf29, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 100096, guid: 54c59f8780aaa2f4ebdae0e8027edf29, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54c59f8780aaa2f4ebdae0e8027edf29, type: 3}

@@ -5,10 +5,10 @@ using UnityEngine;
 public class Level1Manager : MonoBehaviour
 {
     EnnemyInstantiator Instantiator;
-
     // Start is called before the first frame update
     void Start()
     {
+        Instantiator = GetComponent<EnnemyInstantiator>();
         Instantiator.SpawnWorker(new Vector3(0, 0, 0), 0);
     }
 
