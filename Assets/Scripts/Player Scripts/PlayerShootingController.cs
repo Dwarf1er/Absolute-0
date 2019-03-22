@@ -5,6 +5,7 @@ using UnityEngine.Networking;
 
 public class PlayerShootingController : NetworkBehaviour
 {
+    
     //References
     public PlayerWeapons playerWeapon;
     [SerializeField] Camera playerCamera;
@@ -35,19 +36,19 @@ public class PlayerShootingController : NetworkBehaviour
         if (Physics.Raycast(raycastOrigin, raycastDirection, out raycastHit, playerWeapon.weaponRange, raycastMask))
         {
             //Checks if an ennemy has been hit
-            if (raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Ennemy"))
-                CmdEnnemyShot(raycastHit);
+            //if (raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Ennemy"))
+                //CmdEnnemyShot(raycastHit);
 
         }
     }
 
     //Server only method, therefore marked as "Command"
-    
+    /*
     [Command]
     void CmdEnnemyShot(RaycastHit hit)
     {
         Debug.Log(hit.collider.name + " was hit");
         //hit.rigidbody.GetComponent<Ennemy>().TakeDamage;
-    }
+    }*/
     
 }
