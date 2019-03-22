@@ -55,9 +55,10 @@ public class PlayerController : MonoBehaviour
         RaycastHit raycastHit;
         Vector3 raycastOrigin = gameObject.transform.position + (Vector3.up * PlayerUtilities.PlayerHeight) + CameraOffSet.z * utilities.playerCamera.transform.TransformDirection(Vector3.forward); //Tête du player + 5 vers l'arrière
         Vector3 raycastDirection = utilities.playerCamera.transform.TransformDirection(Vector3.forward);
+        float raycastRange = 5f;
         int raycastMask = LayerMask.GetMask("LocalPlayer", "Environment");
 
-        if (Physics.Raycast(raycastOrigin, raycastDirection, out raycastHit, Mathf.Infinity, raycastMask))
+        if (Physics.Raycast(raycastOrigin, raycastDirection, out raycastHit, raycastRange, raycastMask))
         {
             //Checks if the camera is behind a part of the environment (e.g a wall, the floor, etc...)
             if (raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Environment"))

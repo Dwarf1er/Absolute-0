@@ -8,7 +8,7 @@ public class DoorTrigger : MonoBehaviour
 
     private void Start()
     {
-        animator = GetComponent<Animator>();
+        animator = GetComponentInParent<Animator>();
     }
 
     private void OnTriggerEnter(Collider other)
