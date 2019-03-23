@@ -8,6 +8,6 @@ public class PlayerWeapons
 {
     //M16 attributes
     public string weaponName = "M16";
-    public float weaponDamage = 15f;
-    public float weaponRange = 200f;
+    public int weaponDamage = 15;
+    public int weaponRange = 200;
 }

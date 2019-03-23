@@ -13,6 +13,9 @@ public class PlayerNetworking : NetworkBehaviour
     [SerializeField]
     string onlineAllyLayerName = "Ally";
     Camera lobbyCamera;
+    [SerializeField]
+    GameObject playerUIPrefab;
+    GameObject playerUIInstance;
 
     void Start()
     {
@@ -32,6 +35,10 @@ public class PlayerNetworking : NetworkBehaviour
             //Prevents error if there is no lobbyCamera in the scene
             if (lobbyCamera != null)
                 lobbyCamera.enabled = true;
+
+            //Create PlayerUI when spawned
+            playerUIInstance = Instantiate(playerUIPrefab);
+            playerUIInstance.name = playerUIPrefab.name;
         }
 
         //Gives the player a unique identifier
@@ -65,6 +72,9 @@ public class PlayerNetworking : NetworkBehaviour
     //Reactivate the LobbyCamera
     void OnDisable()
     {
+        //Removes the player UI on death
+        Destroy(playerUIInstance);
+
         if (lobbyCamera != null)
             lobbyCamera.enabled = true;
     }
