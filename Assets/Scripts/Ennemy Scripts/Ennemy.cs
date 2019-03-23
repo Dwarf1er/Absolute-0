@@ -8,34 +8,39 @@ public abstract class Ennemy : MonoBehaviour
     //Components
     protected virtual Animator Animator { get; set; } //Must have the following parameters: (float) Speed, (trigger) TakeDamage, (trigger) Death
     protected virtual NavMeshAgent NavMeshAgent { get; set; }
+    public GameObject Target { get; protected set; }
 
     //Stats
-    int Tier { get; set; }
-    int MaxHP { get; set; }
+    int Tier;
+    int MaxHP;
+    int Armor;
+    float Speed;
+    int Damage;
+
+    //Properties
     int HP
     {
-        get { return hp; }
+        get { return hp_; }
         set
         {
-            hp = value;
+            hp_ = value;
 
-            if (hp <= 0) //Trigger NPC death
+            if (hp_ <= 0) //Trigger NPC death
             {
-                hp = 0;
+                hp_ = 0;
                 TriggerDeath();
             }
 
-            if (hp > MaxHP) //Prevent over-healing
-                hp = MaxHP;
+            if (hp_ > MaxHP) //Prevent over-healing
+                hp_ = MaxHP;
         }
     }
-    int Armor { get; set; }
-    float Speed { get; set; }
-    int Damage { get; set; }
-    bool hasRangedAttack { get; set; } //lol ça restera pas là longtemps
 
     //Backing Store
-    int hp;
+    [SerializeField] int hp_;
+
+    //Bools
+    public bool inRange;
 
     protected virtual void Awake()
     {
@@ -78,5 +83,11 @@ public abstract class Ennemy : MonoBehaviour
     public void SetDestination(Vector3 destination)
     {
         NavMeshAgent.SetDestination(destination);
+    }
+    
+    public void SetTarget(GameObject newTarget)
+    {
+        Target = newTarget;
+        SetDestination(Target.transform.position);
     }
 }
