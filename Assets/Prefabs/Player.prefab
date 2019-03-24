@@ -101,7 +101,7 @@ GameObject:
   - component: {fileID: 1816378126333168662}
   m_Layer: 11
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -228,6 +228,8 @@ MonoBehaviour:
   offlineComponents: []
   onlineEnnemyLayerName: Ennemy
   onlineAllyLayerName: Ally
+  playerUIPrefab: {fileID: 7222942146141877454, guid: 3ca20d3e12793ec4fa86173fc0912397,
+    type: 3}
 --- !u!114 &7070738931214261070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,6 +259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d6bd26e42ccb0d4691c25b3cb738bc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHp: 100
 --- !u!1 &7329652069342889124
 GameObject:
   m_ObjectHideFlags: 0
