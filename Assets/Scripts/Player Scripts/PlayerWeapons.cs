@@ -21,26 +21,12 @@ public class PlayerWeapons : MonoBehaviour
     }
 
     //Weapons
-    public Weapon BenelliM4 { get; set; }
-    public Weapon M4 { get; set; }
-    public Weapon M110 { get; set; }
-    public Weapon M249 { get; set; }
-    public Weapon MP5 { get; set; }
-    public Weapon SMAW { get; set; }
-
-    //Weapons graphics
-    [SerializeField]
-    GameObject BenelliM4Model;
-    [SerializeField]
-    GameObject M4Model;
-    [SerializeField]
-    GameObject M110Model;
-    [SerializeField]
-    GameObject M249Model;
-    [SerializeField]
-    GameObject MP5Model;
-    [SerializeField]
-    GameObject SMAWModel;
+    public static Weapon BenelliM4 { get; set; }
+    public static Weapon M4 { get; set; }
+    public static Weapon M110 { get; set; }
+    public static Weapon M249 { get; set; }
+    public static Weapon MP5 { get; set; }
+    public static Weapon SMAW { get; set; }
 
     private void Start()
     {

@@ -269,7 +269,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b08fa35fc04b3ee4f90b4b047e8d78cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultPlayerWeapon: {fileID: 0}
+  BenelliM4Model: {fileID: 7583449985756758352}
+  M4Model: {fileID: 7583449985756758340}
+  M110Model: {fileID: 7583449985756758348}
+  M249Model: {fileID: 7583449985756758346}
+  MP5Model: {fileID: 7583449985756758342}
+  SMAWModel: {fileID: 7583449985756758206}
 --- !u!114 &1474704459287025589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -282,18 +287,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0c72380858468146a66fbcf93a4fed3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BenelliM4: {fileID: 0}
-  M4: {fileID: 0}
-  M110: {fileID: 0}
-  M249: {fileID: 0}
-  MP5: {fileID: 0}
-  SMAW: {fileID: 0}
-  BenelliM4Model: {fileID: 7583449985756758352}
-  M4Model: {fileID: 7583449985756758340}
-  M110Model: {fileID: 7583449985756758348}
-  M249Model: {fileID: 7583449985756758346}
-  MP5Model: {fileID: 7583449985756758342}
-  SMAWModel: {fileID: 7583449985756758206}
 --- !u!1 &7329652069342889124
 GameObject:
   m_ObjectHideFlags: 0
