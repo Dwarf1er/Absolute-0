@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.AI;
 
-public abstract class Ennemy : MonoBehaviour
+public abstract class Ennemy : NetworkBehaviour
 {
     //Components
     protected virtual Animator Animator { get; set; } //Must have the following parameters: (float) Speed, (trigger) TakeDamage, (trigger) Death
@@ -16,6 +17,8 @@ public abstract class Ennemy : MonoBehaviour
     int Armor;
     float Speed;
     int Damage;
+
+    bool isDead;
 
     //Properties
     int HP
@@ -37,7 +40,7 @@ public abstract class Ennemy : MonoBehaviour
     }
 
     //Backing Store
-    [SerializeField] int hp_;
+    int hp_;
 
     //Bools
     public bool inRange;
@@ -59,6 +62,8 @@ public abstract class Ennemy : MonoBehaviour
 
     private void Update()
     {
+        if (isDead)
+            return;
         Animator.SetFloat("Speed", NavMeshAgent.velocity.magnitude);
     }
 

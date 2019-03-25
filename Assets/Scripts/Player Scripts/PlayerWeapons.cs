@@ -21,13 +21,14 @@ public class PlayerWeapons : MonoBehaviour
     }
 
     //Weapons
-    public static Weapon BenelliM4 { get; set; }
-    public static Weapon M4 { get; set; }
-    public static Weapon M110 { get; set; }
-    public static Weapon M249 { get; set; }
-    public static Weapon MP5 { get; set; }
-    public static Weapon SMAW { get; set; }
+    public static Weapon BenelliM4 = new Weapon(1, 1, 1);
+    public static Weapon M4 = new Weapon(25, 120, 5);
+    public static Weapon M110 = new Weapon(1, 1, 1);
+    public static Weapon M249 = new Weapon(1, 1, 1);
+    public static Weapon MP5 = new Weapon(1, 1, 1);
+    public static Weapon SMAW = new Weapon(1, 1, 1);
 
+    /*
     private void Start()
     {
         CreateWeapons();
@@ -37,10 +38,10 @@ public class PlayerWeapons : MonoBehaviour
     {
         //Damage, range, fireRate
         BenelliM4 = new Weapon(1, 1, 1);
-        M4 = new Weapon(1, 1, 1);
+        M4 = new Weapon(25, 120, 5);
         M110 = new Weapon(1, 1, 1);
         M249 = new Weapon(1, 1, 1);
         MP5 = new Weapon(1, 1, 1);
         SMAW = new Weapon(1, 1, 1);
-    }
+    }*/
 }
