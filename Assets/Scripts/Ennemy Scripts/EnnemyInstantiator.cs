@@ -1,14 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class EnnemyInstantiator : MonoBehaviour
+public class EnnemyInstantiator : NetworkBehaviour
 {
     GameObject WorkerPrefab;
     private void Awake()
     {
         WorkerPrefab = Resources.Load<GameObject>("Ennemy Worker");
     }
+
+    [Command]
     public void SpawnWorker(Vector3 position, int tier)
     {
         GameObject newEnnemy = Instantiate(WorkerPrefab, position, Quaternion.identity);

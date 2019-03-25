@@ -20,32 +20,29 @@ public class PlayerWeaponManager : NetworkBehaviour
     GameObject SMAWModel;
 
     //References
-    private PlayerWeapons.Weapon defaultPlayerWeapon = PlayerWeapons.M4;
-    PlayerWeapons.Weapon currentPlayerWeapon;
+    private PlayerWeapons.Weapon defaultPlayerWeapon;
+
+    public PlayerWeapons.Weapon currentPlayerWeapon;
     GameObject currentPlayerWeaponModel;
 
+    GameObject[] WeaponModels { get; set; }
+    PlayerWeapons.Weapon[] Weapons { get; set; }
 
     void Start()
     {
+        defaultPlayerWeapon = PlayerWeapons.M4;
+
+        WeaponModels = new GameObject[] { BenelliM4Model, M4Model, M110Model, M249Model, MP5Model, SMAWModel };
+        Weapons = new PlayerWeapons.Weapon[] { PlayerWeapons.BenelliM4, PlayerWeapons.M4, PlayerWeapons.M110, PlayerWeapons.M249, PlayerWeapons.MP5, PlayerWeapons.SMAW };
+
         currentPlayerWeaponModel = M4Model;
+        
         EquipNextWeapon(defaultPlayerWeapon, currentPlayerWeaponModel);
     }
 
     void Update()
     {
-        //Weapon swapping through keys 1 to 6 (alphanumeric != numpad)
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-            EquipNextWeapon(PlayerWeapons.BenelliM4, BenelliM4Model);
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-            EquipNextWeapon(PlayerWeapons.M4, M4Model);
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-            EquipNextWeapon(PlayerWeapons.M110, M110Model);
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-            EquipNextWeapon(PlayerWeapons.M249, M249Model);
-        if (Input.GetKeyDown(KeyCode.Alpha5))
-            EquipNextWeapon(PlayerWeapons.MP5, MP5Model);
-        if (Input.GetKeyDown(KeyCode.Alpha6))
-            EquipNextWeapon(PlayerWeapons.SMAW, SMAWModel);
+        
     }
 
     //Gets the current weapon to be the new weapon for the player
@@ -57,6 +54,11 @@ public class PlayerWeaponManager : NetworkBehaviour
         currentPlayerWeaponModel = newWeaponModel;
 
         currentPlayerWeaponModel.SetActive(true);
+    }
+
+    public void EquipNextWeapon (int weaponID)
+    {
+        EquipNextWeapon(Weapons[weaponID], WeaponModels[weaponID]);
     }
 
     //Allows to get a reference to the currently equipped weapon of a LocalPlayer

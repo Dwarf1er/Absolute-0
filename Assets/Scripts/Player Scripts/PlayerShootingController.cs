@@ -5,10 +5,8 @@ using UnityEngine.Networking;
 
 [RequireComponent(typeof(PlayerWeaponManager))]
 public class PlayerShootingController : NetworkBehaviour
-{/*
-    
+{
     //References
-    public PlayerWeapons currentPlayerWeapon;
     PlayerWeaponManager playerWeaponManager;
     [SerializeField]
     Camera playerCamera;
@@ -25,8 +23,19 @@ public class PlayerShootingController : NetworkBehaviour
 
     private void Update()
     {
-        //Gets the current player weapon from the playerWeaponManager
-        currentPlayerWeapon = playerWeaponManager.GetCurrentPlayerWeapon();
+        //Weapon swapping through keys 1 to 6 (alphanumeric != numpad)
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+            playerWeaponManager.EquipNextWeapon(0);
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+            playerWeaponManager.EquipNextWeapon(1);
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+            playerWeaponManager.EquipNextWeapon(2);
+        if (Input.GetKeyDown(KeyCode.Alpha4))
+            playerWeaponManager.EquipNextWeapon(3);
+        if (Input.GetKeyDown(KeyCode.Alpha5))
+            playerWeaponManager.EquipNextWeapon(4);
+        if (Input.GetKeyDown(KeyCode.Alpha6))
+            playerWeaponManager.EquipNextWeapon(5);
         
         //Fire1 is by default left ctrl in the input manager, changed for mouse 0 button in the project settings
         if (Input.GetButtonDown("Fire1"))
@@ -40,25 +49,24 @@ public class PlayerShootingController : NetworkBehaviour
         RaycastHit raycastHit;
         Vector3 raycastOrigin = playerCamera.transform.position;
         Vector3 raycastDirection = playerCamera.transform.forward;
-        int raycastMask = LayerMask.GetMask("Ennemy");
+        int raycastMask = LayerMask.GetMask("Ennemy", "Environment");
 
-        if (Physics.Raycast(raycastOrigin, raycastDirection, out raycastHit, currentPlayerWeapon.weaponRange, raycastMask))
+        if (Physics.Raycast(raycastOrigin, raycastDirection, out raycastHit, playerWeaponManager.currentPlayerWeapon.WeaponRange, raycastMask))
         {
             //Checks if an ennemy has been hit
             if (raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Ennemy"))
             {
                 GameObject ennemyHit = raycastHit.transform.gameObject;
-                CmdEnnemyShot(ennemyHit, currentPlayerWeapon.weaponDamage);
+                CmdEnnemyShot(ennemyHit);
             }
         }
     }
 
     //Server only method, therefore marked as "Command"
     [Command]
-    void CmdEnnemyShot(GameObject ennemyHit, int damage)
+    void CmdEnnemyShot(GameObject ennemyHit)
     {
         Debug.Log(ennemyHit.name + " was hit");
-        ennemyHit.GetComponent<Ennemy>().TakeDamage(damage);
+        ennemyHit.GetComponent<Ennemy>().TakeDamage(playerWeaponManager.currentPlayerWeapon.WeaponDamage);
     }
-*/  
 }
