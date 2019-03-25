@@ -12,7 +12,7 @@ public class EnnemyInstantiator : NetworkBehaviour
     }
 
     [Command]
-    public void SpawnWorker(Vector3 position, int tier)
+    public void CmdSpawnWorker(Vector3 position, int tier)
     {
         GameObject newEnnemy = Instantiate(WorkerPrefab, position, Quaternion.identity);
         newEnnemy.GetComponent<WorkerAI>().SetStats(30, 0, 2, 10);

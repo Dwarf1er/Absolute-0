@@ -11,7 +11,7 @@ public class Level1Manager : MonoBehaviour
     void Start()
     {
         Instantiator = GetComponent<EnnemyInstantiator>();
-        Instantiator.SpawnWorker(new Vector3(0, 0, 0), 0);
+        Instantiator.CmdSpawnWorker(new Vector3(0, 0, 0), 0);
     }
 
     // Update is called once per frame

@@ -20,7 +20,7 @@ public class PlayerShootingController : NetworkBehaviour
         //Gets the reference to the PlayerWeaponManager
         playerWeaponManager = GetComponent<PlayerWeaponManager>();
     }
-
+    
     private void Update()
     {
         //Weapon swapping through keys 1 to 6 (alphanumeric != numpad)
