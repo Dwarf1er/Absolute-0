@@ -281,7 +281,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ad9a4abc9e5b3e4b88390b4b85d13ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offlineComponents: []
+  offlineComponents:
+  - {fileID: 4862682674519466630}
+  - {fileID: 924510110598274220}
+  - {fileID: 8678688239460354427}
+  - {fileID: 5047696661230405431}
+  - {fileID: 1816378126333168662}
+  - {fileID: 5856111122139797340}
+  - {fileID: 7311766794815075599}
+  - {fileID: 1474704459287025589}
   onlineEnnemyLayerName: Ennemy
   onlineAllyLayerName: Ally
   playerUIPrefab: {fileID: 7222942146141877454, guid: 3ca20d3e12793ec4fa86173fc0912397,

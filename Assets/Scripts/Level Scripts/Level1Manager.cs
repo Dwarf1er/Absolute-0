@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class Level1Manager : MonoBehaviour
+public class Level1Manager : NetworkBehaviour
 {
     EnnemyInstantiator Instantiator;
 
