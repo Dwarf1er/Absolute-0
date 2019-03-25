@@ -18,14 +18,16 @@ public class Level1Manager : NetworkBehaviour
 
     public override void OnStartServer()
     {
-
+        SpawnWorker();
     }
 
     // Update is called once per frame
     void Update()
     {
+        /*
         if (Input.GetKeyDown(KeyCode.G))
             SpawnWorker();
+        */
     }
 
     void SpawnWorker()
