@@ -17,6 +17,9 @@ public abstract class Ennemy : NetworkBehaviour
     int Armor;
     float Speed;
     int Damage;
+    
+    protected float AttackDelay;
+    protected float timeSinceLastAttack;
 
     bool isDead;
 

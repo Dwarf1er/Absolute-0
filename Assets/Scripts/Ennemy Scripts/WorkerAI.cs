@@ -28,7 +28,16 @@ public class WorkerAI : Ennemy
             if (Target != null && Target.GetComponent<PlayerController>() != null) //Only recalculate for non-static targets (players)
                 SetDestination(Target.transform.position);
         }
-        
+
+        //Attack
+        if (timeSinceLastAttack < AttackDelay)
+            timeSinceLastAttack += Time.deltaTime; //No need to be calculated if the ennemy has already waited long enough
+        else
+        {
+            if (inRange)
+                AttackTarget();
+        }
+
 
         //Controlling the animation
         stopped = NavMeshAgent.velocity.magnitude == 0;
@@ -37,5 +46,11 @@ public class WorkerAI : Ennemy
         Animator.SetBool("IsStopped", stopped);
         Animator.SetFloat("Speed", NavMeshAgent.velocity.magnitude);
         Animator.SetFloat("Stride", stride);
+    }
+
+    void AttackTarget()
+    {
+        Animator.SetTrigger("Attack");
+        //Target.GetComponent<PlayerUtilities>().
     }
 }
