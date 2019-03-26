@@ -57,16 +57,16 @@ public class PlayerShootingController : NetworkBehaviour
             if (raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Ennemy"))
             {
                 GameObject ennemyHit = raycastHit.transform.gameObject;
-                CmdEnnemyShot(ennemyHit);
+                CmdEnnemyShot(ennemyHit, playerWeaponManager.currentPlayerWeapon.WeaponDamage);
             }
         }
     }
 
     //Server only method, therefore marked as "Command"
     [Command]
-    void CmdEnnemyShot(GameObject ennemyHit)
+    void CmdEnnemyShot(GameObject ennemyHit, int damage)
     {
         Debug.Log(ennemyHit.name + " was hit");
-        ennemyHit.GetComponent<Ennemy>().TakeDamage(playerWeaponManager.currentPlayerWeapon.WeaponDamage);
+        ennemyHit.GetComponent<Ennemy>().TakeDamage(damage);
     }
 }
