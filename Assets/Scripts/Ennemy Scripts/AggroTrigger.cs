@@ -13,6 +13,13 @@ public class AggroTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        RootEnnemy.SetTarget(other.gameObject);
+        if (RootEnnemy.Target == RootEnnemy.DefaultTarget) //Will not change target if the ennemy is already chasing someone
+            RootEnnemy.SetTarget(other.gameObject);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject == RootEnnemy.Target) //Will not lose target because of another player leaving aggro range
+            RootEnnemy.TargetLost();
     }
 }

@@ -9,7 +9,8 @@ public abstract class Ennemy : NetworkBehaviour
     //Components
     protected virtual Animator Animator { get; set; } //Must have the following parameters: (float) Speed, (trigger) TakeDamage, (trigger) Death
     protected virtual NavMeshAgent NavMeshAgent { get; set; }
-    public GameObject Target { get; protected set; }
+    [SerializeField] public GameObject Target;
+    [SerializeField] public GameObject DefaultTarget;
 
     //Stats
     int Tier;
@@ -21,7 +22,7 @@ public abstract class Ennemy : NetworkBehaviour
     [SerializeField] protected float AttackDelay;
     [SerializeField] protected float timeSinceLastAttack;
 
-    [SerializeField] bool isDead;
+    [SerializeField] protected bool isDead;
 
     //Properties
     int HP
@@ -62,6 +63,9 @@ public abstract class Ennemy : NetworkBehaviour
         Speed = speed;
         Damage = damage;
         AttackDelay = attackDelay;
+
+        isDead = false;
+        NavMeshAgent.speed = Speed;
     }
 
     private void Update()
@@ -74,7 +78,10 @@ public abstract class Ennemy : NetworkBehaviour
     //Functions
     public void TriggerDeath()
     {
+        Animator.SetBool("Dead", true);
         Animator.SetTrigger("Death");
+        isDead = true;
+        NavMeshAgent.isStopped = true;
     }
 
     public void TakeDamage(int rawDamage)
@@ -98,5 +105,16 @@ public abstract class Ennemy : NetworkBehaviour
     {
         Target = newTarget;
         SetDestination(Target.transform.position);
+    }
+
+    public void SetDefaultTarget(GameObject defaultTarget)
+    {
+        DefaultTarget = defaultTarget;
+        SetTarget(DefaultTarget);
+    }
+
+    public void TargetLost()
+    {
+        SetTarget(DefaultTarget);
     }
 }

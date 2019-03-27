@@ -6,15 +6,7 @@ using UnityEngine.Networking;
 public class Level1Manager : NetworkBehaviour
 {
     [SerializeField] GameObject WorkerPrefab;
-
-    //EnnemyInstantiator Instantiator;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        //Instantiator = GetComponent<EnnemyInstantiator>();
-        //Instantiator.CmdSpawnWorker(new Vector3(0, 0, 0), 0);
-    }
+    [SerializeField] GameObject Objective;
 
     public override void OnStartServer()
     {
@@ -35,6 +27,7 @@ public class Level1Manager : NetworkBehaviour
         Vector3 position = Vector3.forward * 4;
         GameObject newWorker = Instantiate(WorkerPrefab, position, Quaternion.identity) as GameObject;
         newWorker.GetComponent<WorkerAI>().SetStats(30, 0, 2, 10, 0.8f);
+        newWorker.GetComponent<WorkerAI>().SetDefaultTarget(Objective);
         NetworkServer.Spawn(newWorker);
     }
 }

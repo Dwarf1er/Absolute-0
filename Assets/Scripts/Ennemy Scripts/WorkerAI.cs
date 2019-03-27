@@ -17,6 +17,9 @@ public class WorkerAI : Ennemy
     // Update is called once per frame
     void Update()
     {
+        if (isDead)
+            return;
+
         //Pathfinding
         if (inRange)
         {
