@@ -17,11 +17,11 @@ public abstract class Ennemy : NetworkBehaviour
     int Armor;
     float Speed;
     int Damage;
-    
-    protected float AttackDelay;
-    protected float timeSinceLastAttack;
 
-    bool isDead;
+    [SerializeField] protected float AttackDelay;
+    [SerializeField] protected float timeSinceLastAttack;
+
+    [SerializeField] bool isDead;
 
     //Properties
     int HP
@@ -43,7 +43,7 @@ public abstract class Ennemy : NetworkBehaviour
     }
 
     //Backing Store
-    int hp_;
+    [SerializeField] int hp_;
 
     //Bools
     public bool inRange;
@@ -54,13 +54,14 @@ public abstract class Ennemy : NetworkBehaviour
         NavMeshAgent = GetComponent<NavMeshAgent>();
     }
 
-    public void SetStats(int maxHp, int armor, float speed, int damage)
+    public void SetStats(int maxHp, int armor, float speed, int damage, float attackDelay)
     {
         MaxHP = maxHp;
         HP = MaxHP;
         Armor = armor;
         Speed = speed;
         Damage = damage;
+        AttackDelay = attackDelay;
     }
 
     private void Update()

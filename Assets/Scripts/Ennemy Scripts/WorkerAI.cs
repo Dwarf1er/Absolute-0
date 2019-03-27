@@ -27,6 +27,7 @@ public class WorkerAI : Ennemy
             NavMeshAgent.isStopped = false;
             if (Target != null && Target.GetComponent<PlayerController>() != null) //Only recalculate for non-static targets (players)
                 SetDestination(Target.transform.position);
+            Animator.SetTrigger("StopAttack");
         }
 
         //Attack
@@ -35,7 +36,10 @@ public class WorkerAI : Ennemy
         else
         {
             if (inRange)
+            {
                 AttackTarget();
+                timeSinceLastAttack = 0;
+            }
         }
 
 
