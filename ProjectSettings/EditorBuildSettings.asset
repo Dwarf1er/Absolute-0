@@ -8,9 +8,9 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 1
-    path: Assets/Scenes/MenuJouer.unity
-    guid: 6fc46fbebc373a94480a03cd4148a906
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
@@ -29,4 +29,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level 1.unity
     guid: 8ef77b827f004484fb761d4eee951465
+  - enabled: 1
+    path: Assets/Scenes/MenuJouer.unity
+    guid: 43be9da71bec5cb43bc8c4d92e7bc7c5
+  - enabled: 1
+    path: Assets/Scenes/Level 3.unity
+    guid: 387a6707622319143832f8c3d9bfb765
   m_configObjects: {}
