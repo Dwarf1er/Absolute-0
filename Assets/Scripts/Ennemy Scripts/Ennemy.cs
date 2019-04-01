@@ -17,7 +17,7 @@ public abstract class Ennemy : NetworkBehaviour
     int MaxHP;
     int Armor;
     float Speed;
-    int Damage;
+    protected int Damage;
 
     [SerializeField] protected float AttackDelay;
     [SerializeField] protected float timeSinceLastAttack;

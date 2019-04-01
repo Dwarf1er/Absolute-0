@@ -109,6 +109,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c092cdfb9ab10d843911efced3243ba5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Target: {fileID: 0}
+  DefaultTarget: {fileID: 0}
   AttackDelay: 0
   timeSinceLastAttack: 0
   isDead: 0
@@ -688,8 +690,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 1
+  m_Center: {x: 0, y: 0.8, z: 0}
 --- !u!114 &2881762243234946287
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -58,6 +58,9 @@ public class WorkerAI : Ennemy
     void AttackTarget()
     {
         Animator.SetTrigger("Attack");
-        //Target.GetComponent<PlayerUtilities>().
+        if (Target.GetComponent<PlayerStats>() != null)
+            Target.GetComponent<PlayerStats>().TakeDamage(Damage);
+        if (Target.GetComponent<Core>() != null)
+            Target.GetComponent<Core>().TakeDamage(Damage);
     }
 }
