@@ -8,9 +8,9 @@ public class MainMenu : MonoBehaviour
 {
     Button PlayBtn { get; set; }
     // Start is called before the first frame update
-    void Start()
+    void Update()
     {
-        PlayBtn = GameObject.Find("BtnJouer").GetComponent<Button>();
-        PlayBtn.onClick.AddListener(() => SceneManager.LoadScene("MenuJouer", LoadSceneMode.Single));
+        if (Input.anyKey)
+            SceneManager.LoadScene("MenuJouer", LoadSceneMode.Single);
     }
 }

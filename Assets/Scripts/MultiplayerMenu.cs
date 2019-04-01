@@ -1,4 +1,5 @@
 ﻿//https://www.youtube.com/watch?v=9w2kwGDZ6wM
+//https://docs.unity3d.com/ScriptReference/Networking.NetworkManager.ServerChangeScene.html 
 using System;
 using System.Collections;
 using System.Collections.Generic;
