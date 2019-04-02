@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
+[RequireComponent(typeof(PlayerStats))]
 public class PlayerNetworking : NetworkBehaviour
 {
     //References
@@ -39,6 +40,17 @@ public class PlayerNetworking : NetworkBehaviour
             //Create PlayerUI when spawned
             playerUIInstance = Instantiate(playerUIPrefab);
             playerUIInstance.name = playerUIPrefab.name;
+
+            //Configuration of the PlayerUI
+            PlayerUI playerUi = playerUIInstance.GetComponent<PlayerUI>();
+
+            //Checks if the playerUI exists
+            if (playerUi == null)
+                Debug.LogError("No playerUI on the playerUI prefab");
+
+            else
+                playerUi.SetPlayer(GetComponent<PlayerStats>());
+
         }
 
         //Gives the player a unique identifier

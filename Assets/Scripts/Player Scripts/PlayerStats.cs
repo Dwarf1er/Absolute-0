@@ -14,11 +14,19 @@ public class PlayerStats : NetworkBehaviour
         SetPlayerStats();
     }
 
+    //The player always begins with his maximum health amount
     public void SetPlayerStats()
     {
         currentHp = maxHp;
     }
 
+    //Used for the health bar size
+    public int GetHpAmount()
+    {
+        return currentHp / maxHp;
+    }
+
+    //Used to calculate the damage dealt to the player after an attack
     public void TakeDamage(int rawDamage)
     {
         currentHp -= rawDamage;
