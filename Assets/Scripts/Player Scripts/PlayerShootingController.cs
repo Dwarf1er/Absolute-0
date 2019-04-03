@@ -7,6 +7,7 @@ using UnityEngine.Networking;
 public class PlayerShootingController : NetworkBehaviour
 {
     //References
+    Animator animator;
     PlayerWeaponManager playerWeaponManager;
     [SerializeField]
     Camera playerCamera;
@@ -17,7 +18,8 @@ public class PlayerShootingController : NetworkBehaviour
         if (playerCamera == null)
             throw new System.NullReferenceException("PlayerShootingController: playerCamera missing");
 
-        //Gets the reference to the PlayerWeaponManager
+        //Get references in the player's game object
+        animator = GetComponent<Animator>();
         playerWeaponManager = GetComponent<PlayerWeaponManager>();
     }
     
@@ -46,6 +48,7 @@ public class PlayerShootingController : NetworkBehaviour
     [Client]
     void Fire()
     {
+        animator.SetTrigger("Shoot");
         RaycastHit raycastHit;
         Vector3 raycastOrigin = playerCamera.transform.position;
         Vector3 raycastDirection = playerCamera.transform.forward;

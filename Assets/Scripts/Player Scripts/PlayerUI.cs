@@ -21,6 +21,10 @@ public class PlayerUI : MonoBehaviour
     void Update()
     {
         SetHpValue(Player.GetHpAmount());
+
+        //For testing purposes
+        //if (Input.GetKeyDown(KeyCode.G))
+            //Player.TakeDamage(20);
     }
 
     void SetHpValue(float value)
