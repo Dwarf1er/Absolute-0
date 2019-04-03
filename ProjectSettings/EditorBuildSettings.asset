@@ -14,24 +14,24 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 1
-    path: Assets/Scenes/NetworkTest.unity
-    guid: 0044dc9af0fba02418900f64055e26c2
-  - enabled: 1
-    path: Assets/Scenes/MainLevel.unity
-    guid: 43d8012d1cefd584081d810725a93e27
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/Menu principal.unity
     guid: f6eab667b84218940877ee1cb56c2bf1
+  - enabled: 1
+    path: Assets/Scenes/MenuJouer.unity
+    guid: 43be9da71bec5cb43bc8c4d92e7bc7c5
+  - enabled: 1
+    path: Assets/Scenes/MainLevel.unity
+    guid: 43d8012d1cefd584081d810725a93e27
   - enabled: 1
     path: Assets/Scenes/Level 2.unity
     guid: b841b09b30b542b488f184b29e1443cb
   - enabled: 1
     path: Assets/Scenes/Level 1.unity
     guid: 8ef77b827f004484fb761d4eee951465
-  - enabled: 1
-    path: Assets/Scenes/MenuJouer.unity
-    guid: 43be9da71bec5cb43bc8c4d92e7bc7c5
   - enabled: 1
     path: Assets/Scenes/Level 3.unity
     guid: 387a6707622319143832f8c3d9bfb765
