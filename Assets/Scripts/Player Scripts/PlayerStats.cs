@@ -21,9 +21,9 @@ public class PlayerStats : NetworkBehaviour
     }
 
     //Used for the health bar size
-    public int GetHpAmount()
+    public float GetHpAmount()
     {
-        return currentHp / maxHp;
+        return (float)currentHp / maxHp;
     }
 
     //Used to calculate the damage dealt to the player after an attack
