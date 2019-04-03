@@ -12,8 +12,14 @@ public class MultiplayerMenu : NetworkManager
 
     Button BtnHost { get; set; }
     Button BtnJoin { get; set; }
+    Button BtnDisconnect { get; set; }
+    Button BtnLevel1 { get; set; }
+    Button BtnLevel2 { get; set; }
+    Button BtnLevel3 { get; set; }
+    Button BtnClient { get; set; }
     InputField IPAdress { get; set; }
     Text TxtError { get; set; }
+    string PlayScene { get; set; }
     private void Start()
     {
         InitializeReferences();
@@ -94,7 +100,28 @@ public class MultiplayerMenu : NetworkManager
 
     private void SetOtherButtons()
     {
-        GameObject.Find("Button").GetComponent<Button>().onClick.AddListener(() => StopGame());
+        BtnDisconnect = GameObject.Find("BtnDisconnect").GetComponent<Button>();
+        BtnDisconnect.onClick.AddListener(() => StopGame());
+        BtnLevel1 = GameObject.Find("BtnLevel1").GetComponent<Button>();
+        BtnLevel1.onClick.AddListener(() => ChangeScene("Level 1"));
+        BtnLevel2 = GameObject.Find("BtnLevel2").GetComponent<Button>();
+        BtnLevel2.onClick.AddListener(() => ChangeScene("Level 2"));
+        BtnLevel3 = GameObject.Find("BtnLevel3").GetComponent<Button>();
+        BtnLevel3.onClick.AddListener(() => ChangeScene("Level 3"));
+        BtnClient = GameObject.Find("BtnClient").GetComponent<Button>();
+        BtnClient.onClick.AddListener(() => GoToHostScene());
+    }
+
+    private void GoToHostScene()
+    {
+        if (!string.IsNullOrEmpty(PlayScene))
+        NetworkManager.singleton.ServerChangeScene(PlayScene);
+    }
+
+    private void ChangeScene(string sceneName)
+    {
+        NetworkManager.singleton.ServerChangeScene(sceneName);
+        PlayScene = sceneName;
     }
 
     void SetMenuButtons()
