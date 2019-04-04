@@ -14,12 +14,18 @@ public class AttackTrigger : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject == RootEnnemy.Target)
+        {
             RootEnnemy.inRange = true;
+            RootEnnemy.StartAttack();
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject == RootEnnemy.Target)
+        {
             RootEnnemy.inRange = false;
+            RootEnnemy.StopAttack();
+        }
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class WorkerAI : Ennemy
 {
     bool stopped;
-    float stride; //how much speed this ennemy has accumulated (velocity/max speed)
+    //float stride; //how much speed this ennemy has accumulated (velocity/max speed)
 
     protected override void Awake()
     {
@@ -30,9 +30,9 @@ public class WorkerAI : Ennemy
             NavMeshAgent.isStopped = false;
             if (Target != null && Target.GetComponent<PlayerController>() != null) //Only recalculate for non-static targets (players)
                 SetDestination(Target.transform.position);
-            Animator.SetTrigger("StopAttack");
+            //Animator.SetTrigger("StopAttack");
         }
-
+        /*
         //Attack
         if (timeSinceLastAttack < AttackDelay)
             timeSinceLastAttack += Time.deltaTime; //No need to be calculated if the ennemy has already waited long enough
@@ -44,17 +44,18 @@ public class WorkerAI : Ennemy
                 timeSinceLastAttack = 0;
             }
         }
-
+        */
 
         //Controlling the animation
         stopped = NavMeshAgent.velocity.magnitude == 0;
-        stride = NavMeshAgent.velocity.magnitude / NavMeshAgent.speed;
+        //stride = NavMeshAgent.velocity.magnitude / NavMeshAgent.speed;
 
         Animator.SetBool("IsStopped", stopped);
         Animator.SetFloat("Speed", NavMeshAgent.velocity.magnitude);
-        Animator.SetFloat("Stride", stride);
+        //Animator.SetFloat("Stride", stride);
     }
 
+    /*
     void AttackTarget()
     {
         Animator.SetTrigger("Attack");
@@ -63,4 +64,5 @@ public class WorkerAI : Ennemy
         if (Target.GetComponent<Core>() != null)
             Target.GetComponent<Core>().TakeDamage(Damage);
     }
+    */
 }

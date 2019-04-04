@@ -117,4 +117,23 @@ public abstract class Ennemy : NetworkBehaviour
     {
         SetTarget(DefaultTarget);
     }
+
+    public void StartAttack()
+    {
+        Animator.SetTrigger("StartAttack");
+    }
+
+    public void StopAttack()
+    {
+        Animator.SetTrigger("StopAttack");
+        Debug.Log("Attack stopped");
+    }
+
+    public void Attack()
+    {
+        if (Target.GetComponent<PlayerStats>() != null)
+            Target.GetComponent<PlayerStats>().TakeDamage(Damage);
+        if (Target.GetComponent<Core>() != null)
+            Target.GetComponent<Core>().TakeDamage(Damage);
+    }
 }
