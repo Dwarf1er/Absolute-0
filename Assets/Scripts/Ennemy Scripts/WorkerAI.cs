@@ -21,7 +21,7 @@ public class WorkerAI : Ennemy
             return;
 
         //Pathfinding
-        if (inRange)
+        if (isAttacking)
         {
             NavMeshAgent.isStopped = true;
         }

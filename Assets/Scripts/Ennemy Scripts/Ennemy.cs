@@ -16,7 +16,16 @@ public abstract class Ennemy : NetworkBehaviour
     int Tier;
     int MaxHP;
     int Armor;
-    float Speed;
+    float StartingSpeed;
+    float Speed
+    {
+        get { return speed_; }
+        set
+        {
+            speed_ = value;
+            NavMeshAgent.speed = value;
+        }
+    }
     protected int Damage;
 
     [SerializeField] protected float AttackDelay;
@@ -45,9 +54,11 @@ public abstract class Ennemy : NetworkBehaviour
 
     //Backing Store
     [SerializeField] int hp_;
+    [SerializeField] float speed_;
 
     //Bools
-    public bool inRange;
+    //public bool inRange;
+    public bool isAttacking;
 
     protected virtual void Awake()
     {
@@ -60,12 +71,12 @@ public abstract class Ennemy : NetworkBehaviour
         MaxHP = maxHp;
         HP = MaxHP;
         Armor = armor;
+        StartingSpeed = speed;
         Speed = speed;
         Damage = damage;
         AttackDelay = attackDelay;
 
         isDead = false;
-        NavMeshAgent.speed = Speed;
     }
 
     private void Update()
@@ -75,15 +86,8 @@ public abstract class Ennemy : NetworkBehaviour
         Animator.SetFloat("Speed", NavMeshAgent.velocity.magnitude);
     }
 
-    //Functions
-    public void TriggerDeath()
-    {
-        Animator.SetBool("Dead", true);
-        Animator.SetTrigger("Death");
-        isDead = true;
-        NavMeshAgent.isStopped = true;
-    }
-
+    // Functions - Taking Damage
+    
     public void TakeDamage(int rawDamage)
     {
         int damage = rawDamage - Armor;
@@ -95,6 +99,20 @@ public abstract class Ennemy : NetworkBehaviour
 
         HP -= damage;
     }
+
+    public void TriggerDeath()
+    {
+        Animator.SetBool("Dead", true);
+        Animator.SetTrigger("Death");
+        isDead = true;
+
+        //Stop the corpse from moving
+        NavMeshAgent.isStopped = true;
+        GetComponent<CapsuleCollider>().enabled = false;
+        GetComponent<Rigidbody>().isKinematic = true;
+    }
+
+    // Functions - Setting Target
 
     public void SetDestination(Vector3 destination)
     {
@@ -118,15 +136,20 @@ public abstract class Ennemy : NetworkBehaviour
         SetTarget(DefaultTarget);
     }
 
+    // Functions - Attacking
+
     public void StartAttack()
     {
         Animator.SetTrigger("StartAttack");
+        isAttacking = true;
+        Speed = 0;
     }
 
     public void StopAttack()
     {
         Animator.SetTrigger("StopAttack");
-        Debug.Log("Attack stopped");
+        isAttacking = false;
+        Speed = StartingSpeed;
     }
 
     public void Attack()

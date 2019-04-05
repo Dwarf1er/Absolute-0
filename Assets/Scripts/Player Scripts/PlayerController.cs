@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
             if (raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Environment"))
             {
                 Debug.DrawRay(raycastOrigin, raycastDirection * raycastHit.distance, Color.red); //Debug info
-                Debug.Log("Hit l'environnement"); //Debug info
+                //Debug.Log("Hit l'environnement"); //Debug info
                 float translateFactor = (raycastHit.point - raycastOrigin).magnitude / CameraOffSet.magnitude; //Translate factor is determined by the distance from obstacle to camera and from player to camera
                 finalCameraOffSet *= (0.9f - translateFactor); // (1 - translateFactor) collerait la caméra à la surface du plancher/mur
             }
@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour
             if (raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("LocalPlayer"))
             {
                 Debug.DrawRay(raycastOrigin, raycastDirection * raycastHit.distance, Color.blue); //Debug info
-                Debug.Log("Hit le joueur"); //Debug info
+                //Debug.Log("Hit le joueur"); //Debug info
             }
         }
 

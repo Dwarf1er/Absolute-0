@@ -15,7 +15,6 @@ public class AttackTrigger : MonoBehaviour
     {
         if (other.gameObject == RootEnnemy.Target)
         {
-            RootEnnemy.inRange = true;
             RootEnnemy.StartAttack();
         }
     }
@@ -24,7 +23,6 @@ public class AttackTrigger : MonoBehaviour
     {
         if (other.gameObject == RootEnnemy.Target)
         {
-            RootEnnemy.inRange = false;
             RootEnnemy.StopAttack();
         }
     }
