@@ -30,6 +30,7 @@ public class PlayerUI : MonoBehaviour
     void SetHpValue(float value)
     {
         //Changes the scale of the bar on the X axis to match the graphic's orientation
-        hpBar.localScale = new Vector3(value, 1f, 1f);
+        if (value >= 0)
+            hpBar.localScale = new Vector3(value, 1f, 1f);
     }
 }

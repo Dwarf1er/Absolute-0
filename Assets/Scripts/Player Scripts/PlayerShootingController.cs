@@ -8,6 +8,7 @@ public class PlayerShootingController : NetworkBehaviour
 {
     //References
     Animator animator;
+    int currentAmmoInClip;
     PlayerWeaponManager playerWeaponManager;
     [SerializeField]
     Camera playerCamera;
@@ -38,9 +39,11 @@ public class PlayerShootingController : NetworkBehaviour
             playerWeaponManager.EquipNextWeapon(4);
         if (Input.GetKeyDown(KeyCode.Alpha6))
             playerWeaponManager.EquipNextWeapon(5);
+        if (Input.GetKeyDown(KeyCode.R))
+            animator.SetTrigger("Reload");
         
         //Fire1 is by default left ctrl in the input manager, changed for mouse 0 button in the project settings
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && currentAmmoInClip > 0)
             Fire();
     }
 
@@ -63,6 +66,9 @@ public class PlayerShootingController : NetworkBehaviour
                 CmdEnnemyShot(ennemyHit, playerWeaponManager.currentPlayerWeapon.WeaponDamage);
             }
         }
+
+        //Removes one bullet after each click
+        currentAmmoInClip -= 1;
     }
 
     //Server only method, therefore marked as "Command"
@@ -71,5 +77,11 @@ public class PlayerShootingController : NetworkBehaviour
     {
         Debug.Log(ennemyHit.name + " was hit");
         ennemyHit.GetComponent<Ennemy>().TakeDamage(damage);
+    }
+
+    //Refill magazine
+    public void Reload()
+    {
+        currentAmmoInClip = playerWeaponManager.currentPlayerWeapon.WeaponClipSize;
     }
 }
