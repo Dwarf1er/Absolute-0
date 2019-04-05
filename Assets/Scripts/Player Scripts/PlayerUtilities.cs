@@ -116,6 +116,9 @@ public class PlayerUtilities : NetworkBehaviour
             rigibody.AddForce(Vector3.up * 5, ForceMode.Impulse);
             animator.SetTrigger("Jump");            
         }
+
+        animator.SetFloat("ZVelocity", Input.GetAxisRaw("Vertical"));
+        animator.SetFloat("XVelocity", Input.GetAxisRaw("Horizontal"));
     }
 
     //Rotates the player
