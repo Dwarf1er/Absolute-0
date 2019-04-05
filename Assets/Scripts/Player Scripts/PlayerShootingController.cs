@@ -8,7 +8,7 @@ public class PlayerShootingController : NetworkBehaviour
 {
     //References
     Animator animator;
-    int currentAmmoInClip;
+    public int currentAmmoInClip;
     PlayerWeaponManager playerWeaponManager;
     [SerializeField]
     Camera playerCamera;

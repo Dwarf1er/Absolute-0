@@ -12,6 +12,8 @@ public class PlayerWeapons : MonoBehaviour
         public int WeaponRange { get; private set; }
         public float WeaponFireRate { get; private set; }
         public int WeaponClipSize { get; private set; }
+        public int WeaponAmmoInClip { get; private set; }
+        public bool IsUnlocked { get; private set; }
 
         public Weapon(int weaponDamage, int weaponRange, float weaponFireRate, int weaponClipSize)
         {

@@ -106,6 +106,8 @@ GameObject:
   - component: {fileID: 3703460745229906834}
   - component: {fileID: 6739504186159240425}
   - component: {fileID: 3746342768329256982}
+  - component: {fileID: 3431957566518217113}
+  - component: {fileID: 4901506186404425924}
   - component: {fileID: 4862682674519466630}
   - component: {fileID: 924510110598274220}
   - component: {fileID: 4616794041079126181}
@@ -113,8 +115,6 @@ GameObject:
   - component: {fileID: 5856111122139797340}
   - component: {fileID: 7311766794815075599}
   - component: {fileID: 1474704459287025589}
-  - component: {fileID: 4901506186404425924}
-  - component: {fileID: 3431957566518217113}
   m_Layer: 11
   m_Name: Player
   m_TagString: Player
@@ -243,6 +243,45 @@ MonoBehaviour:
   m_MovementThreshold: 0.001
   m_InterpolateRotation: 0.3
   m_InterpolateMovement: 0
+--- !u!114 &3431957566518217113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5168639402256876684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1590678366, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Animator: {fileID: 4901506186404425924}
+  m_ParameterSendBits: 0
+  param0: 
+  param1: 
+  param2: 
+  param3: 
+  param4: 
+  param5: 
+--- !u!95 &4901506186404425924
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5168639402256876684}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 54c59f8780aaa2f4ebdae0e8027edf29, type: 3}
+  m_Controller: {fileID: 9100000, guid: 71f47cd8fcdb2cf41b3d9b3e9d432dba, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &4862682674519466630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -352,45 +391,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0c72380858468146a66fbcf93a4fed3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!95 &4901506186404425924
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5168639402256876684}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 54c59f8780aaa2f4ebdae0e8027edf29, type: 3}
-  m_Controller: {fileID: 9100000, guid: 71f47cd8fcdb2cf41b3d9b3e9d432dba, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &3431957566518217113
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5168639402256876684}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1590678366, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Animator: {fileID: 4901506186404425924}
-  m_ParameterSendBits: 0
-  param0: 
-  param1: 
-  param2: 
-  param3: 
-  param4: 
-  param5: 
 --- !u!1 &7329652069342889124
 GameObject:
   m_ObjectHideFlags: 0
