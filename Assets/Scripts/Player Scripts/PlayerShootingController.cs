@@ -9,8 +9,11 @@ public class PlayerShootingController : NetworkBehaviour
     //References
     Animator animator;
     PlayerWeaponManager playerWeaponManager;
+    public PlayerWeapons.Weapon equipedWeapon;
     [SerializeField]
     Camera playerCamera;
+
+    float timeSinceLastShot { get; set; }
 
     private void Start()
     {
@@ -25,6 +28,8 @@ public class PlayerShootingController : NetworkBehaviour
     
     private void Update()
     {
+        timeSinceLastShot += Time.deltaTime;
+
         //Weapon swapping through keys 1 to 6 (alphanumeric != numpad)
         if (Input.GetKeyDown(KeyCode.Alpha1))
             playerWeaponManager.EquipNextWeapon(0);
@@ -39,11 +44,40 @@ public class PlayerShootingController : NetworkBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha6))
             playerWeaponManager.EquipNextWeapon(5);
         if (Input.GetKeyDown(KeyCode.R))
-            animator.SetTrigger("Reload");
+        {
+            if (equipedWeapon.WeaponClipSize == 1)
+                animator.SetTrigger("ReloadRocket");
+            else
+                animator.SetTrigger("Reload");
+
+            transform.Find("ReloadSFX").GetComponent<AudioSource>().Play();
+        }
+
+
+        if (Input.GetButtonDown("Fire1") && equipedWeapon.WeaponAmmoInClip == 0)
+            transform.Find("DryFireSFX").GetComponent<AudioSource>().Play();
+
+        if (equipedWeapon.IsAuto)
+        {
+            //Fire1 is by default left ctrl in the input manager, changed for mouse 0 button in the project settings
+            if (Input.GetButton("Fire1") && equipedWeapon.WeaponAmmoInClip > 0 && timeSinceLastShot > equipedWeapon.WeaponFireRate)
+            {
+                Fire();
+                timeSinceLastShot = 0;
+                playerWeaponManager.currentPlayerWeaponModel.GetComponent<AudioSource>().Play();
+            }
+        }
+        else
+        {
+            //Fire1 is by default left ctrl in the input manager, changed for mouse 0 button in the project settings
+            if (Input.GetButtonDown("Fire1") && equipedWeapon.WeaponAmmoInClip > 0 && timeSinceLastShot > equipedWeapon.WeaponFireRate)
+            {
+                Fire();
+                timeSinceLastShot = 0;
+                playerWeaponManager.currentPlayerWeaponModel.GetComponent<AudioSource>().Play();
+            }
+        }
         
-        //Fire1 is by default left ctrl in the input manager, changed for mouse 0 button in the project settings
-        if (Input.GetButtonDown("Fire1") && playerWeaponManager.currentPlayerWeapon.WeaponAmmoInClip > 0)
-            Fire();
     }
 
     //Raycast to hit targets, only used locally, therefore marked as "Client"
@@ -56,18 +90,18 @@ public class PlayerShootingController : NetworkBehaviour
         Vector3 raycastDirection = playerCamera.transform.forward;
         int raycastMask = LayerMask.GetMask("Ennemy", "Environment");
 
-        if (Physics.Raycast(raycastOrigin, raycastDirection, out raycastHit, playerWeaponManager.currentPlayerWeapon.WeaponRange, raycastMask))
+        if (Physics.Raycast(raycastOrigin, raycastDirection, out raycastHit, equipedWeapon.WeaponRange, raycastMask))
         {
             //Checks if an ennemy has been hit
             if (raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Ennemy"))
             {
                 GameObject ennemyHit = raycastHit.transform.gameObject;
-                CmdEnnemyShot(ennemyHit, playerWeaponManager.currentPlayerWeapon.WeaponDamage);
+                CmdEnnemyShot(ennemyHit, equipedWeapon.WeaponDamage);
             }
         }
 
         //Removes one bullet after each click
-        playerWeaponManager.currentPlayerWeapon.WeaponAmmoInClip -= 1;
+        equipedWeapon.WeaponAmmoInClip -= 1;
     }
 
     //Server only method, therefore marked as "Command"
@@ -81,6 +115,6 @@ public class PlayerShootingController : NetworkBehaviour
     //Refill magazine
     public void Reload()
     {
-        playerWeaponManager.currentPlayerWeapon.WeaponAmmoInClip = playerWeaponManager.currentPlayerWeapon.WeaponClipSize;
+        equipedWeapon.WeaponAmmoInClip = equipedWeapon.WeaponClipSize;
     }
 }

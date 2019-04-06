@@ -44,7 +44,8 @@ public abstract class Ennemy : NetworkBehaviour
             if (hp_ <= 0) //Trigger NPC death
             {
                 hp_ = 0;
-                TriggerDeath();
+                if (!isDead)
+                    TriggerDeath();
             }
 
             if (hp_ > MaxHP) //Prevent over-healing

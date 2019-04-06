@@ -23,7 +23,7 @@ public class PlayerWeaponManager : NetworkBehaviour
     private PlayerWeapons.Weapon defaultPlayerWeapon;
 
     public PlayerWeapons.Weapon currentPlayerWeapon;
-    GameObject currentPlayerWeaponModel;
+    public GameObject currentPlayerWeaponModel;
 
     GameObject[] WeaponModels { get; set; }
     PlayerWeapons.Weapon[] Weapons { get; set; }
@@ -54,6 +54,8 @@ public class PlayerWeaponManager : NetworkBehaviour
         currentPlayerWeaponModel = newWeaponModel;
 
         currentPlayerWeaponModel.SetActive(true);
+
+        GetComponent<PlayerShootingController>().equipedWeapon = newWeapon;
     }
 
     public void EquipNextWeapon (int weaponID)
