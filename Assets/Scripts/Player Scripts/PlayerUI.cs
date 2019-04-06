@@ -15,7 +15,6 @@ public class PlayerUI : MonoBehaviour
 
     PlayerStats Player { get; set; }
     PlayerController Controller { get; set; }
-    PlayerShootingController ShootingController { get; set; }
     PlayerWeaponManager WeaponManager { get; set; }
 
     //Getting access to the stats of our player
@@ -23,14 +22,13 @@ public class PlayerUI : MonoBehaviour
     {
         Player = player;
         Controller = Player.GetComponent<PlayerController>();
-        ShootingController = Player.GetComponent<PlayerShootingController>();
         WeaponManager = Player.GetComponent<PlayerWeaponManager>();
     }
 
     void Update()
     {
         SetHpValue(Player.GetHpAmount());
-        SetAmmoAmount(ShootingController.currentAmmoInClip, WeaponManager.currentPlayerWeapon.WeaponClipSize);
+        SetAmmoAmount(WeaponManager.currentPlayerWeapon.WeaponAmmoInClip, WeaponManager.currentPlayerWeapon.WeaponClipSize);
 
         //For testing purposes
         //if (Input.GetKeyDown(KeyCode.G))

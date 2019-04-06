@@ -20,7 +20,6 @@ public class PlayerWeaponManager : NetworkBehaviour
     GameObject SMAWModel;
 
     //References
-    PlayerShootingController ShootingController { get; set; }
     private PlayerWeapons.Weapon defaultPlayerWeapon;
 
     public PlayerWeapons.Weapon currentPlayerWeapon;
@@ -31,7 +30,6 @@ public class PlayerWeaponManager : NetworkBehaviour
 
     void Start()
     {
-        ShootingController = GetComponent<PlayerShootingController>();
         defaultPlayerWeapon = PlayerWeapons.M4;
 
         WeaponModels = new GameObject[] { BenelliM4Model, M4Model, M110Model, M249Model, MP5Model, SMAWModel };
@@ -56,9 +54,6 @@ public class PlayerWeaponManager : NetworkBehaviour
         currentPlayerWeaponModel = newWeaponModel;
 
         currentPlayerWeaponModel.SetActive(true);
-
-        //Keeps the good amount of ammo after swaps
-        ShootingController.currentAmmoInClip = currentPlayerWeapon.WeaponClipSize;
     }
 
     public void EquipNextWeapon (int weaponID)
