@@ -20,9 +20,14 @@ public class MultiplayerMenu : NetworkManager
     InputField IPAdress { get; set; }
     Text TxtError { get; set; }
     string PlayScene { get; set; }
+    bool IsClicked { get; set; }
+    float ConnectionTime { get; set; }
     private void Start()
     {
         InitializeReferences();
+        IsClicked = false;
+        ConnectionTime = 0;
+        singleton.maxConnections = 2;
     }
 
     /*
@@ -57,39 +62,43 @@ public class MultiplayerMenu : NetworkManager
     public void StartUpHost()
     {
         AssociatePort();
-        NetworkManager.singleton.StartHost();
+        singleton.StartHost();
     }
+
     //Méthode permettant d'instancier le joueur invité
     public void StartUpClient()
     {
+        IsClicked = true; //En cliquant sur le bouton, on déclanche le décompte pour calculer le temps de la connexion.
         AssociateIPAddress();
         //Nous vérifions s'il y a bel et bien une adresse IP pour faire la connexion
         //S'il y en a pas, un message d'erreur est lancé
-        if (string.IsNullOrEmpty(NetworkManager.singleton.networkAddress))
-            TxtError.text = ErrorMessage;
+        if (string.IsNullOrEmpty(singleton.networkAddress))
+            TxtError.text = "**Aucune adresse IP. Veuillez SVP entrer une adresse IP.**";
         //S'il y en a un, la connexion peut être établie
         else
         {
             TxtError.text = string.Empty;
             AssociatePort();
-            NetworkManager.singleton.StartClient();
+            singleton.StartClient();
         }
-        
     }
-    //Méthode permettant d'associer l'adresse IP dans la mémoir du Network Manager
+
+    //Méthode permettant d'associer l'adresse IP pour le Network Manager
     private void AssociateIPAddress()
     {
-        NetworkManager.singleton.networkAddress = IPAdress.text;
+        singleton.networkAddress = IPAdress.text;
     }
+
     //Méthode permettant d'associer un port pour établir la connexion
     private void AssociatePort()
     {
-        NetworkManager.singleton.networkPort = 5005;
+        singleton.networkPort = 5005;
     }
+
     //Méthode permettant de faire la transition entre le mode hors ligne et le mode en ligne
     void OnLevelWasLoaded(int level)
     {
-        if (level == 0)
+        if (level == 1)
         {
             SetMenuButtons();
         }
@@ -117,14 +126,21 @@ public class MultiplayerMenu : NetworkManager
     //Méthode permettant au joueur invité de se rendre à la scène choisit par le joueur hôte
     private void GoToHostScene()
     {
-        NetworkManager.singleton.ServerChangeScene(PlayScene);
+        //if(string.IsNullOrEmpty(PlayScene))
+
+        
+        //else
+            singleton.ServerChangeScene(PlayScene);
     }
 
     //Méthode permettant de changer vers la scène choisit par le joueur hôte
     private void ChangeScene(string sceneName)
     {
-        NetworkManager.singleton.ServerChangeScene(sceneName);
-        PlayScene = sceneName;
+        //if (singleton.numPlayers == 2)
+        //{
+            singleton.ServerChangeScene(sceneName);
+            PlayScene = sceneName;
+        //}
     }
 
     //Méthode permettant d'instancier les gameobjects dans le menu multijoueur
@@ -134,15 +150,37 @@ public class MultiplayerMenu : NetworkManager
         BtnHost.onClick.AddListener(() => StartUpHost());
         BtnJoin = GameObject.Find("BtnJoindrePartie").GetComponent<Button>();
         BtnJoin.onClick.AddListener(() => StartUpClient());
+        IPAdress = GameObject.Find("InputIP").GetComponent<InputField>();
+        TxtError = GameObject.Find("TxtError").GetComponent<Text>();
     }
 
     //Méthode permettant d'arrêter la connexion
     private void StopGame()
     {
-        Debug.Log("Bouton cliqué");
-        NetworkManager.singleton.StopHost();
+        singleton.StopHost();
     }
 
-    
+    private void Update()
+    {
+        CheckConnectionTime();
+    }
+
+    //Ici, on vérifie si la connexion prend trop de temps pour se faire. S'il n'y a pas de connexion après 10 secondes,
+    //on lance un message d'erreur.
+    void CheckConnectionTime()
+    {
+        if (IsClicked)
+        {
+            ConnectionTime += Time.deltaTime;
+        }
+        if (ConnectionTime >= 10 && !string.IsNullOrEmpty(singleton.networkAddress))
+        {
+            TxtError.text = ErrorMessage;
+            IsClicked = false;
+            ConnectionTime = 0;
+        }
+    }
+
+
 }
 
