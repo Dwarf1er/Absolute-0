@@ -109,7 +109,7 @@ public class PlayerShootingController : NetworkBehaviour
     void CmdEnnemyShot(GameObject ennemyHit, int damage)
     {
         Debug.Log(ennemyHit.name + " was hit");
-        ennemyHit.GetComponent<Ennemy>().TakeDamage(damage);
+        ennemyHit.GetComponent<Ennemy>().CmdTakeDamage(damage);
     }
 
     //Refill magazine

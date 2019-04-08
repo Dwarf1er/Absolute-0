@@ -9,7 +9,7 @@ public abstract class Ennemy : NetworkBehaviour
     //Components
     protected virtual Animator Animator { get; set; } //Must have the following parameters: (float) Speed, (trigger) TakeDamage, (trigger) Death
     protected virtual NavMeshAgent NavMeshAgent { get; set; }
-    [SerializeField] public GameObject Target;
+    public GameObject Target { get; set; }
     [SerializeField] public GameObject DefaultTarget;
 
     //Stats
@@ -17,21 +17,12 @@ public abstract class Ennemy : NetworkBehaviour
     int MaxHP;
     int Armor;
     float StartingSpeed;
-    float Speed
-    {
-        get { return speed_; }
-        set
-        {
-            speed_ = value;
-            NavMeshAgent.speed = value;
-        }
-    }
     protected int Damage;
 
-    [SerializeField] protected float AttackDelay;
-    [SerializeField] protected float timeSinceLastAttack;
-
-    [SerializeField] protected bool isDead;
+    //Bools
+    [SyncVar] public bool isAttacking;
+    [SyncVar] bool isStopped;
+    [SyncVar] protected bool isDead;
 
     //Properties
     int HP
@@ -45,7 +36,7 @@ public abstract class Ennemy : NetworkBehaviour
             {
                 hp_ = 0;
                 if (!isDead)
-                    TriggerDeath();
+                    CmdTriggerDeath();
             }
 
             if (hp_ > MaxHP) //Prevent over-healing
@@ -53,60 +44,63 @@ public abstract class Ennemy : NetworkBehaviour
         }
     }
 
-    //Backing Store
-    [SerializeField] int hp_;
-    [SerializeField] float speed_;
+    float Speed
+    {
+        get { return speed_; }
+        set
+        {
+            speed_ = value;
+            NavMeshAgent.speed = value;
+        }
+    }
 
-    //Bools
-    public bool isAttacking;
-    bool stopped;
+    //Backing Store
+    [SyncVar] int hp_;
+    [SyncVar] float speed_;
+
+    
 
     protected virtual void Awake()
     {
-        Animator = GetComponent<Animator>();
-        NavMeshAgent = GetComponent<NavMeshAgent>();
+        
     }
 
-    public void SetStats(int maxHp, int armor, float speed, int damage, float attackDelay)
+    [Command]
+    public void CmdSetStats(int maxHp, int armor, float speed, int damage)
     {
+        Animator = GetComponent<Animator>();
+        NavMeshAgent = GetComponent<NavMeshAgent>();
+
         MaxHP = maxHp;
         HP = MaxHP;
         Armor = armor;
         StartingSpeed = speed;
         Speed = speed;
         Damage = damage;
-        AttackDelay = attackDelay;
 
         isDead = false;
     }
 
+    [Server]
     private void Update()
     {
         if (isDead)
             return;
 
-        //Pathfinding
-        if (isAttacking)
-        {
-            NavMeshAgent.isStopped = true;
-        }
-        else
-        {
-            NavMeshAgent.isStopped = false;
-            if (Target != null && Target.GetComponent<PlayerController>() != null) //Only recalculate for non-static targets (players)
-                SetDestination(Target.transform.position);
-        }
+        if (Target != null && Target.GetComponent<PlayerController>() != null) //Only recalculate for non-static targets (players)
+            CmdSetDestination(Target.transform.position);
 
         //Controlling the animation
-        stopped = NavMeshAgent.velocity.magnitude == 0;
+        isStopped = NavMeshAgent.velocity.magnitude == 0;
 
-        Animator.SetBool("IsStopped", stopped);
+        Animator.SetBool("IsStopped", isStopped);
         Animator.SetFloat("Speed", NavMeshAgent.velocity.magnitude);
     }
 
     // Functions - Taking Damage
-    
-    public void TakeDamage(int rawDamage)
+
+    [Command]
+    public void CmdTakeDamage(int rawDamage)
     {
         int damage = rawDamage - Armor;
 
@@ -118,7 +112,8 @@ public abstract class Ennemy : NetworkBehaviour
         HP -= damage;
     }
 
-    public void TriggerDeath()
+    [Command]
+    public void CmdTriggerDeath()
     {
         Animator.SetBool("Dead", true);
         Animator.SetTrigger("Death");
@@ -132,45 +127,52 @@ public abstract class Ennemy : NetworkBehaviour
 
     // Functions - Setting Target
 
-    public void SetDestination(Vector3 destination)
+    [Command]
+    public void CmdSetDestination(Vector3 destination)
     {
         NavMeshAgent.SetDestination(destination);
     }
     
-    public void SetTarget(GameObject newTarget)
+    [Command]
+    public void CmdSetTarget(GameObject newTarget)
     {
         Target = newTarget;
-        SetDestination(Target.transform.position);
+        CmdSetDestination(Target.transform.position);
     }
 
-    public void SetDefaultTarget(GameObject defaultTarget)
+    [Command]
+    public void CmdSetDefaultTarget(GameObject defaultTarget)
     {
         DefaultTarget = defaultTarget;
-        SetTarget(DefaultTarget);
+        CmdSetTarget(DefaultTarget);
     }
 
-    public void TargetLost()
+    [Command]
+    public void CmdTargetLost()
     {
-        SetTarget(DefaultTarget);
+        CmdSetTarget(DefaultTarget);
     }
 
     // Functions - Attacking
 
-    public void StartAttack()
+    [Command]
+    public void CmdStartAttack()
     {
         Animator.SetTrigger("StartAttack");
         isAttacking = true;
         Speed = 0;
     }
 
-    public void StopAttack()
+    [Command]
+    public void CmdStopAttack()
     {
         Animator.SetTrigger("StopAttack");
         isAttacking = false;
         Speed = StartingSpeed;
     }
 
-    public void Attack()
+    [Command]
+    public void CmdAttack()
     {
         if (Target.GetComponent<PlayerStats>() != null)
             Target.GetComponent<PlayerStats>().TakeDamage(Damage);
