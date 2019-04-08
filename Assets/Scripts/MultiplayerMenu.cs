@@ -87,8 +87,6 @@ public class MultiplayerMenu : NetworkManager
     private void AssociateIPAddress()
     {
         singleton.networkAddress = IPAdress.text;
-
-        
     }
 
     //Méthode permettant d'associer un port pour établir la connexion
@@ -151,7 +149,7 @@ public class MultiplayerMenu : NetworkManager
 
     private void Update()
     {
-        CheckConnectionTime();
+        //CheckConnectionTime();
     }
 
     //Ici, on vérifie si la connexion prend trop de temps pour se faire. S'il n'y a pas de connexion après 10 secondes,
