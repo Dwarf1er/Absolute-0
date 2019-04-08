@@ -27,7 +27,7 @@ public class MultiplayerMenu : NetworkManager
         InitializeReferences();
         IsClicked = false;
         ConnectionTime = 0;
-        singleton.maxConnections = 2;
+// singleton.maxConnections = 2;
     }
 
     /*
@@ -62,7 +62,7 @@ public class MultiplayerMenu : NetworkManager
     public void StartUpHost()
     {
         AssociatePort();
-        singleton.StartHost();
+        NetworkManager.singleton.StartHost();
     }
 
     //Méthode permettant d'instancier le joueur invité
@@ -79,20 +79,20 @@ public class MultiplayerMenu : NetworkManager
         {
             TxtError.text = string.Empty;
             AssociatePort();
-            singleton.StartClient();
+            NetworkManager.singleton.StartClient();
         }
     }
 
     //Méthode permettant d'associer l'adresse IP pour le Network Manager
     private void AssociateIPAddress()
     {
-        singleton.networkAddress = IPAdress.text;
+        NetworkManager.singleton.networkAddress = IPAdress.text;
     }
 
     //Méthode permettant d'associer un port pour établir la connexion
     private void AssociatePort()
     {
-        singleton.networkPort = 5005;
+        NetworkManager.singleton.networkPort = 5005;
     }
 
     //Méthode permettant de faire la transition entre le mode hors ligne et le mode en ligne
@@ -126,7 +126,7 @@ public class MultiplayerMenu : NetworkManager
     {
         //if (singleton.numPlayers == 2)
         //{
-            singleton.ServerChangeScene(sceneName);
+            NetworkManager.singleton.ServerChangeScene(sceneName);
         //}
     }
 
@@ -144,7 +144,7 @@ public class MultiplayerMenu : NetworkManager
     //Méthode permettant d'arrêter la connexion
     private void StopGame()
     {
-        singleton.StopHost();
+        NetworkManager.singleton.StopHost();
     }
 
     private void Update()
@@ -160,7 +160,7 @@ public class MultiplayerMenu : NetworkManager
         {
             ConnectionTime += Time.deltaTime;
         }
-        if (ConnectionTime >= 10 && !string.IsNullOrEmpty(singleton.networkAddress))
+        if (ConnectionTime >= 10 && !string.IsNullOrEmpty(NetworkManager.singleton.networkAddress))
         {
             TxtError.text = ErrorMessage;
             IsClicked = false;
