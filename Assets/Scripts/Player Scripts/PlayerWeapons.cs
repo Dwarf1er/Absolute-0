@@ -31,7 +31,7 @@ public class PlayerWeapons : MonoBehaviour
     public static Weapon BenelliM4 = new Weapon(10, 100, 0.6f, 8, false); //semi-auto, 100 RPM
     public static Weapon M4 = new Weapon(25, 100, 0.1f, 30, true); //auto, 600 RPM
     public static Weapon M110 = new Weapon(10, 100, 0.8f, 10, false); //semi-auto, 100 RPM
-    public static Weapon M249 = new Weapon(10, 100, 0.07f, 30, true); //auto, 850 RPM
+    public static Weapon M249 = new Weapon(10, 100, 0.07f, 45, true); //auto, 850 RPM
     public static Weapon MP5 = new Weapon(10, 100, 0.075f, 30, true); //auto, 800 RPM
     public static Weapon SMAW = new Weapon(10, 100, 1, 1, false); //N/A
 }

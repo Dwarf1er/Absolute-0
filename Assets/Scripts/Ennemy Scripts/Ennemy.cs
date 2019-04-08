@@ -58,8 +58,8 @@ public abstract class Ennemy : NetworkBehaviour
     [SerializeField] float speed_;
 
     //Bools
-    //public bool inRange;
     public bool isAttacking;
+    bool stopped;
 
     protected virtual void Awake()
     {
@@ -84,6 +84,23 @@ public abstract class Ennemy : NetworkBehaviour
     {
         if (isDead)
             return;
+
+        //Pathfinding
+        if (isAttacking)
+        {
+            NavMeshAgent.isStopped = true;
+        }
+        else
+        {
+            NavMeshAgent.isStopped = false;
+            if (Target != null && Target.GetComponent<PlayerController>() != null) //Only recalculate for non-static targets (players)
+                SetDestination(Target.transform.position);
+        }
+
+        //Controlling the animation
+        stopped = NavMeshAgent.velocity.magnitude == 0;
+
+        Animator.SetBool("IsStopped", stopped);
         Animator.SetFloat("Speed", NavMeshAgent.velocity.magnitude);
     }
 
