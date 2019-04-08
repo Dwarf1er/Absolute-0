@@ -119,18 +119,6 @@ public class MultiplayerMenu : NetworkManager
         BtnLevel2.onClick.AddListener(() => ChangeScene("Level 2"));
         BtnLevel3 = GameObject.Find("BtnLevel3").GetComponent<Button>();
         BtnLevel3.onClick.AddListener(() => ChangeScene("Level 3"));
-        BtnClient = GameObject.Find("BtnClient").GetComponent<Button>();
-        BtnClient.onClick.AddListener(() => GoToHostScene());
-    }
-    
-    //Méthode permettant au joueur invité de se rendre à la scène choisit par le joueur hôte
-    private void GoToHostScene()
-    {
-        //if(string.IsNullOrEmpty(PlayScene))
-
-        
-        //else
-            singleton.ServerChangeScene(PlayScene);
     }
 
     //Méthode permettant de changer vers la scène choisit par le joueur hôte
