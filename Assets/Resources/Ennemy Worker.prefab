@@ -109,13 +109,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c092cdfb9ab10d843911efced3243ba5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Target: {fileID: 0}
   DefaultTarget: {fileID: 0}
-  AttackDelay: 0
-  timeSinceLastAttack: 0
-  isDead: 0
-  hp_: 0
-  inRange: 0
+  isAttacking: 0
 --- !u!195 &947476490
 NavMeshAgent:
   m_ObjectHideFlags: 0

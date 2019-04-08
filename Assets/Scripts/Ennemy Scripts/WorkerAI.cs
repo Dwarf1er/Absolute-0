@@ -6,14 +6,4 @@ using UnityEngine.AI;
 public class WorkerAI : Ennemy
 {
 
-    protected override void Awake()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

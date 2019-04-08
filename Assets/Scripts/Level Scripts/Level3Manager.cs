@@ -27,8 +27,8 @@ public class Level3Manager : NetworkBehaviour
     {
         Vector3 position = new Vector3(7,-26,-40);
         GameObject newWorker = Instantiate(WorkerPrefab, position, Quaternion.identity) as GameObject;
-        newWorker.GetComponent<WorkerAI>().SetStats(30, 0, 2, 10, 0.8f);
-        newWorker.GetComponent<WorkerAI>().SetDefaultTarget(Objective);
+        newWorker.GetComponent<WorkerAI>().CmdSetStats(30, 0, 2, 10);
+        newWorker.GetComponent<WorkerAI>().CmdSetDefaultTarget(Objective);
         NetworkServer.Spawn(newWorker);
     }
    
