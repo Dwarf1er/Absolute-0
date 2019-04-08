@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
+    
 public class MultiplayerMenu : NetworkManager
 {
     const string ErrorMessage = "**Une erreur lors de la connexion est survenue. Veuillez vous assurez d'avoir bien entré l'adresse IP**";
@@ -19,7 +20,6 @@ public class MultiplayerMenu : NetworkManager
     Button BtnClient { get; set; }
     InputField IPAdress { get; set; }
     Text TxtError { get; set; }
-    string PlayScene { get; set; }
     bool IsClicked { get; set; }
     float ConnectionTime { get; set; }
     private void Start()
@@ -87,6 +87,8 @@ public class MultiplayerMenu : NetworkManager
     private void AssociateIPAddress()
     {
         singleton.networkAddress = IPAdress.text;
+
+        
     }
 
     //Méthode permettant d'associer un port pour établir la connexion
@@ -127,7 +129,6 @@ public class MultiplayerMenu : NetworkManager
         //if (singleton.numPlayers == 2)
         //{
             singleton.ServerChangeScene(sceneName);
-            PlayScene = sceneName;
         //}
     }
 
