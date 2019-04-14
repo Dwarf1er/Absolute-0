@@ -16,6 +16,7 @@ public class PlayerUI : MonoBehaviour
     PlayerStats Player { get; set; }
     PlayerController Controller { get; set; }
     PlayerWeaponManager WeaponManager { get; set; }
+    
 
     //Getting access to the stats of our player
     public void SetPlayer (PlayerStats player)
