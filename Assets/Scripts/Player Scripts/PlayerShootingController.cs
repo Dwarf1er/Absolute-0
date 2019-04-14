@@ -96,7 +96,12 @@ public class PlayerShootingController : NetworkBehaviour
             if (raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Ennemy"))
             {
                 GameObject ennemyHit = raycastHit.transform.gameObject;
-                CmdEnnemyShot(ennemyHit, equipedWeapon.WeaponDamage);
+                bool isHeadshot = raycastHit.collider.name == "Head Collider";
+
+                if (isHeadshot)
+                    CmdEnnemyHeadshot(ennemyHit, equipedWeapon.WeaponDamage);
+                else
+                    CmdEnnemyShot(ennemyHit, equipedWeapon.WeaponDamage);
             }
         }
 
@@ -110,6 +115,13 @@ public class PlayerShootingController : NetworkBehaviour
     {
         Debug.Log(ennemyHit.name + " was hit");
         ennemyHit.GetComponent<Ennemy>().CmdTakeDamage(damage);
+    }
+
+    [Command]
+    void CmdEnnemyHeadshot(GameObject ennemyHit, int damage)
+    {
+        Debug.Log(ennemyHit.name + " was hit");
+        ennemyHit.GetComponent<Ennemy>().CmdTakeHeadshot(damage);
     }
 
     //Refill magazine

@@ -23,6 +23,7 @@ public abstract class Ennemy : NetworkBehaviour
     [SyncVar] public bool isAttacking;
     [SyncVar] bool isStopped;
     [SyncVar] protected bool isDead;
+    [SyncVar] bool lastHitWasHeadshot;
 
     //Properties
     int HP
@@ -102,7 +103,22 @@ public abstract class Ennemy : NetworkBehaviour
     [Command]
     public void CmdTakeDamage(int rawDamage)
     {
+        lastHitWasHeadshot = false;
         int damage = rawDamage - Armor;
+
+        if (damage >= 0)
+            Animator.SetTrigger("TakeDamage"); //Animation is only triggered if the ennemy takes damage
+        else
+            damage = 0; //Damage must not be negative
+
+        HP -= damage;
+    }
+
+    [Command]
+    public void CmdTakeHeadshot(int rawDamage)
+    {
+        lastHitWasHeadshot = true;
+        int damage = rawDamage * 3 - Armor; //Headshot multiplier is x3
 
         if (damage >= 0)
             Animator.SetTrigger("TakeDamage"); //Animation is only triggered if the ennemy takes damage
@@ -116,7 +132,11 @@ public abstract class Ennemy : NetworkBehaviour
     public void CmdTriggerDeath()
     {
         Animator.SetBool("Dead", true);
-        Animator.SetTrigger("Death");
+        if (lastHitWasHeadshot)
+            Animator.SetTrigger("Headshot Death");
+        else
+            Animator.SetTrigger("Death");
+
         isDead = true;
 
         //Stop the corpse from moving
