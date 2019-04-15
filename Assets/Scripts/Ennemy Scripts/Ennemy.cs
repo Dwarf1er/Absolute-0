@@ -8,6 +8,7 @@ public abstract class Ennemy : NetworkBehaviour
 {
     //Components
     protected virtual Animator Animator { get; set; } //Must have the following parameters: (float) Speed, (trigger) TakeDamage, (trigger) Death
+    protected virtual NetworkAnimator NetAnimator { get; set; }
     protected virtual NavMeshAgent NavMeshAgent { get; set; }
     public GameObject Target { get; set; }
     [SerializeField] public GameObject DefaultTarget;
@@ -70,6 +71,7 @@ public abstract class Ennemy : NetworkBehaviour
     public void CmdSetStats(int maxHp, int armor, float speed, int damage)
     {
         Animator = GetComponent<Animator>();
+        NetAnimator = GetComponent<NetworkAnimator>();
         NavMeshAgent = GetComponent<NavMeshAgent>();
 
         MaxHP = maxHp;
@@ -107,7 +109,7 @@ public abstract class Ennemy : NetworkBehaviour
         int damage = rawDamage - Armor;
 
         if (damage >= 0)
-            Animator.SetTrigger("TakeDamage"); //Animation is only triggered if the ennemy takes damage
+            NetAnimator.SetTrigger("TakeDamage"); //Animation is only triggered if the ennemy takes damage
         else
             damage = 0; //Damage must not be negative
 
@@ -121,7 +123,7 @@ public abstract class Ennemy : NetworkBehaviour
         int damage = rawDamage * 3 - Armor; //Headshot multiplier is x3
 
         if (damage >= 0)
-            Animator.SetTrigger("TakeDamage"); //Animation is only triggered if the ennemy takes damage
+            NetAnimator.SetTrigger("TakeDamage"); //Animation is only triggered if the ennemy takes damage
         else
             damage = 0; //Damage must not be negative
 
@@ -133,9 +135,9 @@ public abstract class Ennemy : NetworkBehaviour
     {
         Animator.SetBool("Dead", true);
         if (lastHitWasHeadshot)
-            Animator.SetTrigger("HeadshotDeath");
+            NetAnimator.SetTrigger("HeadshotDeath");
         else
-            Animator.SetTrigger("Death");
+            NetAnimator.SetTrigger("Death");
 
         isDead = true;
 
@@ -177,7 +179,7 @@ public abstract class Ennemy : NetworkBehaviour
     [Command]
     public void CmdStartAttack()
     {
-        Animator.SetTrigger("StartAttack");
+        NetAnimator.SetTrigger("StartAttack");
         isAttacking = true;
         Speed = 0;
     }
@@ -185,7 +187,7 @@ public abstract class Ennemy : NetworkBehaviour
     [Command]
     public void CmdStopAttack()
     {
-        Animator.SetTrigger("StopAttack");
+        NetAnimator.SetTrigger("StopAttack");
         isAttacking = false;
         Speed = StartingSpeed;
     }
