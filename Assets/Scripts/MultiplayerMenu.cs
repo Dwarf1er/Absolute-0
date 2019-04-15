@@ -92,7 +92,7 @@ public class MultiplayerMenu : NetworkManager
     //Méthode permettant d'associer un port pour établir la connexion
     private void AssociatePort()
     {
-        NetworkManager.singleton.networkPort = 5005;
+        NetworkManager.singleton.networkPort = 7777;
     }
 
     //Méthode permettant de faire la transition entre le mode hors ligne et le mode en ligne
