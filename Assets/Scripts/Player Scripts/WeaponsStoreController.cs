@@ -14,22 +14,21 @@ public class WeaponsStoreController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameObject.SetActive(false);
+        IsTriggered = false;
+// gameObject.SetActive(IsTriggered);
     }
 
     public void SetTrigger(bool condition)
     {
-        IsTriggered = condition;
+        gameObject.SetActive(true);
         Debug.Log("Condition changed");
     }
 
     // Update is called once per frame
     void Update()
     {
-            if (IsTriggered)
-            {
-                gameObject.SetActive(true);
-            }
+        Debug.Log("Is in update");
+        gameObject.SetActive(IsTriggered);
             
         
     }
