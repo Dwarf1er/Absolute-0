@@ -11,8 +11,8 @@ public class Level1Manager : NetworkBehaviour
 
     public override void OnStartServer()
     {
-        SpawnWorker();
         SpawnWarrior();
+        SpawnWorker();
     }
 
     // Update is called once per frame

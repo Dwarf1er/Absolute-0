@@ -445,9 +445,9 @@ GameObject:
   - component: {fileID: 2010657047066583340}
   - component: {fileID: 5212988272357924793}
   - component: {fileID: 8659551218524498264}
+  - component: {fileID: 824938983155561303}
   - component: {fileID: 2912949911720312940}
   - component: {fileID: 3390710265014602106}
-  - component: {fileID: 824938983155561303}
   m_Layer: 10
   m_Name: Ennemy Warrior
   m_TagString: Untagged
@@ -550,6 +550,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &824938983155561303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2010657047059321496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceec598902cdbc445bbc459fc07a8895, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DefaultTarget: {fileID: 0}
+  isAttacking: 0
 --- !u!195 &2912949911720312940
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -605,20 +619,6 @@ MonoBehaviour:
     i15: 0
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
---- !u!114 &824938983155561303
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2010657047059321496}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceec598902cdbc445bbc459fc07a8895, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DefaultTarget: {fileID: 0}
-  isAttacking: 0
 --- !u!1 &2010657047059321498
 GameObject:
   m_ObjectHideFlags: 0
