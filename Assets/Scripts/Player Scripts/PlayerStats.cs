@@ -27,6 +27,8 @@ public class PlayerStats : NetworkBehaviour
 
             if (hp_ > MaxHP) //Prevent over-healing
                 hp_ = MaxHP;
+
+            Debug.Log("Set HP to " + HP);
         }
     }
 
