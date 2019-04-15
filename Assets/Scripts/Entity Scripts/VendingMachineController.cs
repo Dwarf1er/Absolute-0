@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class VendingMachineController : MonoBehaviour
 {
-    [SerializeField]
-    GameObject WeaponsUI;
-    WeaponsStoreController WeaponsStore { get; set; }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        WeaponsStore = WeaponsUI.GetComponent<WeaponsStoreController>();
-    }
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Est dedans");
-        WeaponsStore.SetTrigger(true);
+        GameObject PlayerUI = other.GetComponent<PlayerUtilities>().playerUI;
+        GameObject WeaponsMenu = PlayerUI.transform.Find("WeaponsMenu").gameObject;
+        WeaponsMenu.SetActive(true);
+
     }
+    private void OnTriggerExit(Collider other)
+    {
+        GameObject PlayerUI = other.GetComponent<PlayerUtilities>().playerUI;
+        GameObject WeaponsMenu = PlayerUI.transform.Find("WeaponsMenu").gameObject;
+        WeaponsMenu.SetActive(false);
+    }
+
 
 }
