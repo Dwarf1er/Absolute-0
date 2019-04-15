@@ -22,6 +22,7 @@ public class PlayerUtilities : NetworkBehaviour
     Animator animator; // Used to trigger animations
     bool inAir { get; set; } //Checks if the player jumped
     bool inSprint { get; set; } //Checks if the player is sprinting
+    public GameObject playerUI { get; set; }
 
     [SerializeField]
     public Camera playerCamera;
