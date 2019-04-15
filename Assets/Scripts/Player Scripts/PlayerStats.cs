@@ -6,30 +6,52 @@ using UnityEngine.Networking;
 public class PlayerStats : NetworkBehaviour
 {
     [SerializeField]
-    private int maxHp = 100;
-    int currentHp;
+    private int MaxHP = 100;
+
+    //Properties
+    int HP
+    {
+        get { return hp_; }
+        set
+        {
+            hp_ = value;
+
+            if (hp_ <= 0) //Trigger player death
+            {
+                hp_ = 0;
+                /* Death has not yet been added
+                if (!isDead)
+                    CmdTriggerDeath();
+                */
+            }
+
+            if (hp_ > MaxHP) //Prevent over-healing
+                hp_ = MaxHP;
+        }
+    }
+
+    //Backing Store
+    [SyncVar] int hp_;
 
     void Awake()
     {
         SetPlayerStats();
     }
-
-    //The player always begins with his maximum health amount
+    
     public void SetPlayerStats()
     {
-        currentHp = maxHp;
+        HP = MaxHP; //The player always begins with his maximum health amount
     }
 
     //Used for the health bar size
-    public float GetHpAmount()
+    public float GetHpPercentage()
     {
-        return (float)currentHp / maxHp;
+        return (float) HP / MaxHP;
     }
-
-    //Used to calculate the damage dealt to the player after an attack
+    
     public void TakeDamage(int rawDamage)
     {
-        currentHp -= rawDamage;
-        Debug.Log(transform.name + " now has" + currentHp + " HP");
+        HP -= rawDamage;
+        Debug.Log(transform.name + " now has" + HP + " HP");
     }
 }

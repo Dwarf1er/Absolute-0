@@ -133,7 +133,7 @@ public abstract class Ennemy : NetworkBehaviour
     {
         Animator.SetBool("Dead", true);
         if (lastHitWasHeadshot)
-            Animator.SetTrigger("Headshot Death");
+            Animator.SetTrigger("HeadshotDeath");
         else
             Animator.SetTrigger("Death");
 
@@ -141,7 +141,6 @@ public abstract class Ennemy : NetworkBehaviour
 
         //Stop the corpse from moving
         NavMeshAgent.isStopped = true;
-        GetComponent<CapsuleCollider>().enabled = false;
         GetComponent<Rigidbody>().isKinematic = true;
     }
 
