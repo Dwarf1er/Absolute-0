@@ -1413,7 +1413,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3516979305986461403}
   - component: {fileID: 4073898325721042627}
-  - component: {fileID: 8460268276791717696}
   - component: {fileID: 6182472116633390197}
   m_Layer: 12
   m_Name: Attack Trigger
@@ -1449,39 +1448,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 2.6
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8460268276791717696
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5554447827339517314}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 0
-    i1: 0
-    i2: 0
-    i3: 0
-    i4: 0
-    i5: 0
-    i6: 0
-    i7: 0
-    i8: 0
-    i9: 0
-    i10: 0
-    i11: 0
-    i12: 0
-    i13: 0
-    i14: 0
-    i15: 0
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
 --- !u!114 &6182472116633390197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1504,8 +1470,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7056918496383345389}
   - component: {fileID: 4356232455114969635}
-  - component: {fileID: 5052623397877509839}
-  - component: {fileID: 5101474521788747855}
+  - component: {fileID: 268870815422426577}
   m_Layer: 12
   m_Name: Aggro Trigger
   m_TagString: Untagged
@@ -1540,40 +1505,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 8
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5052623397877509839
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7922327648545720606}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 0
-    i1: 0
-    i2: 0
-    i3: 0
-    i4: 0
-    i5: 0
-    i6: 0
-    i7: 0
-    i8: 0
-    i9: 0
-    i10: 0
-    i11: 0
-    i12: 0
-    i13: 0
-    i14: 0
-    i15: 0
-  m_ServerOnly: 0
-  m_LocalPlayerAuthority: 0
---- !u!114 &5101474521788747855
+--- !u!114 &268870815422426577
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
