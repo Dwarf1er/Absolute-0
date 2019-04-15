@@ -24,6 +24,8 @@ public class PlayerUI : MonoBehaviour
         Player = player;
         Controller = Player.GetComponent<PlayerController>();
         WeaponManager = Player.GetComponent<PlayerWeaponManager>();
+
+        player.gameObject.GetComponent<PlayerUtilities>().playerUI = gameObject;
     }
 
     void Update()
