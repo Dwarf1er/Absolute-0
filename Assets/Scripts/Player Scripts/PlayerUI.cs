@@ -16,7 +16,6 @@ public class PlayerUI : MonoBehaviour
     PlayerStats Player { get; set; }
     PlayerController Controller { get; set; }
     public PlayerWeaponManager WeaponManager { get; set; }
-    WeaponsStoreController WeaponsStoreController { get; set; }
     
 
     //Getting access to the stats of our player
@@ -27,8 +26,6 @@ public class PlayerUI : MonoBehaviour
         WeaponManager = Player.GetComponent<PlayerWeaponManager>();
 
         player.gameObject.GetComponent<PlayerUtilities>().playerUI = gameObject;
-        WeaponsStoreController = GetComponentInChildren<WeaponsStoreController>();
-        WeaponsStoreController.SetReferences();
     }
 
     void Update()
