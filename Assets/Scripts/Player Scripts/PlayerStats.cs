@@ -37,13 +37,15 @@ public class PlayerStats : NetworkBehaviour
     }
 
     //Backing Store
+    [SyncVar]
     int hp_;
 
     void Awake()
     {
         SetPlayerStats();
     }
-    
+
+    [Client]
     public void SetPlayerStats()
     {
         HP = MaxHP; //The player always begins with his maximum health amount
@@ -54,11 +56,11 @@ public class PlayerStats : NetworkBehaviour
     {
         return (float) HP / (float) MaxHP;
     }
-    
-    [Server]
+
+    [Client]
     public void TakeDamage(int rawDamage)
     {
         HP -= rawDamage;
-        Debug.Log(transform.name + " now has" + HP + " HP");
+        Debug.Log(transform.name + " now has " + HP + " HP");
     }
 }
