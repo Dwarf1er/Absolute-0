@@ -3,33 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class Level3Manager : NetworkBehaviour
+public class Level3Manager : LevelManager
 {
-
-    [SerializeField] GameObject WorkerPrefab;
-    [SerializeField] GameObject Objective;
-
     public override void OnStartServer()
     {
-        SpawnWorker();
+        SpawnWarrior(new Vector3(7, -26, -40));
+        SpawnWarrior(new Vector3(7, -26, -40));
     }
 
-    //// Update is called once per frame
-    //void Update()
-    //{
-
-    //    if (Input.GetKeyDown(KeyCode.G))
-    //        SpawnWorker();
-
-    //}
-
-    void SpawnWorker()
+    // Update is called once per frame
+    void Update()
     {
-        Vector3 position = new Vector3(7,-26,-40);
-        GameObject newWorker = Instantiate(WorkerPrefab, position, Quaternion.identity) as GameObject;
-        newWorker.GetComponent<WorkerAI>().CmdSetStats(30, 0, 2, 10);
-        newWorker.GetComponent<WorkerAI>().CmdSetDefaultTarget(Objective);
-        NetworkServer.Spawn(newWorker);
+
+        if (Input.GetKeyDown(KeyCode.G))
+            SpawnWorker(new Vector3(7, -26, -40));
+
     }
-   
+
+
+
 }
