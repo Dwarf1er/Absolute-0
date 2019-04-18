@@ -33,6 +33,7 @@ public class PlayerStats : NetworkBehaviour
     }
 
     //Backing Store
+    [SerializeField] //Serialize Field for debugging purposes
     [SyncVar] int hp_;
 
     void Awake()

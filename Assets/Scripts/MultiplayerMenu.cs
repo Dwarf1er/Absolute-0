@@ -102,7 +102,7 @@ public class MultiplayerMenu : NetworkManager
         {
             SetMenuButtons();
         }
-        else
+        if(level ==2)
         {
             SetOtherButtons();
         }
@@ -111,6 +111,7 @@ public class MultiplayerMenu : NetworkManager
    //Méthode pour instancier tous les gameobjects qui ne sont pas dans la scène du menu multijoueur
     private void SetOtherButtons()
     {
+        
         BtnDisconnect = GameObject.Find("BtnDisconnect").GetComponent<Button>();
         BtnDisconnect.onClick.AddListener(() => StopGame());
         BtnLevel1 = GameObject.Find("BtnLevel1").GetComponent<Button>();
@@ -119,6 +120,7 @@ public class MultiplayerMenu : NetworkManager
         BtnLevel2.onClick.AddListener(() => ChangeScene("Level 2"));
         BtnLevel3 = GameObject.Find("BtnLevel3").GetComponent<Button>();
         BtnLevel3.onClick.AddListener(() => ChangeScene("Level 3"));
+        
     }
 
     //Méthode permettant de changer vers la scène choisit par le joueur hôte

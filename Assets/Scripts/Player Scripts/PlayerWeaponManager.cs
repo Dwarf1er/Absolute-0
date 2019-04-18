@@ -26,16 +26,19 @@ public class PlayerWeaponManager : NetworkBehaviour
     public GameObject currentPlayerWeaponModel;
 
     GameObject[] WeaponModels { get; set; }
-    PlayerWeapons.Weapon[] Weapons { get; set; }
+    public PlayerWeapons.Weapon[] Weapons { get; set; }
 
     void Start()
     {
-        defaultPlayerWeapon = PlayerWeapons.M4;
+        defaultPlayerWeapon = PlayerWeapons.MP5;
 
-        WeaponModels = new GameObject[] { BenelliM4Model, M4Model, M110Model, M249Model, MP5Model, SMAWModel };
-        Weapons = new PlayerWeapons.Weapon[] { PlayerWeapons.BenelliM4, PlayerWeapons.M4, PlayerWeapons.M110, PlayerWeapons.M249, PlayerWeapons.MP5, PlayerWeapons.SMAW };
+        WeaponModels = new GameObject[] { MP5Model, BenelliM4Model, M4Model, M249Model, M110Model, SMAWModel };
+        Weapons = new PlayerWeapons.Weapon[] { PlayerWeapons.MP5, PlayerWeapons.BenelliM4, PlayerWeapons.M4, PlayerWeapons.M249, PlayerWeapons.M110, PlayerWeapons.SMAW };
 
-        currentPlayerWeaponModel = M4Model;
+        for (int cpt = 1; cpt < Weapons.Length; cpt++)
+            Weapons[cpt].IsUnlocked = false;
+
+        currentPlayerWeaponModel = MP5Model;
         
         EquipNextWeapon(defaultPlayerWeapon, currentPlayerWeaponModel);
     }
@@ -60,7 +63,8 @@ public class PlayerWeaponManager : NetworkBehaviour
 
     public void EquipNextWeapon (int weaponID)
     {
-        EquipNextWeapon(Weapons[weaponID], WeaponModels[weaponID]);
+        if (Weapons[weaponID].IsUnlocked)
+            EquipNextWeapon(Weapons[weaponID], WeaponModels[weaponID]);
     }
 
     //Allows to get a reference to the currently equipped weapon of a LocalPlayer

@@ -57,7 +57,9 @@ public abstract class Ennemy : NetworkBehaviour
     }
 
     //Backing Store
+    [SerializeField] //Serialize Field for debugging purposes
     [SyncVar] int hp_;
+    [SerializeField] //Serialize Field for debugging purposes
     [SyncVar] float speed_;
 
     

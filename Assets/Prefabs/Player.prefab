@@ -349,7 +349,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d6bd26e42ccb0d4691c25b3cb738bc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 100
+  MaxHP: 100
+  hp_: 0
 --- !u!114 &5856111122139797340
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1292,7 +1293,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100090, guid: 54c59f8780aaa2f4ebdae0e8027edf29, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 100088, guid: 54c59f8780aaa2f4ebdae0e8027edf29, type: 3}
       propertyPath: m_IsActive
