@@ -7,11 +7,15 @@ public class PlayerStats : NetworkBehaviour
 {
     [SerializeField]
     private int MaxHP = 100;
-
+    
     //Properties
     int HP
     {
-        get { return hp_; }
+        get
+        {
+            int hp = hp_;
+            return hp;
+        }
         set
         {
             hp_ = value;
@@ -33,8 +37,7 @@ public class PlayerStats : NetworkBehaviour
     }
 
     //Backing Store
-    [SerializeField] //Serialize Field for debugging purposes
-    [SyncVar] int hp_;
+    int hp_;
 
     void Awake()
     {
@@ -49,9 +52,10 @@ public class PlayerStats : NetworkBehaviour
     //Used for the health bar size
     public float GetHpPercentage()
     {
-        return (float) HP / MaxHP;
+        return (float) HP / (float) MaxHP;
     }
     
+    [Server]
     public void TakeDamage(int rawDamage)
     {
         HP -= rawDamage;

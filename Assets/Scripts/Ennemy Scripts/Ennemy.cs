@@ -150,27 +150,27 @@ public abstract class Ennemy : NetworkBehaviour
 
     // Functions - Setting Target
 
-    [Command]
+    [Server]
     public void CmdSetDestination(Vector3 destination)
     {
         NavMeshAgent.SetDestination(destination);
     }
     
-    [Command]
+    [Server]
     public void CmdSetTarget(GameObject newTarget)
     {
         Target = newTarget;
         CmdSetDestination(Target.transform.position);
     }
 
-    [Command]
+    [Server]
     public void CmdSetDefaultTarget(GameObject defaultTarget)
     {
         DefaultTarget = defaultTarget;
         CmdSetTarget(DefaultTarget);
     }
 
-    [Command]
+    [Server]
     public void CmdTargetLost()
     {
         CmdSetTarget(DefaultTarget);
@@ -178,7 +178,7 @@ public abstract class Ennemy : NetworkBehaviour
 
     // Functions - Attacking
 
-    [Command]
+    [Server]
     public void CmdStartAttack()
     {
         NetAnimator.SetTrigger("StartAttack");
@@ -186,7 +186,7 @@ public abstract class Ennemy : NetworkBehaviour
         Speed = 0;
     }
 
-    [Command]
+    [Server]
     public void CmdStopAttack()
     {
         NetAnimator.SetTrigger("StopAttack");
@@ -194,7 +194,7 @@ public abstract class Ennemy : NetworkBehaviour
         Speed = StartingSpeed;
     }
 
-    [Command]
+    [Server]
     public void CmdAttack()
     {
         if (Target.GetComponent<PlayerStats>() != null)
