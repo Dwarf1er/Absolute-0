@@ -8,6 +8,10 @@ public class LevelManager : NetworkBehaviour
     [SerializeField] protected GameObject WorkerPrefab;
     [SerializeField] protected GameObject WarriorPrefab;
     [SerializeField] protected GameObject Objective;
+    protected List<GameObject> ActiveEnnemies { get; set; }
+    protected List<Vector3>EnnemySpawnPoints { get; set; }
+
+  
     protected void SpawnWorker(Vector3 spawnPoint)
     {
         GameObject newWorker = Instantiate(WorkerPrefab, spawnPoint, Quaternion.identity) as GameObject;
@@ -16,8 +20,8 @@ public class LevelManager : NetworkBehaviour
 
         newWorker.GetComponent<WorkerAI>().CmdSetStats(40, 0, 4, 10);
         newWorker.GetComponent<WorkerAI>().CmdSetDefaultTarget(Objective);
-        
-        GetComponent<SkinnedMeshRenderer>().material = Resources.Load<Material>("Assets/Resources/Skins/Droid_dark_Worker.mat");
+        //GetComponent<SkinnedMeshRenderer>().material = Resources.Load<Material>("Assets/Resources/Skins/Droid_dark_Worker.mat");
+        ActiveEnnemies.Add(newWorker);
     }
     protected void SpawnWarrior(Vector3 spawnPoint)
     {
@@ -27,6 +31,7 @@ public class LevelManager : NetworkBehaviour
 
         newWarrior.GetComponent<WarriorAI>().CmdSetStats(100, 5, 4, 30);
         newWarrior.GetComponent<WarriorAI>().CmdSetDefaultTarget(Objective);
+        ActiveEnnemies.Add(newWarrior);
     }
 
     // Update is called once per frame
