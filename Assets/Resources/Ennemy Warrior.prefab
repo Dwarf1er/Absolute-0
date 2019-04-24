@@ -564,6 +564,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DefaultTarget: {fileID: 0}
   isAttacking: 0
+  hp_: 0
+  speed_: 0
 --- !u!195 &2912949911720312940
 NavMeshAgent:
   m_ObjectHideFlags: 0
