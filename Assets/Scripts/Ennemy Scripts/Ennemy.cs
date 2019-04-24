@@ -86,6 +86,8 @@ public abstract class Ennemy : NetworkBehaviour
         isDead = false;
     }
 
+    protected abstract void SetStats(int ennemyTier);
+
     [Server]
     private void Update()
     {

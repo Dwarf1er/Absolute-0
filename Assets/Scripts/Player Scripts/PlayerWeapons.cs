@@ -28,10 +28,10 @@ public class PlayerWeapons : MonoBehaviour
     }
 
     //Weapons
-    public static Weapon BenelliM4 = new Weapon(10, 100, 0.6f, 8, false); //semi-auto, 100 RPM
-    public static Weapon M4 = new Weapon(25, 100, 0.1f, 30, true); //auto, 600 RPM
-    public static Weapon M110 = new Weapon(10, 100, 0.8f, 10, false); //semi-auto, 100 RPM
-    public static Weapon M249 = new Weapon(10, 100, 0.07f, 45, true); //auto, 850 RPM
-    public static Weapon MP5 = new Weapon(10, 100, 0.075f, 30, true); //auto, 800 RPM
-    public static Weapon SMAW = new Weapon(10, 100, 1, 1, false); //N/A
+    public static Weapon BenelliM4 = new Weapon(0, 100, 0.6f, 8, false); //semi-auto, 100 RPM   //To be added later, will fire 10 pellets for 10 dmg each
+    public static Weapon M4 = new Weapon(35, 100, 0.1f, 30, true); //auto, 600 RPM
+    public static Weapon M110 = new Weapon(80, 100, 0.8f, 10, false); //semi-auto, 100 RPM
+    public static Weapon M249 = new Weapon(25, 100, 0.07f, 45, true); //auto, 850 RPM
+    public static Weapon MP5 = new Weapon(20, 100, 0.075f, 30, true); //auto, 800 RPM
+    public static Weapon SMAW = new Weapon(0, 100, 1, 1, false); //N/A  //To be added later, will fire a rocket for 80 dmg
 }

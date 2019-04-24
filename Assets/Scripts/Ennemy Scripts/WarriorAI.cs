@@ -5,5 +5,8 @@ using UnityEngine.AI;
 
 public class WarriorAI : Ennemy
 {
+    protected override void SetStats(int ennemyTier)
+    {
 
+    }
 }
