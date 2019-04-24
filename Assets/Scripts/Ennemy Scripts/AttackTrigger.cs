@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class AttackTrigger : NetworkBehaviour
+public class AttackTrigger : MonoBehaviour
 {
     Ennemy RootEnnemy { get; set; }
 
@@ -12,7 +12,6 @@ public class AttackTrigger : NetworkBehaviour
         RootEnnemy = GetComponentInParent<Ennemy>();
     }
 
-    [Server]
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject == RootEnnemy.Target)
@@ -21,7 +20,6 @@ public class AttackTrigger : NetworkBehaviour
         }
     }
 
-    [Server]
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject == RootEnnemy.Target)

@@ -7,9 +7,12 @@ public class Level1Manager : LevelManager
 {
     public override void OnStartServer()
     {
+        /*
         SpawnWarrior(Vector3.left * 4);
-        SpawnWarrior(Vector3.left * 4);
-        SpawnWorker(Vector3.left * 4);
+        SpawnWarrior(Vector3.right * 4);
+        SpawnWorker(Vector3.back * 4);
+        SpawnAssaultGunner(Vector3.forward * 4);
+        */
     }
 
     // Update is called once per frame

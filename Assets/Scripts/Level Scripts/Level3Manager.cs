@@ -41,23 +41,20 @@ public class Level3Manager : LevelManager
         LastSpawnTime += Time.deltaTime;
         if (LastSpawnTime >= SpawnTimeInterval)
         {
-            if (IndexSpawn == 3)
-                IndexSpawn = 0;
-            SpawnWorker(EnnemySpawnPoints[IndexSpawn]);
-            NumEnnemies++;
-            IndexSpawn++;
-            LastSpawnTime = 0;
-        }
-        if (NumEnnemies == 6)
-        {
-            IsWaveOne = false;
-            IsWaveTwo = true;
-            LastSpawnTime = 0;
-            IndexSpawn = 0;
+            if (NumEnnemies < 6)
+            {
+                if (IndexSpawn == 3)
+                    IndexSpawn = 0;
+                SpawnWorker(EnnemySpawnPoints[IndexSpawn]);
+                NumEnnemies++;
+                IndexSpawn++;
+                LastSpawnTime = 0;
+            }
         }
     }
     void ExecuteWaveTwo()
     {
+        Debug.Log("Executing Wave 2");
         LastSpawnTime += Time.deltaTime;
         if (LastSpawnTime >= SpawnTimeInterval)
         {
@@ -66,12 +63,6 @@ public class Level3Manager : LevelManager
             SpawnWarrior(EnnemySpawnPoints[IndexSpawn]);
             NumEnnemies++;
             IndexSpawn++;
-            LastSpawnTime = 0;
-        }
-        if (NumEnnemies >= 6)
-        {
-            IsWaveOne = false;
-            IsWaveTwo = true;
             LastSpawnTime = 0;
         }
     }
