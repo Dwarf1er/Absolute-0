@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -39,9 +40,9 @@ public class Level3Manager : LevelManager
     void ExecuteWaveOne()
     {
         LastSpawnTime += Time.deltaTime;
-        if (LastSpawnTime >= SpawnTimeInterval)
+        if (NumEnnemies < 6)
         {
-            if (NumEnnemies < 6)
+            if (LastSpawnTime >= SpawnTimeInterval)
             {
                 if (IndexSpawn == 3)
                     IndexSpawn = 0;
@@ -49,9 +50,43 @@ public class Level3Manager : LevelManager
                 NumEnnemies++;
                 IndexSpawn++;
                 LastSpawnTime = 0;
+
+            }
+        }
+        else
+        {
+            EndWave();
+        }
+        
+                
+          
+                
+    }
+
+    private void EndWave()
+    {
+        if (AreAllDead())
+        {
+            foreach(GameObject g in ActiveEnnemies)
+            {
+                Destroy(g);
             }
         }
     }
+
+    private bool AreAllDead()
+    {
+        bool result = true;
+        foreach(GameObject g in ActiveEnnemies)
+        {
+            if (g != null)
+                if (!g.GetComponent<Ennemy>().isDead)
+                    result = false;
+                
+        }
+        return result;
+    }
+
     void ExecuteWaveTwo()
     {
         Debug.Log("Executing Wave 2");
