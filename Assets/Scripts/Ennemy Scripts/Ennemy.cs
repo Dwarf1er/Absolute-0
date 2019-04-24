@@ -23,7 +23,7 @@ public abstract class Ennemy : NetworkBehaviour
     //Bools
     [SyncVar] public bool isAttacking;
     [SyncVar] bool isStopped;
-    [SyncVar] protected bool isDead;
+    [SyncVar] public bool isDead;
     [SyncVar] bool lastHitWasHeadshot;
 
     //Properties
