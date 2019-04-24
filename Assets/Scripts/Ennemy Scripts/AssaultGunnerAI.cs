@@ -4,5 +4,8 @@ using UnityEngine;
 
 public class AssaultGunnerAI : Ennemy
 {
+    protected override void SetStats(int ennemyTier)
+    {
 
+    }
 }
