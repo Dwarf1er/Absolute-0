@@ -7,7 +7,7 @@ public class PlayerUI : MonoBehaviour
 {
     //References
     [SerializeField]
-    RectTransform hpBar;
+    public RectTransform hpBar;
     [SerializeField]
     Text ammoInClipTxt;
     [SerializeField]
@@ -30,19 +30,16 @@ public class PlayerUI : MonoBehaviour
 
     void Update()
     {
-        SetHpValue(Player.GetComponent<PlayerStats>().GetHpPercentage());
         SetAmmoAmount(WeaponManager.currentPlayerWeapon.WeaponAmmoInClip, WeaponManager.currentPlayerWeapon.WeaponClipSize);
-
-        //For testing purposes
-        //if (Input.GetKeyDown(KeyCode.G))
-            //Player.TakeDamage(20);
     }
 
-    public void SetHpValue(float hpPercentage)
+    /*public void SetHpValue(float hpPercentage)
     {
         //Changes the scale of the bar on the X axis to match the graphic's orientation
+        if (hpPercentage == 0)
+            return;
         hpBar.localScale = new Vector3(hpPercentage, 1f, 1f);
-    }
+    }*/
 
     void SetAmmoAmount(int ammoInClip, int maxAmmo)
     {

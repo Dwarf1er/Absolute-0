@@ -5,14 +5,14 @@ using UnityEngine.Networking;
 
 public class PlayerStats : NetworkBehaviour
 {
-    [SerializeField]
-    private int MaxHP = 100;
-
+    [SerializeField] private int MaxHP = 100;
+    PlayerUtilities utilities { get; set; }
     //Backing Store
-    [SyncVar(hook = "OnHpChanged")] int currentHp;
+    [SyncVar(hook = "OnHpChanged" + "currentHP")] int currentHp;
 
     void Awake()
     {
+        utilities = GetComponent<PlayerUtilities>();
         SetPlayerStats();
     }
 
@@ -34,6 +34,9 @@ public class PlayerStats : NetworkBehaviour
 
     void OnHpChanged(int hp)
     {
+        var UI = utilities.playerUI.GetComponent<PlayerUI>();
+
+        UI.hpBar.sizeDelta = new Vector2(hp * 2, UI.hpBar.sizeDelta.y);
         currentHp = hp;
     }
 
