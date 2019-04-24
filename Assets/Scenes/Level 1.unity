@@ -1786,7 +1786,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &594982858 stripped
 Transform:
@@ -1867,7 +1867,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &733536650
 GameObject:
@@ -3072,7 +3072,7 @@ Transform:
   - {fileID: 1904776769}
   - {fileID: 405056621}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1285293423
 GameObject:
@@ -5231,75 +5231,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1308368853}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1981828641
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 7606603519384481523, guid: f5918aff16d253547a2e1ca0c7d04bbd,
-        type: 3}
-      propertyPath: m_Name
-      value: Ennemy Assault Gunner
-      objectReference: {fileID: 0}
-    - target: {fileID: 3382177070457024738, guid: f5918aff16d253547a2e1ca0c7d04bbd,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 18.110306
-      objectReference: {fileID: 0}
-    - target: {fileID: 3382177070457024738, guid: f5918aff16d253547a2e1ca0c7d04bbd,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.19205621
-      objectReference: {fileID: 0}
-    - target: {fileID: 3382177070457024738, guid: f5918aff16d253547a2e1ca0c7d04bbd,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -10.036353
-      objectReference: {fileID: 0}
-    - target: {fileID: 3382177070457024738, guid: f5918aff16d253547a2e1ca0c7d04bbd,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3382177070457024738, guid: f5918aff16d253547a2e1ca0c7d04bbd,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3382177070457024738, guid: f5918aff16d253547a2e1ca0c7d04bbd,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3382177070457024738, guid: f5918aff16d253547a2e1ca0c7d04bbd,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3382177070457024738, guid: f5918aff16d253547a2e1ca0c7d04bbd,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3382177070457024738, guid: f5918aff16d253547a2e1ca0c7d04bbd,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3382177070457024738, guid: f5918aff16d253547a2e1ca0c7d04bbd,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3382177070457024738, guid: f5918aff16d253547a2e1ca0c7d04bbd,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: f5918aff16d253547a2e1ca0c7d04bbd, type: 3}
 --- !u!1001 &2025208362
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5421,6 +5352,8 @@ MonoBehaviour:
   WorkerPrefab: {fileID: 947476488, guid: cbbca2bd725b74f41aed503ea219dc45, type: 3}
   WarriorPrefab: {fileID: 2010657047059321496, guid: 36bd5a59656f74a43b4ba577c2fb4438,
     type: 3}
+  AssaultGunnerPrefab: {fileID: 7606603519384481523, guid: f5918aff16d253547a2e1ca0c7d04bbd,
+    type: 3}
   Objective: {fileID: 1975661634}
 --- !u!4 &2032463249
 Transform:
@@ -5434,7 +5367,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2032463250
 MonoBehaviour:

@@ -7,6 +7,7 @@ public class LevelManager : NetworkBehaviour
 {
     [SerializeField] protected GameObject WorkerPrefab;
     [SerializeField] protected GameObject WarriorPrefab;
+    [SerializeField] protected GameObject AssaultGunnerPrefab;
     [SerializeField] protected GameObject Objective;
     protected List<GameObject> ActiveEnnemies { get; set; }
     protected List<Vector3>EnnemySpawnPoints { get; set; }
@@ -32,6 +33,17 @@ public class LevelManager : NetworkBehaviour
         newWarrior.GetComponent<WarriorAI>().CmdSetStats(100, 5, 4, 30);
         newWarrior.GetComponent<WarriorAI>().CmdSetDefaultTarget(Objective);
         ActiveEnnemies.Add(newWarrior);
+    }
+
+    protected void SpawnAssaultGunner(Vector3 spawnPoint)
+    {
+        GameObject newAssaultGunner = Instantiate(AssaultGunnerPrefab, spawnPoint, Quaternion.identity) as GameObject;
+
+        NetworkServer.Spawn(newAssaultGunner);
+
+        newAssaultGunner.GetComponent<AssaultGunnerAI>().CmdSetStats(60, 3, 4, 25);
+        newAssaultGunner.GetComponent<AssaultGunnerAI>().CmdSetDefaultTarget(Objective);
+        ActiveEnnemies.Add(newAssaultGunner);
     }
 
     // Update is called once per frame
