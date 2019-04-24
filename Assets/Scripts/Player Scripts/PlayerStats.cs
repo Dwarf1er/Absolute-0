@@ -9,7 +9,7 @@ public class PlayerStats : NetworkBehaviour
     private int MaxHP = 100;
 
     //Backing Store
-    [SyncVar(hook = "currentHp")] int currentHp;
+    [SyncVar(hook = "OnHpChanged")] int currentHp;
 
     void Awake()
     {
@@ -30,6 +30,11 @@ public class PlayerStats : NetworkBehaviour
             currentHp = MaxHP;
 
         Debug.Log(transform.name + " now has " + currentHp + " HP");
+    }
+
+    void OnHpChanged(int hp)
+    {
+        currentHp = hp;
     }
 
     //Used for the health bar size
