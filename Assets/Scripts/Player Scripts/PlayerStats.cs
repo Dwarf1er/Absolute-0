@@ -7,65 +7,39 @@ public class PlayerStats : NetworkBehaviour
 {
     [SerializeField]
     private int MaxHP = 100;
-    
-    //Properties
-    /*
-    int HP
-    {
-        get
-        {
-            int hp = hp_;
-            return hp;
-        }
-        set
-        {
-            hp_ = value;
-
-            if (hp_ <= 0) //Trigger player death
-            {
-                hp_ = 0;
-            }
-
-            if (hp_ > MaxHP) //Prevent over-healing
-                hp_ = MaxHP;
-
-            Debug.Log("Set HP to " + HP);
-        }
-    }
-    */
 
     //Backing Store
-    [SyncVar]
-    int hp;
+    [SyncVar(hook = "currentHp")] int currentHp;
 
     void Awake()
     {
         SetPlayerStats();
     }
 
-    [Client]
-    public void SetPlayerStats()
+    public void TakeDamage(int rawDamage)
     {
-        hp = MaxHP; //The player always begins with his maximum health amount
+        if (!isServer)
+            return;
+
+        currentHp -= rawDamage;
+
+        if (currentHp <= 0) //Trigger player death
+            currentHp = 0;
+
+        if (currentHp > MaxHP) //Prevent over-healing
+            currentHp = MaxHP;
+
+        Debug.Log(transform.name + " now has " + currentHp + " HP");
     }
 
     //Used for the health bar size
     public float GetHpPercentage()
     {
-        return (float) hp / (float) MaxHP;
+        return (float)currentHp / (float)MaxHP;
     }
 
-    [Client]
-    public void TakeDamage(int rawDamage)
+    public void SetPlayerStats()
     {
-        hp -= rawDamage;
-        if (hp <= 0) //Trigger player death
-        {
-            hp = 0;
-        }
-
-        if (hp > MaxHP) //Prevent over-healing
-            hp = MaxHP;
-        Debug.Log(transform.name + " now has " + hp + " HP");
+        currentHp = MaxHP; //The player always begins with his maximum health amount
     }
 }
