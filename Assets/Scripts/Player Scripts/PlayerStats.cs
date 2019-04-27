@@ -6,13 +6,12 @@ using UnityEngine.Networking;
 public class PlayerStats : NetworkBehaviour
 {
     [SerializeField] private int MaxHP = 100;
-    PlayerUtilities utilities { get; set; }
+    PlayerUI playerUi;
     //Backing Store
-    [SyncVar(hook = "OnHpChanged")] int currentHp;
+    [SyncVar(hook = "OnHpChanged")] public int currentHp;
 
     void Awake()
     {
-        utilities = GetComponent<PlayerUtilities>();
         SetPlayerStats();
     }
 
@@ -34,9 +33,7 @@ public class PlayerStats : NetworkBehaviour
 
     void OnHpChanged(int hp)
     {
-        var UI = utilities.playerUI.GetComponent<PlayerUI>();
-
-        UI.hpBar.sizeDelta = new Vector2(hp * 2, UI.hpBar.sizeDelta.y);
+        //playerUi.hpBar.sizeDelta = new Vector2(hp * 2, playerUi.hpBar.sizeDelta.y);
         currentHp = hp;
     }
 
@@ -49,5 +46,10 @@ public class PlayerStats : NetworkBehaviour
     public void SetPlayerStats()
     {
         currentHp = MaxHP; //The player always begins with his maximum health amount
+    }
+
+    public void SetStatsUiReference()
+    {
+        playerUi = GameObject.Find("PlayerUI").GetComponent<PlayerUI>();
     }
 }

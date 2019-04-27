@@ -12,6 +12,8 @@ public class PlayerUI : MonoBehaviour
     Text ammoInClipTxt;
     [SerializeField]
     Text maxAmmoTxt;
+    [SerializeField]
+    Text healthTxt;
 
     PlayerStats Player { get; set; }
     PlayerController Controller { get; set; }
@@ -31,6 +33,7 @@ public class PlayerUI : MonoBehaviour
     void Update()
     {
         SetAmmoAmount(WeaponManager.currentPlayerWeapon.WeaponAmmoInClip, WeaponManager.currentPlayerWeapon.WeaponClipSize);
+        SetHpAmmount();
     }
 
     /*public void SetHpValue(float hpPercentage)
@@ -45,5 +48,10 @@ public class PlayerUI : MonoBehaviour
     {
         ammoInClipTxt.text = ammoInClip.ToString();
         maxAmmoTxt.text = maxAmmo.ToString();
+    }
+
+    void SetHpAmmount()
+    {
+        healthTxt.text = Player.currentHp.ToString();
     }
 }
