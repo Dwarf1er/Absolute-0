@@ -8,7 +8,7 @@ public class PlayerStats : NetworkBehaviour
     [SerializeField] private int MaxHP = 100;
     PlayerUtilities utilities { get; set; }
     //Backing Store
-    [SyncVar(hook = "OnHpChanged" + "currentHP")] int currentHp;
+    [SyncVar(hook = "OnHpChanged")] int currentHp;
 
     void Awake()
     {

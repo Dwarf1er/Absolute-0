@@ -5352,8 +5352,6 @@ MonoBehaviour:
   WorkerPrefab: {fileID: 947476488, guid: cbbca2bd725b74f41aed503ea219dc45, type: 3}
   WarriorPrefab: {fileID: 2010657047059321496, guid: 36bd5a59656f74a43b4ba577c2fb4438,
     type: 3}
-  AssaultGunnerPrefab: {fileID: 7606603519384481523, guid: f5918aff16d253547a2e1ca0c7d04bbd,
-    type: 3}
   Objective: {fileID: 1975661634}
 --- !u!4 &2032463249
 Transform:
