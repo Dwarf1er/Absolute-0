@@ -36,13 +36,15 @@ public class PlayerUI : MonoBehaviour
         SetHpAmmount();
     }
 
-    /*public void SetHpValue(float hpPercentage)
+    /*
+    public void SetHpValue(float hpPercentage)
     {
         //Changes the scale of the bar on the X axis to match the graphic's orientation
         if (hpPercentage == 0)
             return;
         hpBar.localScale = new Vector3(hpPercentage, 1f, 1f);
-    }*/
+    }
+    */
 
     void SetAmmoAmount(int ammoInClip, int maxAmmo)
     {

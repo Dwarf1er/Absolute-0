@@ -16,7 +16,7 @@ public class PlayerNetworking : NetworkBehaviour
     Camera lobbyCamera;
     [SerializeField]
     GameObject playerUIPrefab;
-    GameObject playerUIInstance;
+    public GameObject playerUIInstance;
 
     void Start()
     {
