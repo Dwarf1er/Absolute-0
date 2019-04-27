@@ -14,11 +14,11 @@ public abstract class Ennemy : NetworkBehaviour
     [SerializeField] public GameObject DefaultTarget;
 
     //Stats
-    int Tier;
-    int MaxHP;
-    int Armor;
-    float StartingSpeed;
-    protected int Damage;
+    protected int Tier;
+    protected int MaxHP;
+    protected int Armor;
+    protected float StartingSpeed;
+    [SyncVar] protected int Damage;
 
     //Bools
     [SyncVar] public bool isAttacking;
@@ -27,7 +27,7 @@ public abstract class Ennemy : NetworkBehaviour
     [SyncVar] bool lastHitWasHeadshot;
 
     //Properties
-    int HP
+    protected int HP
     {
         get { return hp_; }
         set
@@ -46,7 +46,7 @@ public abstract class Ennemy : NetworkBehaviour
         }
     }
 
-    float Speed
+    protected float Speed
     {
         get { return speed_; }
         set
