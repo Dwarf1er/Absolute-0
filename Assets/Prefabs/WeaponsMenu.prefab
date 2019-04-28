@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 4164488310945401227}
   - component: {fileID: 81003802517801786}
   - component: {fileID: 4071264465669055602}
+  - component: {fileID: 8121415915667648161}
+  - component: {fileID: 2078052331711697984}
   m_Layer: 5
   m_Name: BuyBtnM249
   m_TagString: Untagged
@@ -118,6 +120,30 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &8121415915667648161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 138879531084266860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f25d1e16651d5f43aa387e19f3e192f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2078052331711697984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 138879531084266860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d7e29902f7239b4793b4721ceb87442, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &557003736472627054
 GameObject:
   m_ObjectHideFlags: 0
@@ -130,6 +156,8 @@ GameObject:
   - component: {fileID: 5534790633017375343}
   - component: {fileID: 5908292365329700673}
   - component: {fileID: 4766101839781950712}
+  - component: {fileID: 331726733130872477}
+  - component: {fileID: 513796427663330217}
   m_Layer: 5
   m_Name: BuyBtnM4A1
   m_TagString: Untagged
@@ -236,6 +264,30 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &331726733130872477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 557003736472627054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f25d1e16651d5f43aa387e19f3e192f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &513796427663330217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 557003736472627054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d7e29902f7239b4793b4721ceb87442, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1328990447251444566
 GameObject:
   m_ObjectHideFlags: 0
@@ -903,6 +955,8 @@ GameObject:
   - component: {fileID: 1109642176937721850}
   - component: {fileID: 6207267879182109585}
   - component: {fileID: 4048361946418595939}
+  - component: {fileID: 8241997004765908118}
+  - component: {fileID: 6432088169672304715}
   m_Layer: 5
   m_Name: BuyBtnM110
   m_TagString: Untagged
@@ -1009,6 +1063,30 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &8241997004765908118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2641261754121779703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f25d1e16651d5f43aa387e19f3e192f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6432088169672304715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2641261754121779703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d7e29902f7239b4793b4721ceb87442, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3416420385966317496
 GameObject:
   m_ObjectHideFlags: 0
@@ -1021,6 +1099,8 @@ GameObject:
   - component: {fileID: 5633457298688906748}
   - component: {fileID: 5006084992614638607}
   - component: {fileID: 1735446970785751254}
+  - component: {fileID: 5618556461206394575}
+  - component: {fileID: 3999697817163772720}
   m_Layer: 5
   m_Name: BuyBtnM4
   m_TagString: Untagged
@@ -1127,6 +1207,30 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &5618556461206394575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3416420385966317496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f25d1e16651d5f43aa387e19f3e192f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3999697817163772720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3416420385966317496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d7e29902f7239b4793b4721ceb87442, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3531888676049084056
 GameObject:
   m_ObjectHideFlags: 0
@@ -1376,6 +1480,8 @@ GameObject:
   - component: {fileID: 4881330655120748657}
   - component: {fileID: 1198575147557346186}
   - component: {fileID: 2079498375986285533}
+  - component: {fileID: 8394401178932478559}
+  - component: {fileID: 1651601790061350963}
   m_Layer: 5
   m_Name: BuyBtnSMAW
   m_TagString: Untagged
@@ -1482,6 +1588,30 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &8394401178932478559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4609976643310591809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f25d1e16651d5f43aa387e19f3e192f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1651601790061350963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4609976643310591809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d7e29902f7239b4793b4721ceb87442, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5082414594251922630
 GameObject:
   m_ObjectHideFlags: 0
