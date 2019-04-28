@@ -11,6 +11,6 @@ public class MainMenu : MonoBehaviour
     void Update()
     {
         if (Input.anyKey)
-            SceneManager.LoadScene("MenuJouer", LoadSceneMode.Single);
+            SceneManager.LoadScene("Menu Jouer", LoadSceneMode.Single);
     }
 }
