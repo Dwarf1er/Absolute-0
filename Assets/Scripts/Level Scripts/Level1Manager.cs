@@ -20,7 +20,7 @@ public class Level1Manager : LevelManager
     {
         
         if (Input.GetKeyDown(KeyCode.G))
-            SpawnWorker(Vector3.left * 4);
+            SpawnWorker(Vector3.left * 4, 0);
         
     }
 

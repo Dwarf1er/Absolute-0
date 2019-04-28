@@ -5,13 +5,18 @@ using UnityEngine.AI;
 
 public class WorkerAI : Ennemy
 {
-    int[] HPTiers = { 1, 2, 3, 4 };
-    int[] ArmorTiers = { 1, 2, 3, 4 };
-    int[] SpeedTiers = { 1, 2, 3, 4 };
-    int[] DamageTiers = { 1, 2, 3, 4 };
+    static readonly int[] HPTiers = { 40, 80, 120, 160 };
+    static readonly int[] ArmorTiers = { 0, 3, 6, 9 };
+    static readonly int[] SpeedTiers = { 4, 4, 4, 4 };
+    static readonly int[] DamageTiers = { 10, 20, 30, 40 };
 
     protected override void SetStats(int ennemyTier)
     {
-
+        MaxHP = HPTiers[ennemyTier];
+        HP = MaxHP;
+        Armor = ArmorTiers[ennemyTier];
+        StartingSpeed = SpeedTiers[ennemyTier];
+        Speed = StartingSpeed;
+        Damage = DamageTiers[ennemyTier];
     }
 }

@@ -68,20 +68,14 @@ public abstract class Ennemy : NetworkBehaviour
     {
         
     }
-
-    [Command]
-    public void CmdSetStats(int maxHp, int armor, float speed, int damage)
+    
+    public void CmdSpawn(int tier)
     {
         Animator = GetComponent<Animator>();
         NetAnimator = GetComponent<NetworkAnimator>();
         NavMeshAgent = GetComponent<NavMeshAgent>();
 
-        MaxHP = maxHp;
-        HP = MaxHP;
-        Armor = armor;
-        StartingSpeed = speed;
-        Speed = speed;
-        Damage = damage;
+        SetStats(tier);
 
         isDead = false;
     }

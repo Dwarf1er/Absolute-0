@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HeavyGunnerAI : Ennemy
 {
-    static readonly int[] HPTiers = { 100, 200, 300, 400 };
+    static readonly int[] HPTiers = { 300, 600, 900, 1200 };
     static readonly int[] ArmorTiers = { 5, 10, 15, 20 };
     static readonly int[] SpeedTiers = { 3, 3, 3, 3 };
     static readonly int[] DamageTiers = { 10, 15, 20, 25 };
