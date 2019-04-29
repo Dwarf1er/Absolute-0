@@ -102,7 +102,7 @@ public class MultiplayerMenu : NetworkManager
         {
             SetMenuButtons();
         }
-        if(level ==2)
+        if(level == 2)
         {
             SetOtherButtons();
         }
