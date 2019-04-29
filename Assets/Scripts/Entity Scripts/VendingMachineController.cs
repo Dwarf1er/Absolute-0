@@ -76,11 +76,11 @@ public class VendingMachineController : NetworkBehaviour
         PlayerUI playerUI = GameObject.Find("PlayerUI").GetComponent<PlayerUI>();
         playerWeaponsManager = playerUI.WeaponManager;
 
-        BuyBtnM4 = currentWeaponsMenu.transform.Find("BuyBtnM4").GetComponent<Button>();
-        BuyBtnM4A1 = currentWeaponsMenu.transform.Find("BuyBtnM4A1").GetComponent<Button>();
-        BuyBtnM249 = currentWeaponsMenu.transform.Find("BuyBtnM249").GetComponent<Button>();
-        BuyBtnM110 = currentWeaponsMenu.transform.Find("BuyBtnM110").GetComponent<Button>();
-        BuyBtnSMAW = currentWeaponsMenu.transform.Find("BuyBtnSMAW").GetComponent<Button>();
+        BuyBtnM4 = GameObject.Find("BuyBtnM4").GetComponent<Button>();
+        BuyBtnM4A1 = GameObject.Find("BuyBtnM4A1").GetComponent<Button>();
+        BuyBtnM249 = GameObject.Find("BuyBtnM249").GetComponent<Button>();
+        BuyBtnM110 = GameObject.Find("BuyBtnM110").GetComponent<Button>();
+        BuyBtnSMAW = GameObject.Find("BuyBtnSMAW").GetComponent<Button>();
 
         BuyBtnM4.onClick.AddListener(() => BuyWeapon(1));
         BuyBtnM4A1.onClick.AddListener(() => BuyWeapon(2));
