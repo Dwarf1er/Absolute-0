@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Core : MonoBehaviour
 {
@@ -24,5 +25,7 @@ public class Core : MonoBehaviour
         HP -= rawDamage;
         if (HP <= 0)
             Destroy(gameObject);
+
+        GameObject.Find("CoreHealthBar").transform.Find("TxtHealth").GetComponent<Text>().text = HP.ToString();
     }
 }
