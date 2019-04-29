@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 
+//DEPRECATED SCRIPT
+
 public class WeaponsStoreController : MonoBehaviour
 {
     PlayerWeaponManager playerWeaponsManager { get; set; }

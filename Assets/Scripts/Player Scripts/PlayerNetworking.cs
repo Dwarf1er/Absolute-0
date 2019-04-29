@@ -38,7 +38,7 @@ public class PlayerNetworking : NetworkBehaviour
                 lobbyCamera.enabled = true;
 
             //Create PlayerUI when spawned
-            playerUIInstance = Instantiate(playerUIPrefab);
+            playerUIInstance = Instantiate(playerUIPrefab, gameObject.transform);
             playerUIInstance.name = playerUIPrefab.name;
 
             //Configuration of the PlayerUI
