@@ -130,7 +130,7 @@ public class Level3Manager : LevelManager
                 {
                     if (IndexSpawn == 3)
                         IndexSpawn = 0;
-                    SpawnWorker(EnnemySpawnPoints[IndexSpawn]);
+                    SpawnWorker(EnnemySpawnPoints[IndexSpawn], 0);
                     NumEnnemies++;
                     IndexSpawn++;
                     LastSpawnTime = 0;
@@ -142,9 +142,9 @@ public class Level3Manager : LevelManager
                 if (IndexSpawn == 3)
                     IndexSpawn = 0;
                 if (IndexSpawn % 2 == 0)
-                    SpawnWorker(EnnemySpawnPoints[IndexSpawn]);
+                    SpawnWorker(EnnemySpawnPoints[IndexSpawn], 0);
                 else
-                    SpawnAssaultGunner(EnnemySpawnPoints[IndexSpawn]);
+                    SpawnAssaultGunner(EnnemySpawnPoints[IndexSpawn], 0);
                 NumEnnemies++;
                 IndexSpawn++;
                 LastSpawnTime = 0;
@@ -176,9 +176,9 @@ public class Level3Manager : LevelManager
                     if (IndexSpawn == 3)
                         IndexSpawn = 0;
                     if (IndexSpawn % 2 == 0)
-                        SpawnWorker(EnnemySpawnPoints[IndexSpawn]);
+                        SpawnWorker(EnnemySpawnPoints[IndexSpawn], 0);
                     else
-                        SpawnAssaultGunner(EnnemySpawnPoints[IndexSpawn]);
+                        SpawnAssaultGunner(EnnemySpawnPoints[IndexSpawn], 0);
                     NumEnnemies++;
                     IndexSpawn++;
                     LastSpawnTime = 0;
@@ -190,7 +190,7 @@ public class Level3Manager : LevelManager
                 {
                     if (IndexSpawn == 3)
                         IndexSpawn = 0;
-                    SpawnAssaultGunner(EnnemySpawnPoints[IndexSpawn]);
+                    SpawnAssaultGunner(EnnemySpawnPoints[IndexSpawn], 0);
                     NumEnnemies++;
                     IndexSpawn++;
                     LastSpawnTime = 0;
@@ -200,9 +200,9 @@ public class Level3Manager : LevelManager
                     if (IndexSpawn == 3)
                         IndexSpawn = 0;
                     if (IndexSpawn % 2 == 0)
-                        SpawnAssaultGunner(EnnemySpawnPoints[IndexSpawn]);
+                        SpawnAssaultGunner(EnnemySpawnPoints[IndexSpawn], 0);
                     else
-                        SpawnWarrior(EnnemySpawnPoints[IndexSpawn]);
+                        SpawnWarrior(EnnemySpawnPoints[IndexSpawn], 0);
                     NumEnnemies++;
                     IndexSpawn++;
                     LastSpawnTime = 0;
