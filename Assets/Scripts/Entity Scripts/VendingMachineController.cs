@@ -6,7 +6,8 @@ using UnityEngine.Networking;
 
 public class VendingMachineController : NetworkBehaviour
 {
-    GameObject WeaponsMenu { get; set; }
+    [SerializeField] GameObject WeaponsMenu;
+    GameObject currentWeaponsMenu { get; set; }
     PlayerWeaponManager playerWeaponsManager { get; set; }
 
     Button BuyBtnM4 { get; set; }
@@ -18,29 +19,12 @@ public class VendingMachineController : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        WeaponsMenu = GameObject.Find("WeaponsMenu").gameObject;
-        
-        BuyBtnM4 = WeaponsMenu.transform.Find("BuyBtnM4").GetComponent<Button>();
-        BuyBtnM4A1 = WeaponsMenu.transform.Find("BuyBtnM4A1").GetComponent<Button>();
-        BuyBtnM249 = WeaponsMenu.transform.Find("BuyBtnM249").GetComponent<Button>();
-        BuyBtnM110 = WeaponsMenu.transform.Find("BuyBtnM110").GetComponent<Button>();
-        BuyBtnSMAW = WeaponsMenu.transform.Find("BuyBtnSMAW").GetComponent<Button>();
 
-        WeaponsMenu.SetActive(false);
     }
 
     public void SetReferences()
     {
-        PlayerUI playerUI = GameObject.Find("PlayerUI").GetComponent<PlayerUI>();
-        playerWeaponsManager = playerUI.WeaponManager;
 
-
-        //BuyBtnM4.onClick.AddListener(() => Debug.Log("TA TU VU JAI CLIQUÉ TABARNAK"));
-        BuyBtnM4.onClick.AddListener(() => BuyWeapon(1));
-        BuyBtnM4A1.onClick.AddListener(() => BuyWeapon(playerWeaponsManager.Weapons[2], BuyBtnM4A1));
-        BuyBtnM249.onClick.AddListener(() => BuyWeapon(playerWeaponsManager.Weapons[3], BuyBtnM249));
-        BuyBtnM110.onClick.AddListener(() => BuyWeapon(playerWeaponsManager.Weapons[4], BuyBtnM110));
-        BuyBtnSMAW.onClick.AddListener(() => BuyWeapon(playerWeaponsManager.Weapons[5], BuyBtnSMAW));
     }
 
     void BuyWeapon(PlayerWeapons.Weapon weaponBought, Button button)
@@ -76,37 +60,43 @@ public class VendingMachineController : NetworkBehaviour
     public void PlayerEntered(Collider other)
     {
         if (other.gameObject.GetComponent<PlayerNetworking>().isLocalPlayer && other.gameObject.GetComponent<PlayerController>() != null)
-        {
-            WeaponsMenu.SetActive(true);
-            SetReferences();
-        }
+            CreateMenu();
     }
 
     public void PlayerLeft(Collider other)
     {
         if (other.gameObject.GetComponent<PlayerNetworking>().isLocalPlayer && other.gameObject.GetComponent<PlayerController>() != null)
-        {
-            WeaponsMenu.SetActive(false);
-        }
+            Destroy(currentWeaponsMenu);
     }
 
-    /*
-    private void OnTriggerEnter(Collider other)
+    void CreateMenu()
     {
-        if (other.gameObject.GetComponent<PlayerNetworking>().isLocalPlayer && other.gameObject.GetComponent<PlayerController>() != null)
-        {
-            WeaponsMenu.SetActive(true);
-            SetReferences();
-        }
+        currentWeaponsMenu = Instantiate(WeaponsMenu, GameObject.Find("PlayerUI").transform);
 
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.GetComponent<PlayerNetworking>().isLocalPlayer && other.gameObject.GetComponent<PlayerController>() != null)
-        {
-            WeaponsMenu.SetActive(false);
-        }
-    }
-    */
+        PlayerUI playerUI = GameObject.Find("PlayerUI").GetComponent<PlayerUI>();
+        playerWeaponsManager = playerUI.WeaponManager;
 
+        BuyBtnM4 = currentWeaponsMenu.transform.Find("BuyBtnM4").GetComponent<Button>();
+        BuyBtnM4A1 = currentWeaponsMenu.transform.Find("BuyBtnM4A1").GetComponent<Button>();
+        BuyBtnM249 = currentWeaponsMenu.transform.Find("BuyBtnM249").GetComponent<Button>();
+        BuyBtnM110 = currentWeaponsMenu.transform.Find("BuyBtnM110").GetComponent<Button>();
+        BuyBtnSMAW = currentWeaponsMenu.transform.Find("BuyBtnSMAW").GetComponent<Button>();
+
+        BuyBtnM4.onClick.AddListener(() => BuyWeapon(1));
+        BuyBtnM4A1.onClick.AddListener(() => BuyWeapon(2));
+        BuyBtnM249.onClick.AddListener(() => BuyWeapon(3));
+        BuyBtnM110.onClick.AddListener(() => BuyWeapon(4));
+        BuyBtnSMAW.onClick.AddListener(() => BuyWeapon(5));
+
+        if (playerWeaponsManager.Weapons[1].IsUnlocked)
+            Destroy(BuyBtnM4.gameObject);
+        if (playerWeaponsManager.Weapons[2].IsUnlocked)
+            Destroy(BuyBtnM4A1.gameObject);
+        if (playerWeaponsManager.Weapons[3].IsUnlocked)
+            Destroy(BuyBtnM249.gameObject);
+        if (playerWeaponsManager.Weapons[4].IsUnlocked)
+            Destroy(BuyBtnM110.gameObject);
+        if (playerWeaponsManager.Weapons[5].IsUnlocked)
+            Destroy(BuyBtnSMAW.gameObject);
+    }
 }
