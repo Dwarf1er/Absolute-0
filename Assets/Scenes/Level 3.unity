@@ -24182,6 +24182,8 @@ MonoBehaviour:
     type: 3}
   AssaultGunnerPrefab: {fileID: 7606603519384481523, guid: f5918aff16d253547a2e1ca0c7d04bbd,
     type: 3}
+  HeavyGunnerPrefab: {fileID: 7560876265521338615, guid: 2a0cd69f828bf8347bcfb874f5030582,
+    type: 3}
   Objective: {fileID: 554036245}
   SpawnPoint1: {x: 7, y: -26, z: -40}
   SpawnPoint2: {x: -62, y: -28, z: -28}
