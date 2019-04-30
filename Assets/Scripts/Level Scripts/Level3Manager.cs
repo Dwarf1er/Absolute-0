@@ -20,6 +20,7 @@ public class Level3Manager : LevelManager
     bool IsWaveTwo;
     bool IsWaveThree;
     bool IsWaveFour;
+    bool IsWaveFive;
     int NumEnnemies { get; set; }
     int IndexSpawn { get; set; }
     int NumActiveEnnemies { get; set; }
@@ -31,6 +32,8 @@ public class Level3Manager : LevelManager
         IsWaveOne = true;
         IsWaveTwo = false;
         IsWaveThree = false;
+        IsWaveFour = false;
+        IsWaveFive = false;
         EnnemySpawnPoints.Add(SpawnPoint1);
         EnnemySpawnPoints.Add(SpawnPoint2);
         EnnemySpawnPoints.Add(SpawnPoint3);
@@ -46,22 +49,34 @@ public class Level3Manager : LevelManager
     {
         if (Objective != null)
         {
+            CountTime();
             if (IsWaveOne)
                 ExecuteWaveOne();
             if (IsWaveTwo)
                 ExecuteWaveTwo();
             if (IsWaveThree)
                 ExecuteWaveThree();
+            if (IsWaveFour)
+                ExecuteWaveFour();
         }
     }
 
-   
+    private void CountTime()
+    {
+        LastSpawnTime += Time.deltaTime;
+        DeleteTime += Time.deltaTime;
+    }
+
+    void AjustCounters()
+    {
+        NumEnnemies++;
+        IndexSpawn++;
+        LastSpawnTime = 0;
+    }
 
     void ExecuteWaveOne()
     {
         Debug.Log("Executing Wave 1");
-        LastSpawnTime += Time.deltaTime;
-        DeleteTime += Time.deltaTime;
         if (NumEnnemies < 6)
         {
             if (LastSpawnTime >= SpawnTimeInterval)
@@ -69,21 +84,14 @@ public class Level3Manager : LevelManager
                 if (IndexSpawn == 3)
                     IndexSpawn = 0;
                 SpawnWorker(EnnemySpawnPoints[IndexSpawn], 0);
-                NumEnnemies++;
-                IndexSpawn++;
-                LastSpawnTime = 0;
+                AjustCounters();
             }
         }
         else
         {
             EndWave(ref IsWaveOne, ref IsWaveTwo);
         }
-        if(DeleteTime >= SpawnTimeInterval)
-        {
-            DestroyEnnemies();
-            DeleteTime = 0;
-        }
-        
+        ClearLevel(8);
     }
 
     private void EndWave(ref bool IsCurrentWave, ref bool IsNextWave)
@@ -93,6 +101,7 @@ public class Level3Manager : LevelManager
             IsCurrentWave = false;
             IsNextWave = true;
             DestroyEnnemies();
+            ClearList();
             LastSpawnTime = 0;
             IndexSpawn = 0;
             NumEnnemies = 0;
@@ -118,11 +127,18 @@ public class Level3Manager : LevelManager
                     Destroy(g);
     }
 
+    void ClearLevel(float timeLimit)
+    {
+        if (DeleteTime >= timeLimit)
+        {
+            DestroyEnnemies();
+            DeleteTime = 0;
+        }
+    }
+
     void ExecuteWaveTwo()
     {
         Debug.Log("Executing Wave 2");
-        LastSpawnTime += Time.deltaTime;
-        DeleteTime += Time.deltaTime;
         if (NumEnnemies < 10)
         {
             if (NumEnnemies < 4)
@@ -132,9 +148,7 @@ public class Level3Manager : LevelManager
                     if (IndexSpawn == 3)
                         IndexSpawn = 0;
                     SpawnWorker(EnnemySpawnPoints[IndexSpawn], 0);
-                    NumEnnemies++;
-                    IndexSpawn++;
-                    LastSpawnTime = 0;
+                    AjustCounters();
 
                 }
             }
@@ -148,9 +162,7 @@ public class Level3Manager : LevelManager
                         SpawnWorker(EnnemySpawnPoints[IndexSpawn], 0);
                     else
                         SpawnAssaultGunner(EnnemySpawnPoints[IndexSpawn], 0);
-                    NumEnnemies++;
-                    IndexSpawn++;
-                    LastSpawnTime = 0;
+                    AjustCounters();
                 }
             }
         }
@@ -158,19 +170,11 @@ public class Level3Manager : LevelManager
         {
             EndWave(ref IsWaveTwo, ref IsWaveThree);
         }
-        if (DeleteTime >= SpawnTimeInterval)
-        {
-            DestroyEnnemies();
-            DeleteTime = 0;
-        }
-            
-
+        ClearLevel(8);
     }
     private void ExecuteWaveThree()
     {
         Debug.Log("Executing Wave 3");
-        LastSpawnTime += Time.deltaTime;
-        DeleteTime += Time.deltaTime;
         if (NumEnnemies < 14)
         {
             if (NumEnnemies < 5)
@@ -183,9 +187,7 @@ public class Level3Manager : LevelManager
                         SpawnWorker(EnnemySpawnPoints[IndexSpawn], 0);
                     else
                         SpawnAssaultGunner(EnnemySpawnPoints[IndexSpawn], 0);
-                    NumEnnemies++;
-                    IndexSpawn++;
-                    LastSpawnTime = 0;
+                    AjustCounters();
                 }
             }
             else
@@ -197,9 +199,7 @@ public class Level3Manager : LevelManager
                         if (IndexSpawn == 3)
                             IndexSpawn = 0;
                         SpawnAssaultGunner(EnnemySpawnPoints[IndexSpawn], 0);
-                        NumEnnemies++;
-                        IndexSpawn++;
-                        LastSpawnTime = 0;
+                        AjustCounters();
                     }
                 }
                 else
@@ -212,9 +212,7 @@ public class Level3Manager : LevelManager
                             SpawnAssaultGunner(EnnemySpawnPoints[IndexSpawn], 0);
                         else
                             SpawnWarrior(EnnemySpawnPoints[IndexSpawn], 0);
-                        NumEnnemies++;
-                        IndexSpawn++;
-                        LastSpawnTime = 0;
+                        AjustCounters();
                     }
                 }
             }
@@ -223,20 +221,11 @@ public class Level3Manager : LevelManager
         {
             EndWave(ref IsWaveThree, ref IsWaveFour);
         }
-        if (DeleteTime >= SpawnTimeInterval)
-        {
-            DestroyEnnemies();
-            DeleteTime = 0;
-        }
-
-        
-;
+        ClearLevel(8);
     }
     void ExecuteWaveFour()
     {
         Debug.Log("Executing Wave 4");
-        LastSpawnTime += Time.deltaTime;
-        DeleteTime += Time.deltaTime;
         if(NumEnnemies < 18)
         {
             if(NumEnnemies < 6)
@@ -251,24 +240,44 @@ public class Level3Manager : LevelManager
                         SpawnAssaultGunner(EnnemySpawnPoints[IndexSpawn], 1);
                     if (IndexSpawn == 2)
                         SpawnWarrior(EnnemySpawnPoints[IndexSpawn], 0);
-                    NumEnnemies++;
-                    IndexSpawn++;
-                    LastSpawnTime = 0;
+                    AjustCounters();
                 }
                 
 
             }
             else
             {
-                if (NumEnnemies < 12)
+                
+                if (LastSpawnTime >= SpawnTimeInterval)
                 {
-                    if (LastSpawnTime >= SpawnTimeInterval)
-                    {
-
-                    }
+                    if (IndexSpawn == 3)
+                        IndexSpawn = 0;
+                    SpawnAssaultGunner(EnnemySpawnPoints[IndexSpawn], 1);
+                    SpawnWarrior(EnnemySpawnPoints[IndexSpawn + 1], 0);
+                    NumEnnemies += 2;
+                    IndexSpawn++;
+                    LastSpawnTime = 0;
                 }
+                
             }
         }
+        else
+        {
+            EndWave(ref IsWaveFour, ref IsWaveFive);
+        }
+        ClearLevel(8);
+    }
+
+    void ExecuteWaveFive()
+    {
+        Debug.Log("Executing Wave 5");
+
+
+    }
+
+    void ClearList()
+    {
+        ActiveEnnemies.RemoveAll(g => g == null);
     }
 
 
