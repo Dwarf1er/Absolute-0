@@ -196,7 +196,7 @@ public abstract class Ennemy : NetworkBehaviour
         Speed = StartingSpeed;
     }
 
-    [Client] //was [Server]
+    [Server]
     public void CmdAttack()
     {
         if (Target.GetComponent<PlayerStats>() != null)

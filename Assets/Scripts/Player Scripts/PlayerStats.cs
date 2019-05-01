@@ -10,7 +10,7 @@ public class PlayerStats : NetworkBehaviour
     public int cash { get; private set; }
     NetworkAnimator animator { get; set; }
     //Backing Store
-    [SyncVar/*(hook = "OnHpChanged")*/] public int currentHp;
+    [SyncVar(hook = "OnHpChanged")] public int currentHp;
 
     void Awake()
     {
