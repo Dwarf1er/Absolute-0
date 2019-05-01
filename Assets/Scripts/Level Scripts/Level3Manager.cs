@@ -12,18 +12,20 @@ public class Level3Manager : LevelManager
     Vector3 SpawnPoint2;
     [SerializeField]
     Vector3 SpawnPoint3;
-    const float SpawnTimeInterval = 10f;
+    const float SpawnTimeInterval = 8f;
     const float WaveOneLimit = 6;
     float LastSpawnTime { get; set; }
     float DeleteTime { get; set; }
+    int NumEnnemies { get; set; }
+    int IndexSpawn { get; set; }
+    int NumActiveEnnemies { get; set; }
+    public int WaveNumber { get; set; }
+
     bool IsWaveOne;
     bool IsWaveTwo;
     bool IsWaveThree;
     bool IsWaveFour;
     bool IsWaveFive;
-    int NumEnnemies { get; set; }
-    int IndexSpawn { get; set; }
-    int NumActiveEnnemies { get; set; }
    
     public override void OnStartServer()
     {
@@ -34,6 +36,7 @@ public class Level3Manager : LevelManager
         IsWaveThree = false;
         IsWaveFour = false;
         IsWaveFive = false;
+        WaveNumber = 1;
         EnnemySpawnPoints.Add(SpawnPoint1);
         EnnemySpawnPoints.Add(SpawnPoint2);
         EnnemySpawnPoints.Add(SpawnPoint3);
@@ -58,6 +61,8 @@ public class Level3Manager : LevelManager
                 ExecuteWaveThree();
             if (IsWaveFour)
                 ExecuteWaveFour();
+            if (IsWaveFive)
+                ExecuteWaveFive();
         }
     }
 
@@ -94,14 +99,15 @@ public class Level3Manager : LevelManager
         ClearLevel(8);
     }
 
-    private void EndWave(ref bool IsCurrentWave, ref bool IsNextWave)
+    private void EndWave(ref bool isCurrentWave, ref bool isNextWave)
     {
         if (AreAllDead())
         {
-            IsCurrentWave = false;
-            IsNextWave = true;
+            isCurrentWave = false;
+            isNextWave = true;
             DestroyEnnemies();
             ClearList();
+            WaveNumber++;
             LastSpawnTime = 0;
             IndexSpawn = 0;
             NumEnnemies = 0;
@@ -147,7 +153,7 @@ public class Level3Manager : LevelManager
                 {
                     if (IndexSpawn == 3)
                         IndexSpawn = 0;
-                    SpawnWorker(EnnemySpawnPoints[IndexSpawn], 0);
+                    SpawnWorker(EnnemySpawnPoints[IndexSpawn], 1);
                     AjustCounters();
 
                 }
@@ -159,7 +165,7 @@ public class Level3Manager : LevelManager
                     if (IndexSpawn == 3)
                         IndexSpawn = 0;
                     if (IndexSpawn % 2 == 0)
-                        SpawnWorker(EnnemySpawnPoints[IndexSpawn], 0);
+                        SpawnWorker(EnnemySpawnPoints[IndexSpawn], 1);
                     else
                         SpawnAssaultGunner(EnnemySpawnPoints[IndexSpawn], 0);
                     AjustCounters();
@@ -184,9 +190,9 @@ public class Level3Manager : LevelManager
                     if (IndexSpawn == 3)
                         IndexSpawn = 0;
                     if (IndexSpawn % 2 == 0)
-                        SpawnWorker(EnnemySpawnPoints[IndexSpawn], 0);
+                        SpawnWorker(EnnemySpawnPoints[IndexSpawn], 2);
                     else
-                        SpawnAssaultGunner(EnnemySpawnPoints[IndexSpawn], 0);
+                        SpawnAssaultGunner(EnnemySpawnPoints[IndexSpawn], 1);
                     AjustCounters();
                 }
             }
@@ -198,7 +204,7 @@ public class Level3Manager : LevelManager
                     {
                         if (IndexSpawn == 3)
                             IndexSpawn = 0;
-                        SpawnAssaultGunner(EnnemySpawnPoints[IndexSpawn], 0);
+                        SpawnAssaultGunner(EnnemySpawnPoints[IndexSpawn], 1);
                         AjustCounters();
                     }
                 }
@@ -209,7 +215,7 @@ public class Level3Manager : LevelManager
                         if (IndexSpawn == 3)
                             IndexSpawn = 0;
                         if (IndexSpawn % 2 == 0)
-                            SpawnAssaultGunner(EnnemySpawnPoints[IndexSpawn], 0);
+                            SpawnAssaultGunner(EnnemySpawnPoints[IndexSpawn], 1);
                         else
                             SpawnWarrior(EnnemySpawnPoints[IndexSpawn], 0);
                         AjustCounters();
@@ -235,7 +241,7 @@ public class Level3Manager : LevelManager
                     if (IndexSpawn == 3)
                         IndexSpawn = 0;
                     if (IndexSpawn == 0)
-                        SpawnWorker(EnnemySpawnPoints[IndexSpawn], 1);
+                        SpawnWorker(EnnemySpawnPoints[IndexSpawn], 2);
                     if (IndexSpawn == 1)
                         SpawnAssaultGunner(EnnemySpawnPoints[IndexSpawn], 1);
                     if (IndexSpawn == 2)
@@ -271,7 +277,36 @@ public class Level3Manager : LevelManager
     void ExecuteWaveFive()
     {
         Debug.Log("Executing Wave 5");
+        if(NumEnnemies < 22)
+        {
+            if (NumEnnemies < 18)
+            {
+                if (IndexSpawn == 3)
+                    IndexSpawn = 0;
+                SpawnAtRandom(IndexSpawn);
+                AjustCounters();
+            }
+            else
+            {
+                if (IndexSpawn == 3)
+                    IndexSpawn = 0;
+                SpawnHeavyGunner(EnnemySpawnPoints[IndexSpawn], 0);
+                AjustCounters();
+            }
+        }
 
+
+    }
+
+    private void SpawnAtRandom(int indexSpawn)
+    {
+        int ennemy = UnityEngine.Random.Range(0, 2);
+        if (ennemy == 2)
+            SpawnWorker(EnnemySpawnPoints[indexSpawn], 3);
+        if (ennemy == 1)
+            SpawnAssaultGunner(EnnemySpawnPoints[indexSpawn], 2);
+        if (ennemy == 2)
+            SpawnWarrior(EnnemySpawnPoints[indexSpawn], 1);
 
     }
 
