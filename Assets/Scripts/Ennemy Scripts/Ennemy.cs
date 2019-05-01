@@ -19,6 +19,7 @@ public abstract class Ennemy : NetworkBehaviour
     protected int Armor;
     protected float StartingSpeed;
     [SyncVar] protected int Damage;
+    protected int CashOnKill;
 
     //Bools
     [SyncVar] public bool isAttacking;
@@ -138,6 +139,11 @@ public abstract class Ennemy : NetworkBehaviour
             NetAnimator.SetTrigger("Death");
 
         isDead = true;
+
+        foreach (PlayerStats playerStats in FindObjectsOfType<PlayerStats>())
+        {
+            playerStats.ChangeCash(CashOnKill);
+        }
 
         //Stop the corpse from moving
         NavMeshAgent.isStopped = true;

@@ -35,6 +35,7 @@ public class PlayerWeaponManager : NetworkBehaviour
         WeaponModels = new GameObject[] { MP5Model, BenelliM4Model, M4Model, M249Model, M110Model, SMAWModel };
         Weapons = new PlayerWeapons.Weapon[] { PlayerWeapons.MP5, PlayerWeapons.BenelliM4, PlayerWeapons.M4, PlayerWeapons.M249, PlayerWeapons.M110, PlayerWeapons.SMAW };
 
+        Weapons[0].IsUnlocked = true;
         for (int cpt = 1; cpt < Weapons.Length; cpt++)
             Weapons[cpt].IsUnlocked = false;
 

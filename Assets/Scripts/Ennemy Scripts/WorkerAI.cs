@@ -9,6 +9,7 @@ public class WorkerAI : Ennemy
     static readonly int[] ArmorTiers = { 0, 3, 6, 9 };
     static readonly int[] SpeedTiers = { 4, 4, 4, 4 };
     static readonly int[] DamageTiers = { 10, 20, 30, 40 };
+    static readonly int[] CashTiers = { 5, 10, 15, 20 };
 
     protected override void SetStats(int ennemyTier)
     {
@@ -18,5 +19,6 @@ public class WorkerAI : Ennemy
         StartingSpeed = SpeedTiers[ennemyTier];
         Speed = StartingSpeed;
         Damage = DamageTiers[ennemyTier];
+        CashOnKill = CashTiers[ennemyTier];
     }
 }

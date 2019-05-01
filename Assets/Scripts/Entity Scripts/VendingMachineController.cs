@@ -27,34 +27,46 @@ public class VendingMachineController : NetworkBehaviour
 
     }
 
-    void BuyWeapon(PlayerWeapons.Weapon weaponBought, Button button)
+    void BuyWeapon(PlayerWeapons.Weapon weaponBought, Button button, int price)
     {
-        weaponBought.IsUnlocked = true;
-        button.gameObject.SetActive(false);
+        int playerCash = playerWeaponsManager.gameObject.GetComponent<PlayerStats>().cash;
+        if (playerCash >= price)
+        {
+            weaponBought.IsUnlocked = true;
+            button.gameObject.SetActive(false);
+            playerWeaponsManager.gameObject.GetComponent<PlayerStats>().ChangeCash(-price);
+        }
+        
     }
 
     void BuyWeapon(int weaponID)
     {
         Button buttonToDeactivate = null;
+        int price = 0;
         switch (weaponID)
         {
             case 1:
                 buttonToDeactivate = BuyBtnM4;
+                price = 100;
                 break;
             case 2:
                 buttonToDeactivate = BuyBtnM4A1;
+                price = 100;
                 break;
             case 3:
                 buttonToDeactivate = BuyBtnM249;
+                price = 250;
                 break;
             case 4:
                 buttonToDeactivate = BuyBtnM110;
+                price = 250;
                 break;
             case 5:
                 buttonToDeactivate = BuyBtnSMAW;
+                price = 1000;
                 break;
         }
-        BuyWeapon(playerWeaponsManager.Weapons[weaponID], buttonToDeactivate);
+        BuyWeapon(playerWeaponsManager.Weapons[weaponID], buttonToDeactivate, price);
     }
     
     public void PlayerEntered(Collider other)

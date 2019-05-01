@@ -2,16 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class PlayerStats : NetworkBehaviour
 {
     [SerializeField] private int MaxHP = 100;
+    public int cash { get; private set; }
     //Backing Store
     [SyncVar(hook = "OnHpChanged")] public int currentHp;
 
     void Awake()
     {
-        SetPlayerStats();
+        //SetPlayerStats();
     }
 
     public void TakeDamage(int rawDamage)
@@ -44,5 +46,13 @@ public class PlayerStats : NetworkBehaviour
     public void SetPlayerStats()
     {
         currentHp = MaxHP; //The player always begins with his maximum health amount
+        cash = 0;
+        ChangeCash(50);
+    }
+
+    public void ChangeCash(int cashDifference)
+    {
+        cash += cashDifference;
+        GameObject.Find("MoneyCounter").transform.Find("Money").GetComponent<Text>().text = cash.ToString();
     }
 }

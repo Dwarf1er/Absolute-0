@@ -28,6 +28,7 @@ public class PlayerUI : MonoBehaviour
         WeaponManager = Player.GetComponent<PlayerWeaponManager>();
 
         player.gameObject.GetComponent<PlayerUtilities>().playerUI = gameObject;
+        player.SetPlayerStats();
     }
 
     void Update()
