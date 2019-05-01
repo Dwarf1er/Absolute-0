@@ -80,4 +80,13 @@ public class PlayerController : MonoBehaviour
         //Executing the previous positioning on the camera
         utilities.SetCameraOffSet(finalCameraOffSet);
     }
+
+    public void SetCursorActive(bool isActive)
+    {
+        Cursor.visible = isActive;
+        if (isActive)
+            Cursor.lockState = CursorLockMode.Confined;
+        else
+            Cursor.lockState = CursorLockMode.Locked;
+    }
 }

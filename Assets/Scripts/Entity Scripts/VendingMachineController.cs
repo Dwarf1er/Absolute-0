@@ -72,13 +72,19 @@ public class VendingMachineController : NetworkBehaviour
     public void PlayerEntered(Collider other)
     {
         if (other.gameObject.GetComponent<PlayerNetworking>().isLocalPlayer && other.gameObject.GetComponent<PlayerController>() != null)
+        {
             CreateMenu();
+            other.gameObject.GetComponent<PlayerController>().SetCursorActive(true);
+        }
     }
 
     public void PlayerLeft(Collider other)
     {
         if (other.gameObject.GetComponent<PlayerNetworking>().isLocalPlayer && other.gameObject.GetComponent<PlayerController>() != null)
+        {
             Destroy(currentWeaponsMenu);
+            other.gameObject.GetComponent<PlayerController>().SetCursorActive(false);
+        }
     }
 
     void CreateMenu()

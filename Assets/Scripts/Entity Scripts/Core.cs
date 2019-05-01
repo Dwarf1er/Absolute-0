@@ -24,8 +24,14 @@ public class Core : MonoBehaviour
     {
         HP -= rawDamage;
         if (HP <= 0)
-            Destroy(gameObject);
+            GameOver();
 
         GameObject.Find("CoreHealthBar").transform.Find("TxtHealth").GetComponent<Text>().text = HP.ToString();
+        GameObject.Find("CoreHealthBar").transform.Find("Bar Fill").transform.localScale = new Vector3((float)HP / (float)MaxHP, 1, 1);
+    }
+
+    public void GameOver()
+    {
+
     }
 }
