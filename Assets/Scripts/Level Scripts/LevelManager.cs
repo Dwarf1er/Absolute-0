@@ -13,7 +13,14 @@ public class LevelManager : NetworkBehaviour
     protected List<GameObject> ActiveEnnemies { get; set; }
     protected List<Vector3>EnnemySpawnPoints { get; set; }
 
-  
+    private void Start()
+    {
+        foreach (PlayerController playerController in FindObjectsOfType<PlayerController>())
+        {
+            playerController.SetCursorActive(false);
+        }
+    }
+
     protected void SpawnWorker(Vector3 spawnPoint, int tier)
     {
         GameObject newWorker = Instantiate(WorkerPrefab, spawnPoint, Quaternion.identity) as GameObject;

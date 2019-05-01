@@ -30512,7 +30512,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1975661634, guid: b728bb7c164683d409d72eb644ed6e4f, type: 3}
       propertyPath: m_Name
-      value: projector
+      value: Core
       objectReference: {fileID: 0}
     - target: {fileID: 1975661634, guid: b728bb7c164683d409d72eb644ed6e4f, type: 3}
       propertyPath: m_Layer
@@ -30629,6 +30629,10 @@ PrefabInstance:
         type: 3}
       propertyPath: m_StaticEditorFlags
       value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 1975661636, guid: b728bb7c164683d409d72eb644ed6e4f, type: 3}
+      propertyPath: MaxHP
+      value: 1000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b728bb7c164683d409d72eb644ed6e4f, type: 3}

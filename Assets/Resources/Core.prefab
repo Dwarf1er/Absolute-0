@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1975661635}
   - component: {fileID: 1975661636}
   m_Layer: 9
-  m_Name: projector
+  m_Name: Core
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -103,7 +103,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 0
-  MaxHP: 50
+  MaxHP: 1000
+  GameOverMenu: {fileID: 3531704565212094144, guid: 115abb72434710544b1aaadfe666ee12,
+    type: 3}
 --- !u!1 &1387609885337855866
 GameObject:
   m_ObjectHideFlags: 0
