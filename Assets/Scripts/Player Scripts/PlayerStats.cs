@@ -8,12 +8,14 @@ public class PlayerStats : NetworkBehaviour
 {
     [SerializeField] private int MaxHP = 100;
     public int cash { get; private set; }
+    Animator animator;
     //Backing Store
     [SyncVar(hook = "OnHpChanged")] public int currentHp;
 
     void Awake()
     {
-        //SetPlayerStats();
+        SetPlayerStats();
+        animator = gameObject.GetComponent<Animator>();
     }
 
     public void TakeDamage(int rawDamage)
@@ -24,7 +26,10 @@ public class PlayerStats : NetworkBehaviour
         currentHp -= rawDamage;
 
         if (currentHp <= 0) //Trigger player death
+        {
             currentHp = 0;
+            TriggerDeath();
+        }
 
         if (currentHp > MaxHP) //Prevent over-healing
             currentHp = MaxHP;
@@ -54,5 +59,25 @@ public class PlayerStats : NetworkBehaviour
     {
         cash += cashDifference;
         GameObject.Find("MoneyCounter").transform.Find("Money").GetComponent<Text>().text = cash.ToString();
+    }
+
+    public void TriggerDeath()
+    {
+            animator.SetTrigger("Death");
+            animator.SetBool("Dead", true);
+
+            Rigidbody rigidbody = gameObject.GetComponent<Rigidbody>();
+            rigidbody.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotationX
+                                    | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
+    }
+
+    public void Respawn()
+    {
+        animator.SetBool("Dead", false);
+
+        SetPlayerStats();
+
+        Rigidbody rigidbody = gameObject.GetComponent<Rigidbody>();
+        rigidbody.constraints = RigidbodyConstraints.None;
     }
 }
