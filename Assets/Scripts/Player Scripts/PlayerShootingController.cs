@@ -13,6 +13,8 @@ public class PlayerShootingController : NetworkBehaviour
     [SerializeField]
     Camera playerCamera;
 
+    public bool isDead { get; set; }
+
     float timeSinceLastShot { get; set; }
 
     private void Start()
@@ -28,6 +30,9 @@ public class PlayerShootingController : NetworkBehaviour
     
     private void Update()
     {
+        if (isDead)
+            return;
+
         timeSinceLastShot += Time.deltaTime;
 
         //Weapon swapping through keys 1 to 6 (alphanumeric != numpad)

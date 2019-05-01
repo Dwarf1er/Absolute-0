@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class Level3Manager : LevelManager
 {
@@ -81,7 +82,9 @@ public class Level3Manager : LevelManager
 
     void ExecuteWaveOne()
     {
+        GameObject.Find("WaveCounter").transform.Find("Text").GetComponent<Text>().text = "Wave 1";
         Debug.Log("Executing Wave 1");
+
         if (NumEnnemies < 6)
         {
             if (LastSpawnTime >= SpawnTimeInterval)
@@ -144,7 +147,9 @@ public class Level3Manager : LevelManager
 
     void ExecuteWaveTwo()
     {
+        GameObject.Find("WaveCounter").transform.Find("Text").GetComponent<Text>().text = "Wave 2";
         Debug.Log("Executing Wave 2");
+
         if (NumEnnemies < 10)
         {
             if (NumEnnemies < 4)
@@ -180,7 +185,9 @@ public class Level3Manager : LevelManager
     }
     private void ExecuteWaveThree()
     {
+        GameObject.Find("WaveCounter").transform.Find("Text").GetComponent<Text>().text = "Wave 3";
         Debug.Log("Executing Wave 3");
+
         if (NumEnnemies < 14)
         {
             if (NumEnnemies < 5)
@@ -231,7 +238,9 @@ public class Level3Manager : LevelManager
     }
     void ExecuteWaveFour()
     {
+        GameObject.Find("WaveCounter").transform.Find("Text").GetComponent<Text>().text = "Wave 4";
         Debug.Log("Executing Wave 4");
+
         if(NumEnnemies < 18)
         {
             if(NumEnnemies < 6)
@@ -276,7 +285,9 @@ public class Level3Manager : LevelManager
 
     void ExecuteWaveFive()
     {
+        GameObject.Find("WaveCounter").transform.Find("Text").GetComponent<Text>().text = "Wave 5";
         Debug.Log("Executing Wave 5");
+
         if(NumEnnemies < 22)
         {
             if (NumEnnemies < 18)

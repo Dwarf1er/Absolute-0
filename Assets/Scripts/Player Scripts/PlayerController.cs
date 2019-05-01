@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     float mouseSensitivity = 5f;
     Vector3 CameraOffSet = new Vector3(0, 0, -5f); //The camera offset should only be a distance on the z axis
+    public bool isDead { get; set; }
 
     //Reference to PlayerUtilities to be set in Start
     PlayerUtilities utilities { get; set; }
@@ -23,6 +24,9 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (isDead)
+            return;
+
         //Creation of the player movement vector
         float movementX = Input.GetAxisRaw("Horizontal"); //Axes go from -1 to 1
         float movementZ = Input.GetAxisRaw("Vertical");
