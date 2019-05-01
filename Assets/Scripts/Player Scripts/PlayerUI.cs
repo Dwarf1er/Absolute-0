@@ -35,17 +35,21 @@ public class PlayerUI : MonoBehaviour
     {
         SetAmmoAmount(WeaponManager.currentPlayerWeapon.WeaponAmmoInClip, WeaponManager.currentPlayerWeapon.WeaponClipSize);
         SetHpAmmount();
+        SetHpValue(Player.GetHpPercentage());
     }
 
-    /*
+    
     public void SetHpValue(float hpPercentage)
     {
         //Changes the scale of the bar on the X axis to match the graphic's orientation
         if (hpPercentage == 0)
+        {
+            hpBar.localScale = new Vector3(hpPercentage, 1f, 1f);
             return;
+        }
         hpBar.localScale = new Vector3(hpPercentage, 1f, 1f);
     }
-    */
+    
 
     void SetAmmoAmount(int ammoInClip, int maxAmmo)
     {

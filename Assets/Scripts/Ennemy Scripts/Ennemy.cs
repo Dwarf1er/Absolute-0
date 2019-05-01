@@ -196,12 +196,19 @@ public abstract class Ennemy : NetworkBehaviour
         Speed = StartingSpeed;
     }
 
-    [Server]
+    [Client] //was [Server]
     public void CmdAttack()
     {
         if (Target.GetComponent<PlayerStats>() != null)
-            Target.GetComponent<PlayerStats>().TakeDamage(Damage);
+            CmdPlayerAttacked(Target);
+            //Target.GetComponent<PlayerStats>().TakeDamage(Damage);
         if (Target.GetComponent<Core>() != null)
             Target.GetComponent<Core>().TakeDamage(Damage);
+    }
+
+    [Command]
+    void CmdPlayerAttacked (GameObject target)
+    {
+        target.GetComponent<PlayerStats>().TakeDamage(Damage);
     }
 }
