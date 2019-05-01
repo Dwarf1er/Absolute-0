@@ -104,6 +104,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HP: 0
   MaxHP: 1000
+  GameOverMenu: {fileID: 3531704565212094144, guid: 115abb72434710544b1aaadfe666ee12,
+    type: 3}
 --- !u!1 &1387609885337855866
 GameObject:
   m_ObjectHideFlags: 0

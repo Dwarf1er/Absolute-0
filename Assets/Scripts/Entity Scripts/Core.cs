@@ -8,22 +8,22 @@ public class Core : MonoBehaviour
     [SerializeField] int HP;
     [SerializeField] int MaxHP;
 
+    [SerializeField] GameObject GameOverMenu;
+    bool gameIsOver;
+
     // Start is called before the first frame update
     void Start()
     {
         HP = MaxHP;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        gameIsOver = false;
     }
 
     public void TakeDamage(int rawDamage)
     {
         HP -= rawDamage;
-        if (HP <= 0)
+        if (HP < 0)
+            HP = 0;
+        if (HP == 0 && !gameIsOver)
             GameOver();
 
         GameObject.Find("CoreHealthBar").transform.Find("TxtHealth").GetComponent<Text>().text = HP.ToString();
@@ -32,6 +32,11 @@ public class Core : MonoBehaviour
 
     public void GameOver()
     {
-
+        foreach (PlayerController playerController in FindObjectsOfType<PlayerController>())
+        {
+            playerController.SetCursorActive(true);
+        }
+        Instantiate(GameOverMenu, GameObject.Find("PlayerUI").transform);
+        gameIsOver = true;
     }
 }

@@ -84,9 +84,13 @@ public class PlayerController : MonoBehaviour
     public void SetCursorActive(bool isActive)
     {
         Cursor.visible = isActive;
+        Cursor.lockState = CursorLockMode.Confined;
+        /*
         if (isActive)
             Cursor.lockState = CursorLockMode.Confined;
         else
             Cursor.lockState = CursorLockMode.Locked;
+
+        */
     }
 }
