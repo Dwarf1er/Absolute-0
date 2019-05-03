@@ -80,13 +80,33 @@ public class PlayerShootingController : NetworkBehaviour
         {
             //Fire1 is by default left ctrl in the input manager, changed for mouse 0 button in the project settings
             if (Input.GetButton("Fire1") && equipedWeapon.WeaponAmmoInClip > 0 && timeSinceLastShot > equipedWeapon.WeaponFireRate)
+            {
                 Fire();
+                equipedWeapon.WeaponAmmoInClip -= 1;
+                playerWeaponManager.currentPlayerWeaponModel.GetComponent<AudioSource>().Play();
+            }
         }
         else
         {
             //Fire1 is by default left ctrl in the input manager, changed for mouse 0 button in the project settings
             if (Input.GetButtonDown("Fire1") && equipedWeapon.WeaponAmmoInClip > 0 && timeSinceLastShot > equipedWeapon.WeaponFireRate)
-                Fire();
+            {
+                if (equipedWeapon.WeaponClipSize == 8)
+                {
+                    for (int cpt = 0; cpt < 5; cpt++)
+                        Fire();
+                    equipedWeapon.WeaponAmmoInClip -= 1;
+                    playerWeaponManager.currentPlayerWeaponModel.GetComponent<AudioSource>().Play();
+                }
+                else
+                {
+                    Fire();
+                    equipedWeapon.WeaponAmmoInClip -= 1;
+                    playerWeaponManager.currentPlayerWeaponModel.GetComponent<AudioSource>().Play();
+                }
+                    
+            }
+            
         }
         
     }
@@ -104,8 +124,6 @@ public class PlayerShootingController : NetworkBehaviour
 
         //Calculate Spread
         //Circle Coordinates: root(x^2 + y^2) = 1
-            //float xCoordinate = Random.Range(-1f, 1f);
-            //float yCoordinate = Mathf.Sqrt(1 - Mathf.Pow(xCoordinate, 2));
         Vector2 circleCoordinate = Random.insideUnitCircle;
         //Spread degrees
         float spreadDegrees = Random.Range(0, currentRecoil);
@@ -144,14 +162,10 @@ public class PlayerShootingController : NetworkBehaviour
 
         newBullet.GetComponent<Rigidbody>().AddForce(bulletDirection * 0.2f, ForceMode.Impulse);
 
-        //Removes one bullet after each click
-        equipedWeapon.WeaponAmmoInClip -= 1;
 
         timeSinceLastShot = 0;
         currentRecoil += 5;
         playerUI.SetCrosshairScale(currentRecoil);
-
-        playerWeaponManager.currentPlayerWeaponModel.GetComponent<AudioSource>().Play();
     }
 
     //Server only method, therefore marked as "Command"

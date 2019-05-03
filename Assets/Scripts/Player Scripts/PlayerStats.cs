@@ -49,7 +49,7 @@ public class PlayerStats : NetworkBehaviour
     {
         currentHp = MaxHP; //The player always begins with his maximum health amount
         cash = 0;
-        ChangeCash(50);
+        ChangeCash(2000);
     }
 
     public void ChangeCash(int cashDifference)
