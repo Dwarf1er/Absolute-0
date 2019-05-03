@@ -12,6 +12,8 @@ public class PlayerShootingController : NetworkBehaviour
     public PlayerWeapons.Weapon equipedWeapon;
     [SerializeField]
     Camera playerCamera;
+    [SerializeField]
+    GameObject bulletPrefab;
 
     public bool isDead { get; set; }
 
@@ -90,10 +92,14 @@ public class PlayerShootingController : NetworkBehaviour
     void Fire()
     {
         animator.SetTrigger("Shoot");
-        RaycastHit raycastHit;
+
+        Vector3 gunMuzzlePosition = playerWeaponManager.currentPlayerWeaponModel.transform.Find("Muzzle").position;
+        
         Vector3 raycastOrigin = playerCamera.transform.position;
         Vector3 raycastDirection = playerCamera.transform.forward;
+
         int raycastMask = LayerMask.GetMask("Ennemy", "Environment");
+        RaycastHit raycastHit;
 
         if (Physics.Raycast(raycastOrigin, raycastDirection, out raycastHit, equipedWeapon.WeaponRange, raycastMask))
         {
@@ -109,6 +115,16 @@ public class PlayerShootingController : NetworkBehaviour
                     CmdEnnemyShot(ennemyHit, equipedWeapon.WeaponDamage);
             }
         }
+
+        
+        GameObject newBullet = Instantiate(bulletPrefab, gunMuzzlePosition, Quaternion.identity);
+        Vector3 bulletDirection = raycastHit.point - gunMuzzlePosition;
+
+        //If the player's shot doesn't hit anything
+        if (raycastHit.point == Vector3.zero)
+            bulletDirection = playerWeaponManager.currentPlayerWeaponModel.transform.Find("Muzzle").transform.up * -1;
+
+        newBullet.GetComponent<Rigidbody>().AddForce(bulletDirection * 0.2f, ForceMode.Impulse);
 
         //Removes one bullet after each click
         equipedWeapon.WeaponAmmoInClip -= 1;
