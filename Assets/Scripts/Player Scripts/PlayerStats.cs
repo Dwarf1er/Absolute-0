@@ -15,7 +15,7 @@ public class PlayerStats : NetworkBehaviour
     void Awake()
     {
         animator = gameObject.GetComponentInChildren<NetworkAnimator>();
-        SetPlayerStats();
+        //SetPlayerStats();
     }
 
     public void TakeDamage(int rawDamage)

@@ -10,6 +10,8 @@ public class PlayerShootingController : NetworkBehaviour
     Animator animator;
     PlayerWeaponManager playerWeaponManager;
     public PlayerWeapons.Weapon equipedWeapon;
+    public PlayerUI playerUI;
+
     [SerializeField]
     Camera playerCamera;
     [SerializeField]
@@ -18,6 +20,7 @@ public class PlayerShootingController : NetworkBehaviour
     public bool isDead { get; set; }
 
     float timeSinceLastShot { get; set; }
+    float currentRecoil { get; set; }
 
     private void Start()
     {
@@ -28,6 +31,8 @@ public class PlayerShootingController : NetworkBehaviour
         //Get references in the player's game object
         animator = GetComponent<Animator>();
         playerWeaponManager = GetComponent<PlayerWeaponManager>();
+
+        currentRecoil = 0;
     }
     
     private void Update()
@@ -36,6 +41,13 @@ public class PlayerShootingController : NetworkBehaviour
             return;
 
         timeSinceLastShot += Time.deltaTime;
+        if (currentRecoil > 0)
+        {
+            currentRecoil -= Time.deltaTime * 45;
+            if (currentRecoil < 0)
+                currentRecoil = 0;
+            playerUI.SetCrosshairScale(currentRecoil);
+        }
 
         //Weapon swapping through keys 1 to 6 (alphanumeric != numpad)
         if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -68,21 +80,13 @@ public class PlayerShootingController : NetworkBehaviour
         {
             //Fire1 is by default left ctrl in the input manager, changed for mouse 0 button in the project settings
             if (Input.GetButton("Fire1") && equipedWeapon.WeaponAmmoInClip > 0 && timeSinceLastShot > equipedWeapon.WeaponFireRate)
-            {
                 Fire();
-                timeSinceLastShot = 0;
-                playerWeaponManager.currentPlayerWeaponModel.GetComponent<AudioSource>().Play();
-            }
         }
         else
         {
             //Fire1 is by default left ctrl in the input manager, changed for mouse 0 button in the project settings
             if (Input.GetButtonDown("Fire1") && equipedWeapon.WeaponAmmoInClip > 0 && timeSinceLastShot > equipedWeapon.WeaponFireRate)
-            {
                 Fire();
-                timeSinceLastShot = 0;
-                playerWeaponManager.currentPlayerWeaponModel.GetComponent<AudioSource>().Play();
-            }
         }
         
     }
@@ -98,10 +102,24 @@ public class PlayerShootingController : NetworkBehaviour
         Vector3 raycastOrigin = playerCamera.transform.position;
         Vector3 raycastDirection = playerCamera.transform.forward;
 
+        //Calculate Spread
+        //Circle Coordinates: root(x^2 + y^2) = 1
+            //float xCoordinate = Random.Range(-1f, 1f);
+            //float yCoordinate = Mathf.Sqrt(1 - Mathf.Pow(xCoordinate, 2));
+        Vector2 circleCoordinate = Random.insideUnitCircle;
+        //Spread degrees
+        float spreadDegrees = Random.Range(0, currentRecoil);
+        float xDegrees = spreadDegrees * circleCoordinate.x;
+        float yDegrees = spreadDegrees * circleCoordinate.y;
+        //Spread vector
+        Vector3 spreadVectorX = playerCamera.transform.right * (raycastDirection.magnitude * Mathf.Tan(xDegrees * Mathf.Deg2Rad));
+        Vector3 spreadVectorY = playerCamera.transform.up * (raycastDirection.magnitude * Mathf.Tan(yDegrees * Mathf.Deg2Rad));
+        Vector3 modifiedRaycastDirection = raycastDirection + spreadVectorX + spreadVectorY;
+
         int raycastMask = LayerMask.GetMask("Ennemy", "Environment");
         RaycastHit raycastHit;
 
-        if (Physics.Raycast(raycastOrigin, raycastDirection, out raycastHit, equipedWeapon.WeaponRange, raycastMask))
+        if (Physics.Raycast(raycastOrigin, modifiedRaycastDirection, out raycastHit, equipedWeapon.WeaponRange, raycastMask))
         {
             //Checks if an ennemy has been hit
             if (raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Ennemy"))
@@ -128,6 +146,12 @@ public class PlayerShootingController : NetworkBehaviour
 
         //Removes one bullet after each click
         equipedWeapon.WeaponAmmoInClip -= 1;
+
+        timeSinceLastShot = 0;
+        currentRecoil += 5;
+        playerUI.SetCrosshairScale(currentRecoil);
+
+        playerWeaponManager.currentPlayerWeaponModel.GetComponent<AudioSource>().Play();
     }
 
     //Server only method, therefore marked as "Command"

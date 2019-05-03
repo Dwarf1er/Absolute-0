@@ -1131,6 +1131,7 @@ MonoBehaviour:
   ammoInClipTxt: {fileID: 9082432155988879644}
   maxAmmoTxt: {fileID: 6001731691226229236}
   healthTxt: {fileID: 8500407565611646849}
+  crosshair: {fileID: 7476309627214617447}
 --- !u!1 &7314479699803456927
 GameObject:
   m_ObjectHideFlags: 0
@@ -1271,10 +1272,10 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300000, guid: cce0729f9d23ec64baab036a81e5418f, type: 3}
-  m_Type: 0
+  m_Type: 2
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
