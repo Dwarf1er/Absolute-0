@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(PlayerWeaponManager))]
 public class PlayerShootingController : NetworkBehaviour
@@ -115,6 +116,9 @@ public class PlayerShootingController : NetworkBehaviour
     [Client]
     void Fire()
     {
+        if (SceneManager.GetActiveScene().name == "Lobby")
+            return;
+
         animator.SetTrigger("Shoot");
 
         Vector3 gunMuzzlePosition = playerWeaponManager.currentPlayerWeaponModel.transform.Find("Muzzle").position;
