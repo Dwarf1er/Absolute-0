@@ -12,6 +12,6 @@ public class BtnReturnToLobby : MonoBehaviour
     void Start()
     {
         btnReturnToLobby = GetComponent<Button>();
-        btnReturnToLobby.onClick.AddListener(() => SceneManager.LoadScene("Menu Jouer"));
+        btnReturnToLobby.onClick.AddListener(() => SceneManager.LoadScene("Lobby"));
     }
 }

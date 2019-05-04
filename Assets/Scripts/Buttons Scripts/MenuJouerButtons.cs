@@ -11,8 +11,6 @@ public class MenuJouerButtons : MonoBehaviour, IPointerEnterHandler, IPointerExi
     {
         MenuJouerButtonSizing buttonSizing = GetComponent<MenuJouerButtonSizing>();
         buttonSizing.changeFontSize(40); //Arbitrary number
-
-        Debug.Log("Mouse entered button");
     }
 
     //Detects when the cursor moves away from the button
@@ -20,7 +18,5 @@ public class MenuJouerButtons : MonoBehaviour, IPointerEnterHandler, IPointerExi
     {
         MenuJouerButtonSizing buttonSizing = GetComponent<MenuJouerButtonSizing>();
         buttonSizing.changeFontSize(28); //28 by default
-
-        Debug.Log("Mouse exited button");
     }
 }

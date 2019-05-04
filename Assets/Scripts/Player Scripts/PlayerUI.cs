@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerUI : MonoBehaviour
 {
@@ -15,7 +16,6 @@ public class PlayerUI : MonoBehaviour
     PlayerStats Player { get; set; }
     PlayerController Controller { get; set; }
     public PlayerWeaponManager WeaponManager { get; set; }
-    
 
     //Getting access to the stats of our player
     public void SetPlayer (PlayerStats player)
