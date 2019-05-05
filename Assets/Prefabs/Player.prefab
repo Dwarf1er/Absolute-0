@@ -91,7 +91,7 @@ Skybox:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1633214950675757647}
   m_Enabled: 1
-  m_CustomSkybox: {fileID: 2100000, guid: a51af125f922efc4095321f6fbd32ce7, type: 2}
+  m_CustomSkybox: {fileID: 2100000, guid: 9f69d571a9cb54943b5a80ccd6b19e96, type: 2}
 --- !u!1 &1991483444829604018
 GameObject:
   m_ObjectHideFlags: 0
@@ -514,6 +514,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56dba496ad09fe9459f9ed4d120dea31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerUI: {fileID: 0}
   playerCamera: {fileID: 8678688239460354427}
   bulletPrefab: {fileID: 2571270367526759602, guid: 0babe4e26d92f4a4b8c7ae66cf028496,
     type: 3}
