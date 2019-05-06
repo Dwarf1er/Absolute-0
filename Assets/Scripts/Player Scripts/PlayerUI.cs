@@ -2,23 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerUI : MonoBehaviour
 {
     //References
-    [SerializeField]
-    public RectTransform hpBar;
-    [SerializeField]
-    Text ammoInClipTxt;
-    [SerializeField]
-    Text maxAmmoTxt;
-    [SerializeField]
-    Text healthTxt;
+    [SerializeField] public RectTransform hpBar;
+    [SerializeField] Text ammoInClipTxt;
+    [SerializeField] Text maxAmmoTxt;
+    [SerializeField] Text healthTxt;
+    [SerializeField] GameObject crosshair;
 
     PlayerStats Player { get; set; }
     PlayerController Controller { get; set; }
     public PlayerWeaponManager WeaponManager { get; set; }
-    
 
     //Getting access to the stats of our player
     public void SetPlayer (PlayerStats player)
@@ -60,5 +57,10 @@ public class PlayerUI : MonoBehaviour
     void SetHpAmmount()
     {
         healthTxt.text = Player.currentHp.ToString();
+    }
+
+    public void SetCrosshairScale(float recoilDegrees)
+    {
+        crosshair.transform.localScale = new Vector3(1 + recoilDegrees, 1 + recoilDegrees, 1);
     }
 }

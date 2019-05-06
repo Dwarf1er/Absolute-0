@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class AssaultGunnerAI : Ennemy
 {
+    [SerializeField] GameObject bulletPrefab;
+    [SerializeField] GameObject muzzle;
+
     static readonly int[] HPTiers = { 60, 120, 180, 240 };
     static readonly int[] ArmorTiers = { 3, 6, 9, 12 };
     static readonly int[] SpeedTiers = { 4, 4, 4, 4 };
@@ -19,5 +22,15 @@ public class AssaultGunnerAI : Ennemy
         Speed = StartingSpeed;
         Damage = DamageTiers[ennemyTier];
         CashOnKill = CashTiers[ennemyTier];
+    }
+
+    public override void CmdAttack()
+    {
+        base.CmdAttack();
+        Vector3 gunMuzzlePosition = muzzle.transform.position;
+        GameObject newBullet = Instantiate(bulletPrefab, gunMuzzlePosition, Quaternion.identity);
+        Vector3 direction = Target.transform.position - gunMuzzlePosition;
+        newBullet.GetComponent<Rigidbody>().AddForce(direction * 0.2f, ForceMode.Impulse);
+        muzzle.GetComponent<AudioSource>().Play();
     }
 }

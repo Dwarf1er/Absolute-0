@@ -51,6 +51,10 @@ public class PlayerNetworking : NetworkBehaviour
             else
                 playerUi.SetPlayer(GetComponent<PlayerStats>());
 
+            //Set references for other scripts
+            GetComponent<PlayerStats>().SetPlayerStats();
+            GetComponent<PlayerShootingController>().playerUI = playerUi;
+
         }
 
         //Gives the player a unique identifier

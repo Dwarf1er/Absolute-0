@@ -197,7 +197,7 @@ public abstract class Ennemy : NetworkBehaviour
     }
 
     [Server]
-    public void CmdAttack()
+    public virtual void CmdAttack()
     {
         if (Target.GetComponent<PlayerStats>() != null)
             CmdPlayerAttacked(Target);

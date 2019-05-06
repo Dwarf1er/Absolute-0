@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(PlayerUtilities))]
 public class PlayerController : MonoBehaviour
@@ -87,14 +88,15 @@ public class PlayerController : MonoBehaviour
 
     public void SetCursorActive(bool isActive)
     {
+        Scene currentScene = SceneManager.GetActiveScene();
+
         Cursor.visible = isActive;
         Cursor.lockState = CursorLockMode.Confined;
-        /*
+
+        if (currentScene.name == "Lobby")
+            return;
+        
         if (isActive)
             Cursor.lockState = CursorLockMode.Confined;
-        else
-            Cursor.lockState = CursorLockMode.Locked;
-
-        */
     }
 }
