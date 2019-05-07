@@ -63,7 +63,7 @@ public class PlayerShootingController : NetworkBehaviour
             playerWeaponManager.EquipNextWeapon(4);
         if (Input.GetKeyDown(KeyCode.Alpha6))
             playerWeaponManager.EquipNextWeapon(5);
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) && equipedWeapon.WeaponAmmoInClip != equipedWeapon.WeaponClipSize)
         {
             if (equipedWeapon.WeaponClipSize == 1)
                 animator.SetTrigger("ReloadRocket");
@@ -73,6 +73,9 @@ public class PlayerShootingController : NetworkBehaviour
             transform.Find("ReloadSFX").GetComponent<AudioSource>().Play();
         }
 
+        //Firing
+        if (SceneManager.GetActiveScene().name == "Lobby")
+            return;
 
         if (Input.GetButtonDown("Fire1") && equipedWeapon.WeaponAmmoInClip == 0)
             transform.Find("DryFireSFX").GetComponent<AudioSource>().Play();
@@ -116,8 +119,6 @@ public class PlayerShootingController : NetworkBehaviour
     [Client]
     void Fire()
     {
-        if (SceneManager.GetActiveScene().name == "Lobby")
-            return;
 
         animator.SetTrigger("Shoot");
 
