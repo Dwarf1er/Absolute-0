@@ -1154,6 +1154,10 @@ MonoBehaviour:
   DefaultTarget: {fileID: 0}
   isAttacking: 0
   isDead: 0
+  SkinTier0: {fileID: 2100000, guid: b2a137386017ff34c98051ba2b9bf3eb, type: 2}
+  SkinTier1: {fileID: 2100000, guid: e79cd77ab23ae1b4bb20f04ce962c9d7, type: 2}
+  SkinTier2: {fileID: 2100000, guid: e86ad9545e672534cbe42f221acd2880, type: 2}
+  SkinTier3: {fileID: 2100000, guid: da678248b74c7734a856899ea5f68f09, type: 2}
   hp_: 0
   speed_: 0
   bulletPrefab: {fileID: 2571270367526759602, guid: 0babe4e26d92f4a4b8c7ae66cf028496,

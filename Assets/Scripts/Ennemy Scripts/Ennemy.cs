@@ -27,6 +27,12 @@ public abstract class Ennemy : NetworkBehaviour
     [SyncVar] public bool isDead;
     [SyncVar] bool lastHitWasHeadshot;
 
+    //Skins
+    [SerializeField] public Material SkinTier0;
+    [SerializeField] public Material SkinTier1;
+    [SerializeField] public Material SkinTier2;
+    [SerializeField] public Material SkinTier3;
+
     //Properties
     protected int HP
     {
@@ -77,6 +83,9 @@ public abstract class Ennemy : NetworkBehaviour
         NavMeshAgent = GetComponent<NavMeshAgent>();
 
         SetStats(tier);
+
+        Material[] skins = new Material[] { SkinTier0, SkinTier1, SkinTier2, SkinTier3 };
+        GetComponentInChildren<SkinnedMeshRenderer>().material = skins[tier];
 
         isDead = false;
     }

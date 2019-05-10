@@ -564,6 +564,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DefaultTarget: {fileID: 0}
   isAttacking: 0
+  isDead: 0
+  SkinTier0: {fileID: 2100000, guid: 52e14a1e60150164bb65deb6a7f03544, type: 2}
+  SkinTier1: {fileID: 2100000, guid: 2585abfdc9b56c8488640e02cf476200, type: 2}
+  SkinTier2: {fileID: 2100000, guid: 28d369170cfde7c47ac62dfdc9fbca85, type: 2}
+  SkinTier3: {fileID: 2100000, guid: 5bca904527c368a44a17ceaded9fcd66, type: 2}
   hp_: 0
   speed_: 0
 --- !u!195 &2912949911720312940

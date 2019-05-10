@@ -27,7 +27,6 @@ public class LevelManager : NetworkBehaviour
         
         newWorker.GetComponent<WorkerAI>().CmdSpawn(tier);
         newWorker.GetComponent<WorkerAI>().CmdSetDefaultTarget(Objective);
-        //GetComponent<SkinnedMeshRenderer>().material = Resources.Load<Material>("Assets/Resources/Skins/Droid_dark_Worker.mat");
 
         NetworkServer.Spawn(newWorker);
         ActiveEnnemies.Add(newWorker);

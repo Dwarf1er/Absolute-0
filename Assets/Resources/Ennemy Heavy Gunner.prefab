@@ -1360,7 +1360,7 @@ MonoBehaviour:
   m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TransformSyncMode: 0
+  m_TransformSyncMode: 3
   m_SendInterval: 0.1
   m_SyncRotationAxis: 7
   m_RotationSyncCompression: 0
@@ -1440,8 +1440,14 @@ MonoBehaviour:
   DefaultTarget: {fileID: 0}
   isAttacking: 0
   isDead: 0
+  SkinTier0: {fileID: 2100000, guid: 409c9d76598cc3f4894d982edf50f9ad, type: 2}
+  SkinTier1: {fileID: 2100000, guid: 0cfd91b453fd125479838b47872c7938, type: 2}
+  SkinTier2: {fileID: 2100000, guid: f50e1656b80520e4bad44df09184efe8, type: 2}
+  SkinTier3: {fileID: 2100000, guid: d2443207372fc544592489af48768004, type: 2}
   hp_: 0
   speed_: 0
+  bulletPrefab: {fileID: 0}
+  muzzle: {fileID: 0}
 --- !u!195 &6223444301425317856
 NavMeshAgent:
   m_ObjectHideFlags: 0
