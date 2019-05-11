@@ -13030,6 +13030,10 @@ MonoBehaviour:
   HeavyGunnerPrefab: {fileID: 7560876265521338615, guid: 2a0cd69f828bf8347bcfb874f5030582,
     type: 3}
   Objective: {fileID: 1975661634}
+  LargeSpawn1: {fileID: 1387977801}
+  LargeSpawn2: {fileID: 420850568}
+  SmallSpawn1: {fileID: 573300911}
+  SmallSpawn2: {fileID: 807156208}
 --- !u!4 &2032463249
 Transform:
   m_ObjectHideFlags: 0
