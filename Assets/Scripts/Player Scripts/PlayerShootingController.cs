@@ -147,7 +147,7 @@ public class PlayerShootingController : NetworkBehaviour
             if (raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Ennemy"))
             {
                 GameObject ennemyHit = raycastHit.transform.gameObject;
-                bool isHeadshot = raycastHit.collider.name == "Head Collider";
+                bool isHeadshot = raycastHit.collider.name == "HeadshotTrigger";
 
                 if (isHeadshot)
                     CmdEnnemyHeadshot(ennemyHit, equipedWeapon.WeaponDamage);

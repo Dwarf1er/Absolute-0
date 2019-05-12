@@ -1191,7 +1191,7 @@ GameObject:
   - component: {fileID: 1158086854258143273}
   - component: {fileID: 7043669666302839383}
   m_Layer: 10
-  m_Name: Head Collider
+  m_Name: HeadshotTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

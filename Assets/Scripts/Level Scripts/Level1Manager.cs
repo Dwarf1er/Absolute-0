@@ -37,11 +37,15 @@ public class Level1Manager : LevelManager
 
     IEnumerator NextWave()
     {
-        foreach (GameObject deadEnnemy in ActiveEnnemies)
+        List<GameObject> newEnnemyList = new List<GameObject>();
+        foreach (GameObject ennemy in ActiveEnnemies)
         {
-            if (deadEnnemy.GetComponent<Ennemy>().isDead)
-                Destroy(deadEnnemy.gameObject);
+            if (ennemy.GetComponent<Ennemy>().isDead)
+                Destroy(ennemy.gameObject); //Remove corpses
+            else
+                newEnnemyList.Add(ennemy);
         }
+        ActiveEnnemies = newEnnemyList; //Delete references to dead ennemies
 
         waveCount++;
         for (int cpt = 10; cpt > 0; cpt--)

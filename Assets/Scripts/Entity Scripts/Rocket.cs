@@ -13,7 +13,7 @@ public class Rocket : MonoBehaviour
         Collider[] ennemiesHit = Physics.OverlapSphere(gameObject.transform.position, 10, 1 << 10); // 1 << 10 = only layer 10
         foreach (Collider ennemyhit in ennemiesHit)
         {
-            if (ennemyhit.name == "Head Collider")
+            if (ennemyhit.name == "HeadshotTrigger")
                 ennemyhit.gameObject.GetComponentInParent<Ennemy>().CmdTakeDamage(100);
 
         }
