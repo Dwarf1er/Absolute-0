@@ -67,12 +67,14 @@ public class Level3Manager : LevelManager
         }
     }
 
+    //Méthode permettant de compter le temps entre chaque mise à jour
     private void CountTime()
     {
         LastSpawnTime += Time.deltaTime;
         DeleteTime += Time.deltaTime;
     }
 
+    //Méthode permettant d'incrémenter des variable entières
     void AjustCounters()
     {
         NumEnnemies++;
@@ -82,14 +84,15 @@ public class Level3Manager : LevelManager
 
     void ExecuteWaveOne()
     {
-        GameObject.Find("WaveCounter").transform.Find("Text").GetComponent<Text>().text = "Wave 1";
+        GameObject.Find("WaveCounter").transform.Find("Text").GetComponent<Text>().text = "Wave 1"; //Ajout par Pierre
         Debug.Log("Executing Wave 1");
 
         if (NumEnnemies < 6)
         {
             if (LastSpawnTime >= SpawnTimeInterval)
             {
-                if (IndexSpawn == 3)
+                //On fait instancier les ennemis à différents points dans le niveau en les alternant
+                if (IndexSpawn == 3) //Lorsque l'indice est plus grand que 2 (égale à 3), on le remet à zéro 
                     IndexSpawn = 0;
                 SpawnWorker(EnnemySpawnPoints[IndexSpawn], 0);
                 AjustCounters();
@@ -102,8 +105,10 @@ public class Level3Manager : LevelManager
         ClearLevel(8);
     }
 
+    //Méthode permettant de mettre fin à une vague
     private void EndWave(ref bool isCurrentWave, ref bool isNextWave)
     {
+        //Tant que les ennemis ne sont pas tous morts, on ne met pas fin à la vague
         if (AreAllDead())
         {
             isCurrentWave = false;
@@ -117,6 +122,7 @@ public class Level3Manager : LevelManager
         }
     }
 
+    //Méthode permettant de vérifier si tous les ennemis dans une vague sont morts
     private bool AreAllDead()
     {
         bool result = true;
@@ -124,10 +130,11 @@ public class Level3Manager : LevelManager
         foreach (GameObject g in ActiveEnnemies)
             if (g != null)
                 if(!g.GetComponent<Ennemy>().isDead)
-                    result = false;
+                    result = false; //Le résultat sera faux s'il y a encore un ennemi vivant
         return result;
     }
 
+    //Méthode permettant de détruire tous les ennemis qui sont morts dans le niveau
     private void DestroyEnnemies()
     {
         foreach (GameObject g in ActiveEnnemies)
@@ -136,6 +143,7 @@ public class Level3Manager : LevelManager
                     Destroy(g);
     }
 
+    //Méthode qui, après un certain temps, vient élimniner les ennemis morts de map et remet le compteur à zéro
     void ClearLevel(float timeLimit)
     {
         if (DeleteTime >= timeLimit)
@@ -147,7 +155,7 @@ public class Level3Manager : LevelManager
 
     void ExecuteWaveTwo()
     {
-        GameObject.Find("WaveCounter").transform.Find("Text").GetComponent<Text>().text = "Wave 2";
+        GameObject.Find("WaveCounter").transform.Find("Text").GetComponent<Text>().text = "Wave 2"; //Ajout par Pierre
         Debug.Log("Executing Wave 2");
 
         if (NumEnnemies < 10)
@@ -169,7 +177,7 @@ public class Level3Manager : LevelManager
                 {
                     if (IndexSpawn == 3)
                         IndexSpawn = 0;
-                    if (IndexSpawn % 2 == 0)
+                    if (IndexSpawn % 2 == 0) //L'ennemi instancié est décidé par le fait que l'indice soit paire ou non.
                         SpawnWorker(EnnemySpawnPoints[IndexSpawn], 1);
                     else
                         SpawnAssaultGunner(EnnemySpawnPoints[IndexSpawn], 0);
@@ -185,7 +193,7 @@ public class Level3Manager : LevelManager
     }
     private void ExecuteWaveThree()
     {
-        GameObject.Find("WaveCounter").transform.Find("Text").GetComponent<Text>().text = "Wave 3";
+        GameObject.Find("WaveCounter").transform.Find("Text").GetComponent<Text>().text = "Wave 3"; //Ajout par Pierre
         Debug.Log("Executing Wave 3");
 
         if (NumEnnemies < 14)
@@ -238,7 +246,7 @@ public class Level3Manager : LevelManager
     }
     void ExecuteWaveFour()
     {
-        GameObject.Find("WaveCounter").transform.Find("Text").GetComponent<Text>().text = "Wave 4";
+        GameObject.Find("WaveCounter").transform.Find("Text").GetComponent<Text>().text = "Wave 4"; //Ajout par Pierre
         Debug.Log("Executing Wave 4");
 
         if(NumEnnemies < 18)
@@ -269,7 +277,7 @@ public class Level3Manager : LevelManager
                         IndexSpawn = 0;
                     SpawnAssaultGunner(EnnemySpawnPoints[IndexSpawn], 1);
                     SpawnWarrior(EnnemySpawnPoints[IndexSpawn + 1], 0);
-                    NumEnnemies += 2;
+                    NumEnnemies += 2; //On fait +2, car on instancie 2 ennemis à la fois
                     IndexSpawn++;
                     LastSpawnTime = 0;
                 }
@@ -285,7 +293,7 @@ public class Level3Manager : LevelManager
 
     void ExecuteWaveFive()
     {
-        GameObject.Find("WaveCounter").transform.Find("Text").GetComponent<Text>().text = "Wave 5";
+        GameObject.Find("WaveCounter").transform.Find("Text").GetComponent<Text>().text = "Wave 5"; //Ajout par Pierre
         Debug.Log("Executing Wave 5");
 
         if(NumEnnemies < 22)
@@ -294,7 +302,7 @@ public class Level3Manager : LevelManager
             {
                 if (IndexSpawn == 3)
                     IndexSpawn = 0;
-                SpawnAtRandom(IndexSpawn);
+                SpawnAtRandom(IndexSpawn); //On choist un type d'ennemi au hazard
                 AjustCounters();
             }
             else
@@ -309,6 +317,7 @@ public class Level3Manager : LevelManager
 
     }
 
+    //Méthode permettant de choisir un ennemy au hazard et de l'instancier
     private void SpawnAtRandom(int indexSpawn)
     {
         int ennemy = UnityEngine.Random.Range(0, 2);
@@ -321,6 +330,7 @@ public class Level3Manager : LevelManager
 
     }
 
+    //Méthode permettant de de retirer tous les références non existants de la liste des ennemis
     void ClearList()
     {
         ActiveEnnemies.RemoveAll(g => g == null);

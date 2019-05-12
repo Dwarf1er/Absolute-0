@@ -27,29 +27,7 @@ public class MultiplayerMenu : NetworkManager
         InitializeReferences();
         IsClicked = false;
         ConnectionTime = 0;
-// singleton.maxConnections = 2;
     }
-
-    /*
-    public override void OnServerAddPlayer(NetworkConnection conn, short playerControllerId)
-    {
-        GameObject player;
-        Transform startPos = GetStartPosition();
-
-        if(startPos != null)
-        {
-            if(playerPrefab.name == "Player1")
-            {
-                SkinnedMeshRenderer skin = playerPrefab.transform.Find("Soldier_mesh").GetComponent<SkinnedMeshRenderer>(); //Referencing the skinned mesh renderer to change the material used to have a different type of soldier
-            }
-
-            if(playerPrefab.name == "Player2")
-            {
-
-            }
-        }
-    }
-    */
 
     private void InitializeReferences()
     {
@@ -126,10 +104,7 @@ public class MultiplayerMenu : NetworkManager
     //Méthode permettant de changer vers la scène choisit par le joueur hôte
     private void ChangeScene(string sceneName)
     {
-        //if (singleton.numPlayers == 2)
-        //{
-            NetworkManager.singleton.ServerChangeScene(sceneName);
-        //}
+        NetworkManager.singleton.ServerChangeScene(sceneName);
     }
 
     //Méthode permettant d'instancier les gameobjects dans le menu multijoueur
@@ -151,7 +126,7 @@ public class MultiplayerMenu : NetworkManager
 
     private void Update()
     {
-        //CheckConnectionTime();
+        CheckConnectionTime();
     }
 
     //Ici, on vérifie si la connexion prend trop de temps pour se faire. S'il n'y a pas de connexion après 10 secondes,
