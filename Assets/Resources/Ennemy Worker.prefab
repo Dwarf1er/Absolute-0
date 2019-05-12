@@ -132,6 +132,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DefaultTarget: {fileID: 0}
   isAttacking: 0
+  isDead: 0
+  SkinTier0: {fileID: 2100000, guid: 3390c893b1d9f824db2221c3494369b6, type: 2}
+  SkinTier1: {fileID: 2100000, guid: 9cf5ae4d9a54cb84aa4a1d7d4452d2b5, type: 2}
+  SkinTier2: {fileID: 2100000, guid: 45a5c7bb0b5cfac4e9be5f74a7904e14, type: 2}
+  SkinTier3: {fileID: 2100000, guid: 024f3bf1ff5c26a46b44d73600a13dae, type: 2}
+  hp_: 0
+  speed_: 0
 --- !u!195 &947476490
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1184,7 +1191,7 @@ GameObject:
   - component: {fileID: 1158086854258143273}
   - component: {fileID: 7043669666302839383}
   m_Layer: 10
-  m_Name: Head Collider
+  m_Name: HeadshotTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

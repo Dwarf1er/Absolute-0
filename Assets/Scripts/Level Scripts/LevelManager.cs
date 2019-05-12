@@ -11,12 +11,15 @@ public class LevelManager : NetworkBehaviour
     [SerializeField] protected GameObject HeavyGunnerPrefab;
     [SerializeField] protected GameObject Objective;
     protected List<GameObject> ActiveEnnemies { get; set; }
-    protected List<Vector3>EnnemySpawnPoints { get; set; }
+    protected List<Vector3> EnnemySpawnPoints { get; set; }
+    protected List<PlayerController> Players { get; set; }
 
     private void Start()
     {
+        Players = new List<PlayerController>();
         foreach (PlayerController playerController in FindObjectsOfType<PlayerController>())
         {
+            Players.Add(playerController);
             playerController.SetCursorActive(false);
         }
     }
@@ -27,7 +30,6 @@ public class LevelManager : NetworkBehaviour
         
         newWorker.GetComponent<WorkerAI>().CmdSpawn(tier);
         newWorker.GetComponent<WorkerAI>().CmdSetDefaultTarget(Objective);
-        //GetComponent<SkinnedMeshRenderer>().material = Resources.Load<Material>("Assets/Resources/Skins/Droid_dark_Worker.mat");
 
         NetworkServer.Spawn(newWorker);
         ActiveEnnemies.Add(newWorker);

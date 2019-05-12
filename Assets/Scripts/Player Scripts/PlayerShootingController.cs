@@ -13,10 +13,9 @@ public class PlayerShootingController : NetworkBehaviour
     public PlayerWeapons.Weapon equipedWeapon;
     public PlayerUI playerUI;
 
-    [SerializeField]
-    Camera playerCamera;
-    [SerializeField]
-    GameObject bulletPrefab;
+    [SerializeField] Camera playerCamera;
+    [SerializeField] GameObject bulletPrefab;
+    [SerializeField] GameObject rocketPrefab;
 
     public bool isDead { get; set; }
 
@@ -63,7 +62,7 @@ public class PlayerShootingController : NetworkBehaviour
             playerWeaponManager.EquipNextWeapon(4);
         if (Input.GetKeyDown(KeyCode.Alpha6))
             playerWeaponManager.EquipNextWeapon(5);
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) && equipedWeapon.WeaponAmmoInClip != equipedWeapon.WeaponClipSize)
         {
             if (equipedWeapon.WeaponClipSize == 1)
                 animator.SetTrigger("ReloadRocket");
@@ -73,6 +72,9 @@ public class PlayerShootingController : NetworkBehaviour
             transform.Find("ReloadSFX").GetComponent<AudioSource>().Play();
         }
 
+        //Firing
+        if (SceneManager.GetActiveScene().name == "Lobby")
+            return;
 
         if (Input.GetButtonDown("Fire1") && equipedWeapon.WeaponAmmoInClip == 0)
             transform.Find("DryFireSFX").GetComponent<AudioSource>().Play();
@@ -116,13 +118,11 @@ public class PlayerShootingController : NetworkBehaviour
     [Client]
     void Fire()
     {
-        if (SceneManager.GetActiveScene().name == "Lobby")
-            return;
 
         animator.SetTrigger("Shoot");
 
         Vector3 gunMuzzlePosition = playerWeaponManager.currentPlayerWeaponModel.transform.Find("Muzzle").position;
-        
+
         Vector3 raycastOrigin = playerCamera.transform.position;
         Vector3 raycastDirection = playerCamera.transform.forward;
 
@@ -147,7 +147,7 @@ public class PlayerShootingController : NetworkBehaviour
             if (raycastHit.transform.gameObject.layer == LayerMask.NameToLayer("Ennemy"))
             {
                 GameObject ennemyHit = raycastHit.transform.gameObject;
-                bool isHeadshot = raycastHit.collider.name == "Head Collider";
+                bool isHeadshot = raycastHit.collider.name == "HeadshotTrigger";
 
                 if (isHeadshot)
                     CmdEnnemyHeadshot(ennemyHit, equipedWeapon.WeaponDamage);
@@ -157,14 +157,27 @@ public class PlayerShootingController : NetworkBehaviour
         }
 
         
-        GameObject newBullet = Instantiate(bulletPrefab, gunMuzzlePosition, Quaternion.identity);
+        
         Vector3 bulletDirection = raycastHit.point - gunMuzzlePosition;
 
-        //If the player's shot doesn't hit anything
-        if (raycastHit.point == Vector3.zero)
-            bulletDirection = playerWeaponManager.currentPlayerWeaponModel.transform.Find("Muzzle").transform.up * -1;
+        if (equipedWeapon.WeaponClipSize != 1)
+        {
+            GameObject newBullet = Instantiate(bulletPrefab, gunMuzzlePosition, Quaternion.identity);
 
-        newBullet.GetComponent<Rigidbody>().AddForce(bulletDirection * 0.2f, ForceMode.Impulse);
+            //If the player's shot doesn't hit anything
+            if (raycastHit.point == Vector3.zero)
+                bulletDirection = playerWeaponManager.currentPlayerWeaponModel.transform.Find("Muzzle").transform.up * -1;
+
+            newBullet.GetComponent<Rigidbody>().AddForce(bulletDirection * 0.2f, ForceMode.Impulse);
+        }
+        else
+        {
+            GameObject newRocket = Instantiate(rocketPrefab, gunMuzzlePosition, Quaternion.identity);
+            newRocket.transform.LookAt(raycastHit.point);
+            newRocket.GetComponent<Rigidbody>().AddForce(newRocket.transform.forward * 20);
+        }
+
+        
 
 
         timeSinceLastShot = 0;
